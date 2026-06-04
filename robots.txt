@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://hkasar1239.github.io/sitemap.xml
+Sitemap: https://hkasar1239.github.io/sitemap.txt
