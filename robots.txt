@@ -3,3 +3,5 @@ Allow: /
 
 Sitemap: https://hkasar1239.github.io/sitemap.xml
 Sitemap: https://hkasar1239.github.io/sitemap.txt
+Sitemap: https://hkasar1239.github.io/gsc-sitemap.xml
+Sitemap: https://hkasar1239.github.io/gsc-sitemap.txt
