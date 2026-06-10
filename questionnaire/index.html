@@ -247,10 +247,10 @@ const ALL_TASKS = [
     "repo": "reflex-dev/reflex",
     "repo_name": "Reflex",
     "repo_description": "Reflex is a Python framework for building full-stack web applications.",
-    "context": "Ngrok creates a public url for a service running on your local computer. It provides SSO out of the box, and sends headers like ngrok-auth-user-email to identify logged in users. Reflex is dropping those somewhere, because I don't see them in your State.\n\ndef headers(self):\nreturn str(self.get_headers())\n\nrx.box(State.headers),\n\nngrok http 3000 --oauth=google --oauth-allow-domain=mydomain.com\n\nExpect to see ngrok-auth-user-email in headers.\n\n- Python Version: 3.11.4\n- Reflex Version: 0.2.4\n\nExpose Frontend Request Headers to Backend State\nCurrently, Reflex's router system provides access to websocket headers through rx.State.router.headers, but doesn't expose the original HTTP request headers that were used when loading the frontend application. This makes it difficult to access custom headers set by proxies, ingress controllers, or browser extensions.\nWhen deploying Reflex apps behind proxies or Kubernetes ingress controllers, important headers like identity headers (X-User-*), client IP information headers (X-Forwarded-For), or other custom headers set by infrastructure components are not accessible within the Reflex state system.",
+    "context": "You are running a Reflex app behind ngrok with Google OAuth. Ngrok sends identity headers such as ngrok-auth-user-email, but they do not appear in your Reflex State.\n\nExpected behavior:\nThe displayed headers include proxy-provided request headers such as ngrok-auth-user-email.\n\nObserved behavior:\nReflex exposes websocket headers through rx.State.router.headers, but the original HTTP request headers used to load the frontend app are not available in State. Custom headers set by proxies, ingress controllers, or browser extensions cannot be accessed.",
     "project_context": "You are using Reflex to build a Python web application.",
-    "execution_code": "from reflex.state import State\n\nimport reflex as rx\n\n\nclass State(rx.State):\n    @rx.var\n    def headers(self):\n        return str(self.get_headers())\n\n\ndef index() -> rx.Component:\n    return rx.fragment(\n        rx.color_mode_button(rx.color_mode_icon(), float=\"left\"),\n        rx.vstack(\n            rx.box(State.headers),\n            spacing=\"1.5em\",\n            font_size=\"1em\",\n            padding_top=\"10%\",\n        ),\n    )\n\napp = rx.App()\napp.add_page(index)\napp.compile()",
-    "error_log": "Currently, Reflex's router system provides access to websocket headers through rx.State.router.headers, but doesn't ex...lication. This makes it difficult to access custom headers set by proxies, ingress controllers, or browser extensions.",
+    "execution_code": "from reflex.state import State\nimport reflex as rx\n\nclass State(rx.State):\n    @rx.var\n    def headers(self):\n        return str(self.get_headers())\n\ndef index() -> rx.Component:\n    return rx.fragment(\n        rx.box(State.headers),\n    )\n\napp = rx.App()\napp.add_page(index)\napp.compile()\n\n# Run behind ngrok:\n# ngrok http 3000 --oauth=google --oauth-allow-domain=mydomain.com",
+    "error_log": "Expected behavior:\nThe displayed headers include proxy-provided request headers such as ngrok-auth-user-email.\n\nObserved behavior:\nReflex exposes websocket headers through rx.State.router.headers, but the original HTTP request headers used to load the frontend app are not available in State. Custom headers set by proxies, ingress controllers, or browser extensions cannot be accessed.",
     "shard": 2
   },
   {
@@ -739,12 +739,43 @@ function collectPayload() {
 }
 function validate(payload) { if (!payload.participant_id) return 'Please enter a participant ID or select anonymous.'; const missing = payload.responses.filter(r => !r.query); if (missing.length) return `Please enter a query for all 10 tasks. Missing: ${missing.map(r => r.task_id).join(', ')}.`; return ''; }
 function downloadPayload(payload) { const stamp = new Date().toISOString().replace(/[:.]/g, '-'); const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `human-query-study-shard-${shard}-${stamp}.json`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); }
+function postViaHiddenForm(endpoint, payload) {
+  return new Promise(resolve => {
+    const frameName = 'questionnaire_submit_' + Date.now();
+    const iframe = document.createElement('iframe');
+    iframe.name = frameName;
+    iframe.style.display = 'none';
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = endpoint;
+    form.target = frameName;
+    form.style.display = 'none';
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'payload';
+    input.value = JSON.stringify(payload);
+    form.appendChild(input);
+    document.body.appendChild(iframe);
+    document.body.appendChild(form);
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      setTimeout(() => { form.remove(); iframe.remove(); }, 500);
+      resolve();
+    };
+    iframe.addEventListener('load', finish);
+    setTimeout(finish, 5000);
+    form.submit();
+  });
+}
 async function submitPayload(payload) {
   const config = window.QUESTIONNAIRE_CONFIG || {};
+  localStorage.setItem('human-query-study-last-submission', JSON.stringify(payload));
   if (!config.submitEndpoint) { downloadPayload(payload); setStatus('No collection endpoint is configured yet. A local JSON backup was downloaded.', 'warn'); return; }
   submitButton.disabled = true; setStatus('Submitting responses...', '');
-  try { await fetch(config.submitEndpoint, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(payload) }); localStorage.setItem('human-query-study-last-submission', JSON.stringify(payload)); setStatus('Submitted. Thank you.', 'ok'); }
-  catch (error) { localStorage.setItem('human-query-study-last-submission', JSON.stringify(payload)); if (config.allowDownloadFallback !== false) downloadPayload(payload); setStatus('Submission failed locally, so a backup JSON was saved/downloaded.', 'bad'); }
+  try { await postViaHiddenForm(config.submitEndpoint, payload); setStatus('Submitted. Check the response sheet tab named responses.', 'ok'); }
+  catch (error) { if (config.allowDownloadFallback !== false) downloadPayload(payload); setStatus('Submission failed locally, so a backup JSON was saved/downloaded.', 'bad'); }
   finally { submitButton.disabled = false; }
 }
 function boot() { if (!Number.isInteger(shard) || shard < 1 || shard > 5) { landing.classList.remove('hidden'); return; } study.classList.remove('hidden'); tasksRoot.innerHTML = currentTasks().map(renderTask).join(''); }

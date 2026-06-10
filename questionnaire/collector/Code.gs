@@ -8,6 +8,7 @@ const HEADERS = [
 
 function setupStudySpreadsheet() {
   const spreadsheet = getOrCreateSpreadsheet_();
+  Logger.log(spreadsheet.getUrl());
   return spreadsheet.getUrl();
 }
 
@@ -44,11 +45,9 @@ function doPost(e) {
 }
 
 function parsePayload_(e) {
-  if (!e || !e.postData || !e.postData.contents) {
-    if (e && e.parameter && e.parameter.payload) return JSON.parse(e.parameter.payload);
-    throw new Error('Missing POST body.');
-  }
-  return JSON.parse(e.postData.contents);
+  if (e && e.parameter && e.parameter.payload) return JSON.parse(e.parameter.payload);
+  if (e && e.postData && e.postData.contents) return JSON.parse(e.postData.contents);
+  throw new Error('Missing POST body.');
 }
 
 function getOrCreateSpreadsheet_() {
