@@ -55,16 +55,12 @@ button:disabled { opacity:.55; cursor:not-allowed; }
   <main>
     <section class="hero">
       <h1>Debugging Search Query Study</h1>
-      <p class="muted">For each task, write the first web search query you would type if this error appeared while debugging. The errors are intentionally specific and may be unfamiliar; do not solve the task, just write the query you would naturally try first.</p>
+      <p class="muted">For each task, write the first web search query you would type if this error appeared while debugging. The errors are intentionally specific and may be unfamiliar; do not solve the task, just write the query you would naturally try first. Please do not use an LLM, search engine, or documentation while filling this out.</p>
       <div id="landing" class="notice hidden">
-        <strong>Choose one task set.</strong>
-        <p class="muted">Each link contains 10 debugging tasks. Please complete only the set you were assigned.</p>
+        <strong>Recommended study link.</strong>
+        <p class="muted">The main questionnaire now uses 5 representative debugging tasks so multiple participants answer the same errors.</p>
         <div class="links">
-          <a class="set-link" href="?shard=1">Task set 1 <span>T01-T10</span></a>
-          <a class="set-link" href="?shard=2">Task set 2 <span>T11-T20</span></a>
-          <a class="set-link" href="?shard=3">Task set 3 <span>T21-T30</span></a>
-          <a class="set-link" href="?shard=4">Task set 4 <span>T31-T40</span></a>
-          <a class="set-link" href="?shard=5">Task set 5 <span>T41-T50</span></a>
+          <a class="set-link" href="?mode=core">Core study <span>5 debugging tasks</span></a>
         </div>
       </div>
     </section>
@@ -710,8 +706,11 @@ const ALL_TASKS = [
     "shard": 5
   }
 ];
+const CORE_TASK_IDS = ['streamlink__streamlink-6205', 'pdm-project__pdm-3374', 'urllib3__urllib3-3428', 'kubernetes-client__python-2340', 'pvlib__pvlib-python-1947'];
 const params = new URLSearchParams(window.location.search);
-const shard = parseInt(params.get('shard') || '', 10);
+const shardRaw = params.get('shard');
+const mode = params.get('mode') || (shardRaw ? 'shard' : 'core');
+const shard = parseInt(shardRaw || '', 10);
 const landing = document.getElementById('landing');
 const study = document.getElementById('study');
 const tasksRoot = document.getElementById('tasks');
@@ -723,22 +722,24 @@ const anonymousInput = document.getElementById('anonymous');
 function escapeHtml(value) { return String(value || '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])); }
 function normalizeCode(value) { const text = String(value || '').trim(); return text || 'Run the failing command or test for this task.'; }
 function normalizeError(value) { const text = String(value || '').trim(); return text || 'The command fails or behaves incorrectly for this task.'; }
-function currentTasks() { return ALL_TASKS.filter(t => Number(t.shard) === shard); }
+function currentTasks() { if (mode === 'core') return CORE_TASK_IDS.map(id => ALL_TASKS.find(t => t.instance_id === id)).filter(Boolean); return ALL_TASKS.filter(t => Number(t.shard) === shard); }
+function currentGroupLabel() { return mode === 'core' ? 'Core study · 5 tasks' : `Set ${shard} / 5`; }
+function currentGroupId() { return mode === 'core' ? 'core' : `shard-${shard}`; }
 function renderTask(task) {
   const context = task.project_context || `You are debugging ${task.repo || task.instance_id}.`;
   const code = normalizeCode(task.execution_code);
   const error = normalizeError(task.error_log);
   const full = task.context ? `<details><summary>Show additional context</summary><div class="full-context"><pre>${escapeHtml(task.context)}</pre></div></details>` : '';
-  return `<article class="task" data-instance-id="${escapeHtml(task.instance_id)}"><header class="task-header"><h2>${escapeHtml(task.instance_id)}</h2><div class="muted">Task ${escapeHtml(task.task_id)} · Set ${shard} / 5</div></header><div class="task-body"><div class="context"><strong>Context:</strong> ${escapeHtml(context)}</div><section class="signal"><h3>When executing this code</h3><pre>${escapeHtml(code)}</pre></section><section class="signal"><h3>What you observe</h3><pre>${escapeHtml(error)}</pre></section>${full}<label for="q_${escapeHtml(task.task_id)}">First web search query</label><textarea id="q_${escapeHtml(task.task_id)}" data-task-id="${escapeHtml(task.task_id)}" placeholder="Write one query exactly as you would type it into a search engine."></textarea></div></article>`;
+  return `<article class="task" data-instance-id="${escapeHtml(task.instance_id)}"><header class="task-header"><h2>${escapeHtml(task.instance_id)}</h2><div class="muted">Task ${escapeHtml(task.task_id)} · ${escapeHtml(currentGroupLabel())}</div></header><div class="task-body"><div class="context"><strong>Context:</strong> ${escapeHtml(context)}</div><section class="signal"><h3>When executing this code</h3><pre>${escapeHtml(code)}</pre></section><section class="signal"><h3>What you observe</h3><pre>${escapeHtml(error)}</pre></section>${full}<label for="q_${escapeHtml(task.task_id)}">First web search query</label><textarea id="q_${escapeHtml(task.task_id)}" data-task-id="${escapeHtml(task.task_id)}" placeholder="Write one query exactly as you would type it into a search engine."></textarea></div></article>`;
 }
 function setStatus(message, kind) { statusEl.textContent = message || ''; statusEl.className = 'status ' + (kind || ''); }
 function collectPayload() {
   const participant = anonymousInput.checked ? 'anonymous' : participantInput.value.trim();
-  const responses = currentTasks().map(task => ({ task_id: task.task_id, instance_id: task.instance_id, repo: task.repo, shard: task.shard, query: document.getElementById('q_' + task.task_id).value.trim() }));
-  return { study:'human_debugging_search_query_baseline', study_version:'screen-error-static-20260610', participant_id:participant, background:document.getElementById('background').value, experience:document.getElementById('experience').value, shard, submitted_at_client:new Date().toISOString(), source_url:window.location.href, user_agent:navigator.userAgent, responses };
+  const responses = currentTasks().map(task => ({ task_id: task.task_id, instance_id: task.instance_id, repo: task.repo, original_shard: task.shard, query: document.getElementById('q_' + task.task_id).value.trim() }));
+  return { study:'human_debugging_search_query_baseline', study_version:'core-five-static-20260610', participant_id:participant, background:document.getElementById('background').value, experience:document.getElementById('experience').value, shard: currentGroupId(), submitted_at_client:new Date().toISOString(), source_url:window.location.href, user_agent:navigator.userAgent, responses };
 }
-function validate(payload) { if (!payload.participant_id) return 'Please enter a participant ID or select anonymous.'; const missing = payload.responses.filter(r => !r.query); if (missing.length) return `Please enter a query for all 10 tasks. Missing: ${missing.map(r => r.task_id).join(', ')}.`; return ''; }
-function downloadPayload(payload) { const stamp = new Date().toISOString().replace(/[:.]/g, '-'); const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `human-query-study-shard-${shard}-${stamp}.json`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); }
+function validate(payload) { if (!payload.participant_id) return 'Please enter a participant ID or select anonymous.'; const missing = payload.responses.filter(r => !r.query); if (missing.length) return `Please enter a query for all ${currentTasks().length} tasks. Missing: ${missing.map(r => r.task_id).join(', ')}.`; return ''; }
+function downloadPayload(payload) { const stamp = new Date().toISOString().replace(/[:.]/g, '-'); const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `human-query-study-${currentGroupId()}-${stamp}.json`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); }
 async function submitPayload(payload) {
   const config = window.QUESTIONNAIRE_CONFIG || {};
   if (!config.submitEndpoint) { downloadPayload(payload); setStatus('No collection endpoint is configured yet. A local JSON backup was downloaded.', 'warn'); return; }
@@ -747,7 +748,7 @@ async function submitPayload(payload) {
   catch (error) { localStorage.setItem('human-query-study-last-submission', JSON.stringify(payload)); if (config.allowDownloadFallback !== false) downloadPayload(payload); setStatus('Submission failed locally, so a backup JSON was saved/downloaded.', 'bad'); }
   finally { submitButton.disabled = false; }
 }
-function boot() { if (!Number.isInteger(shard) || shard < 1 || shard > 5) { landing.classList.remove('hidden'); return; } study.classList.remove('hidden'); tasksRoot.innerHTML = currentTasks().map(renderTask).join(''); }
+function boot() { if (params.get('choose') === '1') { landing.classList.remove('hidden'); return; } if (mode !== 'core' && (!Number.isInteger(shard) || shard < 1 || shard > 5)) { landing.classList.remove('hidden'); return; } const tasks = currentTasks(); if (!tasks.length) { landing.classList.remove('hidden'); return; } study.classList.remove('hidden'); tasksRoot.innerHTML = tasks.map(renderTask).join(''); }
 anonymousInput.addEventListener('change', () => { participantInput.disabled = anonymousInput.checked; if (anonymousInput.checked) participantInput.value = ''; });
 submitButton.addEventListener('click', () => { const payload = collectPayload(); const error = validate(payload); if (error) { setStatus(error, 'bad'); return; } submitPayload(payload); });
 downloadButton.addEventListener('click', () => { const payload = collectPayload(); downloadPayload(payload); setStatus('Backup JSON downloaded.', 'ok'); });

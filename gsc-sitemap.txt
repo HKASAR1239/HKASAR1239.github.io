@@ -110,3 +110,4 @@ https://hkasar1239.github.io/terminal-bench-pyknotid-0-5-3-numpy-2-cython-extens
 https://hkasar1239.github.io/terminal-bench-pyknotid-0-5-3-numpy-2-cython-extensions-outdated-solutions/
 https://hkasar1239.github.io/terminal-bench-caffe-1-0-0-cpu-cifar10-current-patch/
 https://hkasar1239.github.io/terminal-bench-caffe-1-0-0-cpu-cifar10-outdated-solutions/
+https://hkasar1239.github.io/questionnaire/core/

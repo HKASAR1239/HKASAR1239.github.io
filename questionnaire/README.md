@@ -1,20 +1,11 @@
 # Debugging Search Query Study
 
-Public questionnaire for the human baseline study. Each shard contains 10 tasks:
+Public questionnaire for the human baseline study. The main study now uses one 5-task core set so multiple participants answer the same errors:
 
-- https://hkasar1239.github.io/questionnaire/?shard=1
-- https://hkasar1239.github.io/questionnaire/?shard=2
-- https://hkasar1239.github.io/questionnaire/?shard=3
-- https://hkasar1239.github.io/questionnaire/?shard=4
-- https://hkasar1239.github.io/questionnaire/?shard=5
+- https://hkasar1239.github.io/questionnaire/
+- https://hkasar1239.github.io/questionnaire/core/
 
-Short aliases are also available:
-
-- https://hkasar1239.github.io/questionnaire/set-1/
-- https://hkasar1239.github.io/questionnaire/set-2/
-- https://hkasar1239.github.io/questionnaire/set-3/
-- https://hkasar1239.github.io/questionnaire/set-4/
-- https://hkasar1239.github.io/questionnaire/set-5/
+The old `set-1` through `set-5` aliases now redirect to the core 5-task study, so previously shared links still work. The full 50-task version remains available manually via `?shard=1` through `?shard=5` for backup only.
 
 ## Response collection
 
