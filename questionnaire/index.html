@@ -739,43 +739,12 @@ function collectPayload() {
 }
 function validate(payload) { if (!payload.participant_id) return 'Please enter a participant ID or select anonymous.'; const missing = payload.responses.filter(r => !r.query); if (missing.length) return `Please enter a query for all 10 tasks. Missing: ${missing.map(r => r.task_id).join(', ')}.`; return ''; }
 function downloadPayload(payload) { const stamp = new Date().toISOString().replace(/[:.]/g, '-'); const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `human-query-study-shard-${shard}-${stamp}.json`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); }
-function postViaHiddenForm(endpoint, payload) {
-  return new Promise(resolve => {
-    const frameName = 'questionnaire_submit_' + Date.now();
-    const iframe = document.createElement('iframe');
-    iframe.name = frameName;
-    iframe.style.display = 'none';
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = endpoint;
-    form.target = frameName;
-    form.style.display = 'none';
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'payload';
-    input.value = JSON.stringify(payload);
-    form.appendChild(input);
-    document.body.appendChild(iframe);
-    document.body.appendChild(form);
-    let done = false;
-    const finish = () => {
-      if (done) return;
-      done = true;
-      setTimeout(() => { form.remove(); iframe.remove(); }, 500);
-      resolve();
-    };
-    iframe.addEventListener('load', finish);
-    setTimeout(finish, 5000);
-    form.submit();
-  });
-}
 async function submitPayload(payload) {
   const config = window.QUESTIONNAIRE_CONFIG || {};
-  localStorage.setItem('human-query-study-last-submission', JSON.stringify(payload));
   if (!config.submitEndpoint) { downloadPayload(payload); setStatus('No collection endpoint is configured yet. A local JSON backup was downloaded.', 'warn'); return; }
   submitButton.disabled = true; setStatus('Submitting responses...', '');
-  try { await postViaHiddenForm(config.submitEndpoint, payload); setStatus('Submitted. Check the response sheet tab named responses.', 'ok'); }
-  catch (error) { if (config.allowDownloadFallback !== false) downloadPayload(payload); setStatus('Submission failed locally, so a backup JSON was saved/downloaded.', 'bad'); }
+  try { await fetch(config.submitEndpoint, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(payload) }); localStorage.setItem('human-query-study-last-submission', JSON.stringify(payload)); setStatus('Submitted. Thank you. Responses are written to the sheet tab named responses.', 'ok'); }
+  catch (error) { localStorage.setItem('human-query-study-last-submission', JSON.stringify(payload)); if (config.allowDownloadFallback !== false) downloadPayload(payload); setStatus('Submission failed locally, so a backup JSON was saved/downloaded.', 'bad'); }
   finally { submitButton.disabled = false; }
 }
 function boot() { if (!Number.isInteger(shard) || shard < 1 || shard > 5) { landing.classList.remove('hidden'); return; } study.classList.remove('hidden'); tasksRoot.innerHTML = currentTasks().map(renderTask).join(''); }
