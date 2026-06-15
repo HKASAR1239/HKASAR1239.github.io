@@ -1,5 +1,5 @@
-const STUDY_TITLE = 'TerminalBench human from-scratch search study';
-const PROPERTY_KEY = 'TB_FROM_SCRATCH_RESPONSE_SPREADSHEET_ID';
+const STUDY_TITLE = 'Human debugging search studies';
+const PROPERTY_KEY = 'HUMAN_DEBUGGING_STUDIES_RESPONSE_SPREADSHEET_ID';
 const SHEET_NAME = 'responses';
 const ASSIGNMENTS_SHEET_NAME = 'assignments';
 
@@ -7,15 +7,20 @@ const HEADERS = [
   'server_received_at',
   'submitted_at_client',
   'source_url',
+  'study_kind',
   'study_version',
   'participant_id',
   'anonymous',
   'background',
   'experience',
+  'shard',
   'assignment_order',
   'task_order',
   'task_id',
+  'instance_id',
   'task_name',
+  'repo',
+  'query',
   'attempted',
   'started_at',
   'ended_at',
@@ -62,38 +67,56 @@ function doPost(e) {
     const receivedAt = new Date();
     const responses = Array.isArray(payload.responses) ? payload.responses : [];
     if (!responses.length) throw new Error('No responses in payload.');
-    const rows = responses.map(response => [
-      receivedAt,
-      payload.submitted_at_client || '',
-      payload.source_url || '',
-      payload.study_version || '',
-      payload.participant_id || '',
-      payload.anonymous || '',
-      payload.background || '',
-      payload.experience || '',
-      payload.assignment_order || '',
-      response.task_order || '',
-      response.task_id || '',
-      response.task_name || '',
-      response.attempted || '',
-      response.started_at || '',
-      response.ended_at || '',
-      response.time_limit_minutes || '',
-      response.did_search || '',
-      response.minutes_to_first_search || '',
-      response.first_search_query || '',
-      response.first_search_trigger_command || '',
-      response.first_search_trigger_error_or_context || '',
-      response.later_search_queries || '',
-      response.solved || '',
-      response.used_llm || '',
-      response.notes || ''
-    ]);
+    const rows = responses.map(response => buildResponseRow_(receivedAt, payload, response));
     sheet.getRange(sheet.getLastRow() + 1, 1, rows.length, HEADERS.length).setValues(rows);
     return json_({ ok: true, rows: rows.length });
   } catch (error) {
     return json_({ ok: false, error: String(error && error.message ? error.message : error) });
   }
+}
+
+function buildResponseRow_(receivedAt, payload, response) {
+  const query = response.query || response.first_search_query || '';
+  return [
+    receivedAt,
+    payload.submitted_at_client || '',
+    payload.source_url || '',
+    payload.study_kind || inferStudyKind_(payload, response),
+    payload.study_version || '',
+    payload.participant_id || '',
+    payload.anonymous || '',
+    payload.background || '',
+    payload.experience || '',
+    payload.shard || '',
+    payload.assignment_order || '',
+    response.task_order || '',
+    response.task_id || '',
+    response.instance_id || '',
+    response.task_name || '',
+    response.repo || '',
+    query,
+    response.attempted || '',
+    response.started_at || '',
+    response.ended_at || '',
+    response.time_limit_minutes || '',
+    response.did_search || '',
+    response.minutes_to_first_search || '',
+    response.first_search_query || query,
+    response.first_search_trigger_command || '',
+    response.first_search_trigger_error_or_context || '',
+    response.later_search_queries || '',
+    response.solved || '',
+    response.used_llm || '',
+    response.notes || ''
+  ];
+}
+
+function inferStudyKind_(payload, response) {
+  if (payload.shard || response.query) return 'swe_query_baseline';
+  if (response.did_search || response.first_search_query || response.first_search_trigger_command) {
+    return 'tbench_from_scratch';
+  }
+  return '';
 }
 
 function parsePayload_(e) {
