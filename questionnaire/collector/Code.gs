@@ -1,13 +1,43 @@
-const STUDY_TITLE = 'Human debugging search query baseline';
-const PROPERTY_KEY = 'HUMAN_QUERY_RESPONSE_SPREADSHEET_ID';
+const STUDY_TITLE = 'TerminalBench human from-scratch search study';
+const PROPERTY_KEY = 'TB_FROM_SCRATCH_RESPONSE_SPREADSHEET_ID';
 const SHEET_NAME = 'responses';
 const ASSIGNMENTS_SHEET_NAME = 'assignments';
+
 const HEADERS = [
-  'server_received_at', 'submitted_at_client', 'source_url', 'participant_id',
-  'background', 'experience', 'shard', 'task_id', 'instance_id', 'repo', 'query'
+  'server_received_at',
+  'submitted_at_client',
+  'source_url',
+  'study_version',
+  'participant_id',
+  'anonymous',
+  'background',
+  'experience',
+  'assignment_order',
+  'task_order',
+  'task_id',
+  'task_name',
+  'attempted',
+  'started_at',
+  'ended_at',
+  'time_limit_minutes',
+  'did_search',
+  'minutes_to_first_search',
+  'first_search_query',
+  'first_search_trigger_command',
+  'first_search_trigger_error_or_context',
+  'later_search_queries',
+  'solved',
+  'used_llm',
+  'notes'
 ];
+
 const ASSIGNMENT_HEADERS = [
-  'assigned_at', 'bucket', 'bucket_count_before', 'bucket_count_after', 'source_url'
+  'assigned_at',
+  'assignment_order',
+  'bucket',
+  'bucket_count_before',
+  'bucket_count_after',
+  'source_url'
 ];
 
 function setupStudySpreadsheet() {
@@ -36,14 +66,28 @@ function doPost(e) {
       receivedAt,
       payload.submitted_at_client || '',
       payload.source_url || '',
+      payload.study_version || '',
       payload.participant_id || '',
+      payload.anonymous || '',
       payload.background || '',
       payload.experience || '',
-      payload.shard || '',
+      payload.assignment_order || '',
+      response.task_order || '',
       response.task_id || '',
-      response.instance_id || '',
-      response.repo || '',
-      response.query || ''
+      response.task_name || '',
+      response.attempted || '',
+      response.started_at || '',
+      response.ended_at || '',
+      response.time_limit_minutes || '',
+      response.did_search || '',
+      response.minutes_to_first_search || '',
+      response.first_search_query || '',
+      response.first_search_trigger_command || '',
+      response.first_search_trigger_error_or_context || '',
+      response.later_search_queries || '',
+      response.solved || '',
+      response.used_llm || '',
+      response.notes || ''
     ]);
     sheet.getRange(sheet.getLastRow() + 1, 1, rows.length, HEADERS.length).setValues(rows);
     return json_({ ok: true, rows: rows.length });
@@ -95,13 +139,13 @@ function assignBucket_(e) {
   lock.waitLock(5000);
   locked = true;
   try {
-    const bucketCount = parseBucketCount_(e.parameter.buckets);
+    const bucketCount = parseBucketCount_(e.parameter.orders || e.parameter.buckets);
     const spreadsheet = getOrCreateSpreadsheet_();
     const sheet = ensureAssignmentSheet_(spreadsheet);
     const counts = Array(bucketCount).fill(0);
     const lastRow = sheet.getLastRow();
     if (lastRow > 1) {
-      const rows = sheet.getRange(2, 2, lastRow - 1, 1).getValues();
+      const rows = sheet.getRange(2, 3, lastRow - 1, 1).getValues();
       rows.forEach(row => {
         const bucket = Number(row[0]);
         if (Number.isInteger(bucket) && bucket >= 1 && bucket <= bucketCount) counts[bucket - 1] += 1;
@@ -110,14 +154,16 @@ function assignBucket_(e) {
     const minCount = Math.min.apply(null, counts);
     const candidates = counts.map((count, index) => count === minCount ? index + 1 : null).filter(Boolean);
     const bucket = candidates[Math.floor(Math.random() * candidates.length)];
+    const order = 'O' + String(bucket).padStart(2, '0');
     sheet.getRange(sheet.getLastRow() + 1, 1, 1, ASSIGNMENT_HEADERS.length).setValues([[
       new Date(),
+      order,
       bucket,
       counts[bucket - 1],
       counts[bucket - 1] + 1,
       e.parameter.source_url || ''
     ]]);
-    return scriptOrJson_({ ok: true, bucket: bucket, bucket_count_before: counts[bucket - 1] }, e);
+    return scriptOrJson_({ ok: true, bucket: bucket, assignment_order: order, bucket_count_before: counts[bucket - 1] }, e);
   } catch (error) {
     return scriptOrJson_({ ok: false, error: String(error && error.message ? error.message : error) }, e);
   } finally {

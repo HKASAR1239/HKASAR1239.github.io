@@ -3,859 +3,674 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
-  <title>Debugging Search Query Study</title>
-  <meta name="description" content="Human baseline study for first web search queries during debugging.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://hkasar1239.github.io/questionnaire/">
+  <title>TerminalBench Debugging Search Study</title>
+  <meta name="description" content="Human study for observing when developers search during TerminalBench debugging tasks.">
   <script src="config.js"></script>
   <style>
-:root { --bg:#f6f7f9; --panel:#fff; --ink:#1f2937; --muted:#5f6b7a; --line:#d8dee8; --line-strong:#c2ccda; --accent:#2563eb; --accent-soft:#eaf1ff; --code-bg:#f3f5f8; --ok:#0f766e; --warn:#a16207; --bad:#b91c1c; }
-* { box-sizing: border-box; }
-html { background: var(--bg); }
-body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--ink); background:var(--bg); line-height:1.45; }
-main { max-width:1120px; margin:0 auto; padding:28px 20px 56px; }
-.hero,.panel,.task { background:var(--panel); border:1px solid var(--line); border-radius:8px; box-shadow:0 1px 3px rgba(15,23,42,.06); }
-.hero { padding:24px; margin-bottom:18px; }
-h1 { margin:0 0 8px; font-size:30px; letter-spacing:0; }
-p { margin:0 0 12px; }
-.muted { color:var(--muted); }
-.notice { border:1px solid var(--line); background:#fff; border-radius:8px; padding:14px 16px; margin-top:14px; }
-.links { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; margin-top:18px; }
-a.set-link { display:block; text-decoration:none; color:var(--ink); background:var(--accent-soft); border:1px solid #bfd2ff; border-radius:8px; padding:14px 16px; font-weight:700; }
-a.set-link span { display:block; color:var(--muted); font-weight:500; margin-top:3px; font-size:14px; }
-.panel { padding:18px; margin-bottom:18px; }
-.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
-label { display:block; font-weight:700; margin-bottom:7px; }
-input,select,textarea { width:100%; border:1px solid var(--line-strong); border-radius:7px; padding:10px 12px; font:inherit; background:#fff; color:var(--ink); }
-textarea { min-height:78px; resize:vertical; }
-.inline { display:flex; gap:8px; align-items:center; margin-top:8px; color:var(--muted); }
-.inline input { width:auto; }
-.task { margin:18px 0; overflow:hidden; }
-.task-header { padding:18px 20px; border-bottom:1px solid var(--line); background:#fbfcfe; }
-.task-header h2 { margin:0 0 6px; font-size:22px; letter-spacing:0; }
-.task-body { padding:18px 20px 22px; }
-.context { border:1px solid var(--line); background:#f9fafc; border-radius:7px; padding:12px 14px; margin-bottom:14px; color:var(--muted); }
-.signal { border:1px solid var(--line-strong); border-radius:8px; padding:14px; margin:14px 0; background:#fbfdff; }
-.signal h3 { margin:0 0 10px; color:var(--muted); font-size:14px; text-transform:uppercase; letter-spacing:.06em; }
-pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:14px; line-height:1.55; background:var(--code-bg); border:1px solid var(--line-strong); border-radius:7px; padding:12px 14px; }
-details { margin:14px 0 18px; border:1px solid var(--line); border-radius:7px; background:#fbfcfe; padding:12px 14px; }
-summary { cursor:pointer; color:var(--muted); font-weight:700; }
-.full-context { margin-top:12px; }
-.full-context p { margin-bottom:10px; }
-.full-context h3,.full-context h4 { margin:18px 0 8px; padding-bottom:5px; border-bottom:1px solid var(--line); }
-.actions { position:sticky; bottom:0; background:rgba(246,247,249,.94); border-top:1px solid var(--line); padding:14px 0; backdrop-filter:blur(8px); }
-button { appearance:none; border:1px solid #1d4ed8; background:var(--accent); color:#fff; border-radius:8px; padding:11px 18px; font:inherit; font-weight:800; cursor:pointer; }
-button.secondary { background:#fff; color:var(--accent); margin-left:10px; }
-button:disabled { opacity:.55; cursor:not-allowed; }
-.status { margin-top:10px; font-weight:700; }
-.status.ok { color:var(--ok); } .status.warn { color:var(--warn); } .status.bad { color:var(--bad); }
-.hidden { display:none!important; }
-@media (max-width:700px) { main{padding:18px 12px 44px;} h1{font-size:24px;} .hero,.panel,.task-body,.task-header{padding:14px;} }
-</style>
-<link rel="canonical" href="https://hkasar1239.github.io/questionnaire/">
-<meta property="og:url" content="https://hkasar1239.github.io/questionnaire/">
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5f6b7c;
+      --line: #d9e0ec;
+      --line-strong: #bdc9da;
+      --accent: #2457d6;
+      --accent-soft: #eaf1ff;
+      --ok: #0f766e;
+      --warn: #a16207;
+      --bad: #b91c1c;
+      --code: #f1f4f8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg); color: var(--ink); }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.45; }
+    main { max-width: 1120px; margin: 0 auto; padding: 28px 18px 72px; }
+    h1, h2, h3 { letter-spacing: 0; }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    h2 { margin: 0 0 6px; font-size: 23px; }
+    h3 { margin: 0 0 10px; font-size: 16px; }
+    p { margin: 0 0 10px; }
+    .hero, .panel, .task {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, .06);
+    }
+    .hero { padding: 24px; margin-bottom: 18px; }
+    .panel { padding: 18px; margin-bottom: 18px; }
+    .muted { color: var(--muted); }
+    .callout {
+      border: 1px solid #bfd2ff;
+      background: var(--accent-soft);
+      border-radius: 8px;
+      padding: 13px 15px;
+      margin-top: 14px;
+    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    label { display: block; font-weight: 700; margin: 0 0 7px; }
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--line-strong);
+      border-radius: 7px;
+      padding: 10px 12px;
+      font: inherit;
+      color: var(--ink);
+      background: #fff;
+    }
+    textarea { min-height: 76px; resize: vertical; }
+    .inline { display: flex; gap: 8px; align-items: center; color: var(--muted); font-weight: 500; }
+    .inline input { width: auto; }
+    .order-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+      color: var(--muted);
+    }
+    .pill {
+      border: 1px solid var(--line);
+      background: #fbfcff;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .task { margin: 18px 0; overflow: hidden; }
+    .task-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfe;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .task-body { padding: 18px 20px 22px; }
+    .task-meta { color: var(--muted); font-weight: 700; }
+    .goal {
+      border: 1px solid var(--line);
+      background: #fbfdff;
+      border-radius: 8px;
+      padding: 13px 14px;
+      margin-bottom: 14px;
+    }
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font: 14px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: var(--code);
+      border: 1px solid var(--line-strong);
+      border-radius: 7px;
+      padding: 12px 14px;
+    }
+    .timer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin: 14px 0;
+    }
+    .small-btn {
+      border: 1px solid #1d4ed8;
+      background: #fff;
+      color: var(--accent);
+      border-radius: 7px;
+      padding: 8px 11px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .small-btn.primary { background: var(--accent); color: #fff; }
+    .fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+    .wide { grid-column: 1 / -1; }
+    details { margin-top: 14px; border: 1px solid var(--line); border-radius: 7px; padding: 11px 13px; background: #fbfcfe; }
+    summary { cursor: pointer; color: var(--muted); font-weight: 800; }
+    .actions {
+      position: sticky;
+      bottom: 0;
+      background: rgba(245, 247, 251, .95);
+      border-top: 1px solid var(--line);
+      padding: 14px 0;
+      backdrop-filter: blur(8px);
+    }
+    button {
+      appearance: none;
+      border: 1px solid #1d4ed8;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      padding: 11px 18px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    button.secondary { background: #fff; color: var(--accent); margin-left: 10px; }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+    .status { margin-top: 10px; font-weight: 800; }
+    .status.ok { color: var(--ok); }
+    .status.warn { color: var(--warn); }
+    .status.bad { color: var(--bad); }
+    .hidden { display: none !important; }
+    @media (max-width: 720px) {
+      main { padding: 18px 12px 58px; }
+      h1 { font-size: 24px; }
+      .hero, .panel, .task-header, .task-body { padding: 14px; }
+      .task-header { display: block; }
+      button.secondary { margin: 8px 0 0; display: block; }
+    }
+  </style>
 </head>
 <body>
-  <main>
-    <section class="hero">
-      <h1>Debugging Search Query Study</h1>
-      <p class="muted">For each task, write the first web search query you would type if this error appeared while debugging. You will see 5 debugging tasks. The errors are intentionally specific and may be unfamiliar; do not solve the task, just write the query you would naturally try first. Please do not use an LLM, search engine, or documentation while filling this out.</p>
-      <div id="landing" class="notice hidden">
-        <strong>Choose a study mode.</strong>
-        <p class="muted">The main public link assigns one balanced 5-task bucket and keeps that assignment stable in this browser. Use the explicit links only if you are coordinating assignments manually.</p>
-        <div class="links">
-          <a class="set-link" href="?mode=random">Balanced assignment <span>5 debugging tasks</span></a>
-          <a class="set-link" href="?mode=core">Focused core study <span>5 debugging tasks</span></a>
-          <a class="set-link" href="?bucket=1">Bucket 1 <span>5 tasks</span></a>
-          <a class="set-link" href="?bucket=2">Bucket 2 <span>5 tasks</span></a>
-          <a class="set-link" href="?bucket=3">Bucket 3 <span>5 tasks</span></a>
-        </div>
+<main>
+  <section class="hero">
+    <h1>TerminalBench Debugging Search Study</h1>
+    <p class="muted">Please try the five assigned TerminalBench tasks naturally. The goal is not to solve every task; the goal is to record when you would use web search and what query you would type.</p>
+    <div class="callout">
+      <strong>Important:</strong> do not use LLMs or coding assistants for this study. Normal web search is allowed. You may stop after any task; partial completion is useful.
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="grid">
+      <div>
+        <label for="participant_id">Participant ID</label>
+        <input id="participant_id" autocomplete="off" placeholder="Initials, lab alias, or anonymous">
+        <label class="inline"><input id="anonymous" type="checkbox"> Use anonymous participant ID</label>
       </div>
-    </section>
-    <section id="study" class="hidden">
-      <section class="panel">
-        <div class="grid">
-          <div>
-            <label for="participant_id">Participant ID</label>
-            <input id="participant_id" autocomplete="off" placeholder="Your initials, lab alias, or anonymous">
-            <label class="inline"><input id="anonymous" type="checkbox"> Use anonymous participant ID</label>
-          </div>
-          <div>
-            <label for="background">Background</label>
-            <select id="background">
-              <option value="">Select one</option>
-              <option>CS Bachelor student</option>
-              <option>CS Master student</option>
-              <option>PhD student / researcher</option>
-              <option>Software engineer</option>
-              <option>Other technical background</option>
-            </select>
-          </div>
-          <div>
-            <label for="experience">Programming experience</label>
-            <select id="experience">
-              <option value="">Select one</option>
-              <option>Less than 1 year</option>
-              <option>1-3 years</option>
-              <option>3-5 years</option>
-              <option>5+ years</option>
-            </select>
-          </div>
-        </div>
-      </section>
-      <div id="tasks"></div>
-      <div class="actions">
-        <button id="submit" type="button">Submit responses</button>
-        <button id="download" class="secondary" type="button">Download backup JSON</button>
-        <div id="status" class="status"></div>
+      <div>
+        <label for="background">Background</label>
+        <select id="background">
+          <option value="">Select one</option>
+          <option>CS Bachelor student</option>
+          <option>CS Master student</option>
+          <option>PhD student / researcher</option>
+          <option>Software engineer</option>
+          <option>Other technical background</option>
+        </select>
       </div>
-    </section>
-  </main>
+      <div>
+        <label for="experience">Programming experience</label>
+        <select id="experience">
+          <option value="">Select one</option>
+          <option>Less than 1 year</option>
+          <option>1-3 years</option>
+          <option>3-5 years</option>
+          <option>5+ years</option>
+        </select>
+      </div>
+    </div>
+    <div class="order-strip" id="orderStrip"></div>
+  </section>
+
+  <div id="tasks"></div>
+
+  <div class="actions">
+    <button id="submit" type="button">Submit responses</button>
+    <button id="download" class="secondary" type="button">Download backup CSV</button>
+    <div id="status" class="status"></div>
+  </div>
+</main>
+
+<form id="submitForm" method="POST" target="submitFrame" class="hidden">
+  <input type="hidden" name="payload" id="payloadField">
+</form>
+<iframe name="submitFrame" id="submitFrame" class="hidden"></iframe>
+
 <script>
-const ALL_TASKS = [
-  {
-    "task_id": "T01",
-    "instance_id": "streamlink__streamlink-6205",
-    "repo": "streamlink/streamlink",
-    "repo_name": "Streamlink",
-    "repo_description": "Streamlink is a CLI tool for extracting streams from websites to a video player of your choice.",
-    "context": "Recently, you noticed that streams with SSL enabled do not play in Streamlink. You then try the no-SSL-verify workaround.\n\nWhen running normally:\nerror: Unable to open URL: HTTPSConnectionPool(...): Max retries exceeded\nSSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate\n\nWhen trying the no-SSL-verify workaround:\nerror: Unable to open URL: Cannot set verify_mode to CERT_NONE when check_hostname is enabled.",
-    "project_context": "You are using Streamlink to open and inspect web video streams.",
-    "execution_code": "streamlink \"<stream URL>\"\n\nstreamlink --http-no-ssl-verify \"<stream URL>\"",
-    "error_log": "When running normally:\nerror: Unable to open URL: HTTPSConnectionPool(...): Max retries exceeded\nSSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate\n\nWhen trying the no-SSL-verify workaround:\nerror: Unable to open URL: Cannot set verify_mode to CERT_NONE when check_hostname is enabled.",
-    "shard": 1
+const STUDY_VERSION = "terminalbench-from-scratch-20260615";
+const TIME_LIMIT_MINUTES = 25;
+
+const TASKS = {
+  "build-pov-ray": {
+    title: "build-pov-ray",
+    shortName: "POV-Ray 2.2 build",
+    goal: "Get a working POV-Ray 2.2 build in the task environment.",
+    command: "/usr/local/bin/povray +L/app/povray-2.2/povdoc/include +I/app/deps/illum1.pov +O/dev/null +P -V",
+    notes: "The validation command expects the povray binary and POV-Ray include files to be available."
   },
-  {
-    "task_id": "T02",
-    "instance_id": "pdm-project__pdm-3374",
-    "repo": "pdm-project/pdm",
-    "repo_name": "PDM",
-    "repo_description": "PDM is a modern Python package and dependency manager.",
-    "context": "you are running a keyring backend that prints to stderr when a password is not found (keyring_pass, specifically). When you do an operation that involves package repositories like update or install, you get a lot of messages about the keyring entries not existing. In a project you are working on, you get ~24 such messages on pdm install, and ~244 on pdm update --outdated.\n\nError: keyring/pdm-pypi-pypi is not in the password store.\nError: keyring/pdm-pypi-pypi/__token__ is not in the password store.\nError: keyring/pdm-pypi-pypi is not in the password store.\nError: keyring/pdm-pypi-pypi/__token__ is not in the password store.\n/home/adam/scratch/temp/.venv/bin/python (3.13)\n\nError: keyring/pdm-pypi-pypi is not in the password store.\nError: keyring/pdm-pypi-pypi/__token__ is not in the password store.\nError: keyring/pdm-pypi-pypi is not in the password store.\nError: keyring/pdm-pypi-pypi/__token__ is not in the password store.",
-    "project_context": "You are using PDM to manage Python project dependencies.",
-    "execution_code": "pdm install",
-    "error_log": "Error: keyring/pdm-pypi-pypi is not in the password store.\nError: keyring/pdm-pypi-pypi/__token__ is not in the password store.",
-    "shard": 1
+  "compile-compcert": {
+    title: "compile-compcert",
+    shortName: "CompCert 3.13.1 build",
+    goal: "Build CompCert 3.13.1 from source in the task environment.",
+    command: "/tmp/CompCert/ccomp -version",
+    notes: "The expected validation command prints the CompCert compiler version."
   },
-  {
-    "task_id": "T03",
-    "instance_id": "urllib3__urllib3-3428",
-    "repo": "urllib3/urllib3",
-    "repo_name": "urllib3",
-    "repo_description": "urllib3 is a widely used HTTP client library for Python.",
-    "context": "A POST request with non-ASCII control bytes in the request body behaves differently after upgrading urllib3 from 1.26.6 to 2.0.2.\n\nMinimal reproduction:\n\nimport urllib3\n\npoolmanager = urllib3.PoolManager(num_pools=10, maxsize=3, block=False)\nconn = poolmanager.connection_from_url(\"https://httpbin.org\")\nresp = conn.urlopen(\n    method=\"POST\",\n    url=\"/post\",\n    body='test\\x80\\x80\\x01\\x01\\x81',\n    headers={\n        \"User-Agent\": \"python-api/2\",\n        \"Accept-Encoding\": \"gzip, deflate\",\n        \"Accept\": \"*/*\",\n        \"Connection\": \"keep-alive\",\n    },\n)\nprint(resp._body)\n\nObserved behavior: urllib3 1.26.6 sends a Content-Length of 9 bytes, while urllib3 2.0.2 sends a Content-Length of 12 bytes for the same request body.",
-    "project_context": "You are using urllib3 to make HTTP requests from Python.",
-    "execution_code": "import urllib3\n\npoolmanager = urllib3.PoolManager(num_pools=10, maxsize=3, block=False)\nconn = poolmanager.connection_from_url(\"https://httpbin.org\")\nresp = conn.urlopen(method=\"POST\", url=\"/post\", body='test\\x80\\x80\\x01\\x01\\x81',  headers={\n                                 'User-Agent': 'python-api/2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'})\nprint(resp._body)",
-    "error_log": "The 'Content-Length' for ver 1.26.6 is 9 bytes, but for ver 2.0.2, it is 12 bytes.",
-    "shard": 1
+  "mailman": {
+    title: "mailman",
+    shortName: "Mailman3/Postfix local delivery",
+    goal: "Configure Mailman3 with Postfix so local delivery reaches the expected mailbox for a reading-group.local.edu list.",
+    command: "python3 /app/eval.py",
+    notes: "Failures may involve Mailman3/Postfix configuration, list creation, or local mail delivery."
   },
-  {
-    "task_id": "T04",
-    "instance_id": "conan-io__conan-16964",
-    "repo": "conan-io/conan",
-    "repo_name": "Conan",
-    "repo_description": "Conan is a C and C++ package manager.",
-    "context": "* Operating System+version: Windows 11\n* Compiler+version: Visual Studio 2019\n* Conan version: 1.51.3\n* Python version: 3.10.3\n\n- require openssl self.requires(\"openssl/1.1.1q\")\n- link with openssl like LINK_LIBRARIES(OpenSSL::SSL OpenSSL::Crypto)\nCHECK_C_SOURCE_COMPILES(\"#include <openssl/opensslv.h>\n\nint main(void) { return 0; }\" PODOFO_HAVE_OPENSSL_1_1)\n\n=> you get the following error:\nC:/J/w/prod/BuildSingleReference/.conan/data/podofo/0.9.7/_/_/build/f8220457d46bfa1f3246ae8e28788767027bcd82/build/CMakeFiles/CMakeTmp/CMakeLists.txt:20 (add_executable):\n\"CONAN_LIB::openssl_OpenSSL_SSL_libssl_RELEASE\" but the target was not\nfound. Perhaps a find_package() call is missing for an IMPORTED target, or\nan ALIAS target is missing?",
-    "project_context": "You are using Conan to install and build C/C++ package dependencies.",
-    "execution_code": "mkdir build1 && cd build1\nconan install zstd/1.5.2@ -g CMakeToolchain -g cmake_find_package -c tools.cmake.cmaketoolchain:find_package_prefer_config=\"OFF\"\ncmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release",
-    "error_log": "\"CONAN_LIB::openssl_OpenSSL_SSL_libssl_RELEASE\" but the target was not found. Perhaps a find_package() call is missing for an IMPORTED target, or an ALIAS target is missing?",
-    "shard": 1
+  "sam-cell-seg": {
+    title: "sam-cell-seg",
+    shortName: "MobileSAM CPU mask conversion",
+    goal: "Run MobileSAM on CPU and convert predicted masks into JSON polylines.",
+    command: "python3 /app/convert_masks.py /app/mobile_sam.pt /app/output /app/demo_rgb.png /app/demo_metadata.csv",
+    notes: "Failures may involve MobileSAM, OpenCV, CPU execution, model checkpoints, or native libraries."
   },
-  {
-    "task_id": "T05",
-    "instance_id": "beeware__briefcase-2085",
-    "repo": "beeware/briefcase",
-    "repo_name": "Briefcase",
-    "repo_description": "Briefcase is a tool for packaging Python projects as native applications.",
-    "context": "DEBUG git.util: Failed checking if running in CYGWIN due to: FileNotFoundError(2, 'No such file or directory')\n\nUnable to check out template branch.\n\nThis is the actual error from Git:\nGitCommandError: Cmd('git') failed due to: exit code(128)\n\n- Python version: 3.12.7\n\nbriefcase.2024_12_08-11_33_10.new.log",
-    "project_context": "You are using Briefcase to create and package a Python desktop application.",
-    "execution_code": "briefcase new",
-    "error_log": "Unable to check out template branch.\nGitCommandError: Cmd('git') failed due to: exit code(128)",
-    "shard": 1
-  },
-  {
-    "task_id": "T06",
-    "instance_id": "llamastack__llama-stack-3224",
-    "repo": "llamastack/llama-stack",
-    "repo_name": "Llama Stack",
-    "repo_description": "Llama Stack is an API layer and distribution framework for Llama applications.",
-    "context": "PyTorch version: 2.8.0\n\nOS: macOS 15.6 (arm64)\nClang version: 17.0.0 (clang-1700.0.13.5)\nCMake version: version 3.31.5\n\nPython version: 3.12.9 (main, May 22 2025, 15:58:04) [Clang 17.0.0 (clang-1700.0.13.3)] (64-bit runtime)\nPython platform: macOS-15.6-arm64-arm-64bit\n\nCPU:\n\nI am trying to use Llama Stack as a back end with LangChain. When I try to send in your tool call responses, you get an error along the lines of:\n\nError executing endpoint route='/v1/openai/v1/responses'\nmethod='post': Error code: 400 - {'error': {'message': \"An assistant message with 'tool_calls' must be followed by tool messages responding\n\nMaybe this is a user error or a bug in LangChain, but it could also be some sort of incompatibility or quirk so I figured I should raise an issue so that more investigation can be done.\n\ntry:\nexcept Exception as e:\nprint(f\"Error running tool {tool_call['name']}: {e}\")\ntool_output = f\"Error running tool: {e}\"\nelse:\ntool_output = f\"Error: Tool '{tool_call['name']}' not found.\"\n\nTraceback (most recent call last):\nFile \"/Users/bmurdock/sample-agent/langchain-issue.py\", line 103, in <module>\nFile \"/Users/bmurdock/.pyenv/versions/3.12.9/lib/python3.12/asyncio/runners.py\", line 195, in run\nFile \"/Users/bmurdock/.pyenv/versions/3.12.9/lib/python3.12/asyncio/runners.py\", line 118, in run\nFile \"/Users/bmurdock/.pyenv/versions/3.12.9/lib/python3.12/asyncio/base_events.py\", line 691, in run_until_complete\nFile \"/Users/bmurdock/sample-agent/langchain-issue.py\", line 99, in main\nFile \"/Users/bmurdock/sample-agent/langchain-issue.py\", line 53, in run_llm_with_tools\n...",
-    "project_context": "You are using Llama Stack to run an LLM application backend.",
-    "execution_code": "python langchain_issue.py",
-    "error_log": "method='post': Error code: 400 - {'error': {'message': \"An assistant message with 'tool_calls' must be followed by tool messages responding\ntool_output = f\"Error: Tool '{tool_call['name']}' not found.\"\nTraceback (most recent call last):\nFile \"/Users/bmurdock/sample-agent/langchain-issue.py\", line 103, in <module>\nFile \"/Users/bmurdock/.pyenv/versions/3.12.9/lib/python3.12/asyncio/runners.py\", line 195, in run\nFile \"/Users/bmurdock/.pyenv/versions/3.12.9/lib/python3.12/asyncio/runners.py\", line 118, in run\nFile \"/Users/bmurdock/.pyenv/versions/3.12.9/lib/python3.12/asyncio/base_events.py\", line 691, in run_until_complete\nFile \"/Users/bmurdock/sample-agent/langchain-issue.py\", line 99, in main\n...",
-    "shard": 1
-  },
-  {
-    "task_id": "T07",
-    "instance_id": "kubernetes-client__python-2340",
-    "repo": "kubernetes-client/python",
-    "repo_name": "Kubernetes Python client",
-    "repo_description": "The Kubernetes Python client is the official Python client library for Kubernetes.",
-    "context": "Attempting to run a simple test program to merely load configuration breaks with a json.dumps TypeError error when using a configuration file similar to those generated by executing the gcloud container clusters get-credentials <cluster> --region <region> --project <gcp_project> command with the gke-gcloud-auth-plugin authentication helper installed:\nERROR:root:Object of type ConfigNode is not JSON serializable\n\napiVersion: v1\nkind: Config\npreferences: {}\ncontexts:\ncluster: test-cluster\nuser: test-user\nname: test\nclusters:\ncertificate-authority-data: bm90X2FfcmVhbF9jZXJ0Cg==\nserver: https://w.x.y.z\nname: test-cluster\nusers:\nuser:\nexec:\napiVersion: client.authentication.k8s.io/v1beta1\ncommand: gke-gcloud-auth-plugin\ninstallHint: Install gke-gcloud-auth-plugin for use with kubectl by following\nprovideClusterInfo: true\ncurrent-context: test\n\npip install kubernetes==32.0.0\n\nYou should receive the following error message from the default logger due to the error being caught and logged without a stacktrace:\nERROR:root:Object of type ConfigNode is not JSON serializable\n\nI haven't looked extensively into what could have changed between versions, but version 31.0.0 appears to work; FWIW here's the requirements.txt for a more-involved test project where version 31.0.0 appears to function with the test file; swapping kubernetes==32.0.0 in breaks it:",
-    "project_context": "You are using Kubernetes Python client to load Kubernetes configuration from Python.",
-    "execution_code": "cat test.py\nfrom kubernetes import client, config\nconfig.load_kube_config()\n\nKUBECONFIG=config python test.py",
-    "error_log": "ERROR:root:Object of type ConfigNode is not JSON serializable",
-    "shard": 1
-  },
-  {
-    "task_id": "T08",
-    "instance_id": "sooperset__mcp-atlassian-581",
-    "repo": "sooperset/mcp-atlassian",
-    "repo_name": "mcp-atlassian",
-    "repo_description": "mcp-atlassian is an MCP server for Atlassian tools such as Jira and Confluence.",
-    "context": "Your client sends the Authorization and X-Atlassian-Cloud-Id headers as shown:\n\nheaders={\n\n❌ But when calling any Jira tool (e.g., jira_get_user_profile), you get the following error:\n\nResult: meta=None content=[TextContent(type='text', text=\"Error calling tool 'get_user_profile'\", annotations=None)] isError=True\n\nValueError: Global OAuth config (with cloud_id) for JiraConfig is missing, but user auth_type is 'oauth'. Cannot determine cloud_id.",
-    "project_context": "You are using mcp-atlassian to call Jira tools through an MCP server.",
-    "execution_code": "python call_jira_tool.py",
-    "error_log": "❌ But when calling any Jira tool (e.g., jira_get_user_profile), I get the following error:\n\nin client console:\n`Result: meta=None content=[TextContent(type='text', text=\"Error calling tool 'get_user_profile'\", annotations=None)] isError=True`\n\nin mcp-atlassian server console:\n\n`ValueError: Global OAuth config (with cloud_id) for JiraConfig is missing, but user auth_type is 'oauth'. Cannot determine cloud_id.`",
-    "shard": 1
-  },
-  {
-    "task_id": "T09",
-    "instance_id": "pvlib__pvlib-python-1947",
-    "repo": "pvlib/pvlib-python",
-    "repo_name": "pvlib-python",
-    "repo_description": "pvlib-python is a Python library for simulating photovoltaic energy systems.",
-    "context": "Hi,\nI have a nasty error I cannot seem to solve, see below code.\n\nThe full error is:\nAttributeError: PVSystem.racking_model not supported for multi-array systems. Set racking_model for each Array in PVSystem.arrays instead.\n\nI guess the error is referring to pvsystem.Array? Except that class doesn't have a property 'racking_model'. The mount object does have that property which is referenced in the Array object but setting it there did not solve the error.\n\nDoes anyone know what I'm doing wrong?\n\nCode:\n# loop over all systems\nfor system in systems:\n    _LOGGER.debug(\"Creating PV system model for system %s\", system[\"name\"])\n    uses_micro: bool = system[\"microinverter\"]\n    arrays: list = system[\"arrays\"]\n    temp_params = TEMPERATURE_MODEL_PARAMETERS[\"pvsyst\"][\"freestanding\"]\n\n    # loop over all arrays\n    pv_arrays = []\n    for array in arrays:\n        _LOGGER.debug(\"Creating PV system model for array %s\", array[\"name\"])\n        mount = FixedMount(surface_tilt=array[\"tilt\"], surface_azimuth=array[\"azimuth\"])\n        module = self._cec_modules[array[\"module\"]]\n\n        pv_arrays.append(\n            Array(\n                mount=mount,\n                module_parameters=module,\n                strings=array[\"strings\"],\n                modules_per_string=array[\"modules_per_string\"],\n                name=array[\"name\"],\n            )\n        )\n\n    # create the PV system\n    inverter = self._cec_inverters[system[\"inverter\"]]\n    pv_system = PVSystem(\n        arrays=pv_arrays,\n        inverter_parameters=inverter,\n        temperature_model_parameters=temp_params,\n        name=system[\"name\"],\n    )\n\n    # create the model chain\n    modelchain = ModelChain(\n        pv_system, self._location, name=system[\"name\"], aoi_model=\"physical\", temperature_model=\"sapm\"\n    )",
-    "project_context": "You are using pvlib-python to model a photovoltaic system in Python.",
-    "execution_code": "# loop over all systems\nfor system in systems:\n    _LOGGER.debug(\"Creating PV system model for system %s\", system[\"name\"])\n    uses_micro: bool = system[\"microinverter\"]\n    arrays: list = system[\"arrays\"]\n    temp_params = TEMPERATURE_MODEL_PARAMETERS[\"pvsyst\"][\"freestanding\"]\n\n    # loop over all arrays\n    pv_arrays = []\n    for array in arrays:\n        _LOGGER.debug(\"Creating PV system model for array %s\", array[\"name\"])\n        mount = FixedMount(surface_tilt=array[\"tilt\"], surface_azimuth=array[\"azimuth\"])\n        module = self._cec_modules[array[\"module\"]]\n\n        pv_arrays.append(\n            Array(\n                mount=mount,\n                module_parameters=module,\n                strings=array[\"strings\"],\n                modules_per_string=array[\"modules_per_string\"],\n                name=array[\"name\"],\n            )\n        )\n\n    # create the PV system\n    inverter = self._cec_inverters[system[\"inverter\"]]\n    pv_system = PVSystem(\n        arrays=pv_arrays,\n        inverter_parameters=inverter,\n        temperature_model_parameters=temp_params,\n        name=system[\"name\"],\n    )\n\n    # create the model chain\n    modelchain = ModelChain(\n        pv_system, self._location, name=system[\"name\"], aoi_model=\"physical\", temperature_model=\"sapm\"\n    )",
-    "error_log": "AttributeError: PVSystem.racking_model not supported for multi-array systems. Set racking_model for each Array in PVSystem.arrays instead.\n\nI guess the error is referring to pvsystem.Array? Except that class doesn't have a property 'racking_model'. The mount object does have that property which is referenced in the Array object but setting it there did not solve the error.",
-    "shard": 1
-  },
-  {
-    "task_id": "T10",
-    "instance_id": "jupyterlab__jupyter-ai-1294",
-    "repo": "jupyterlab/jupyter-ai",
-    "repo_name": "Jupyter AI",
-    "repo_description": "Jupyter AI provides AI assistant integrations for JupyterLab and notebooks.",
-    "context": "Q chat feature supported by the extension amazon-sagemaker-jupyter-ai-q-developer which uses Jupyter AI is not loading correctly or if it loads, the user is not able to get a response back from Q. App container logs show the below exception:\n\nE 2025-03-24 22:06:57.966 ServerApp] Uncaught exception GET /jupyterlab/default/api/ai/config?1742854017897 (169.255.255.1)\n\nmethod='GET', uri='/jupyterlab/default/api/ai/config?1742854017897', version='HTTP/1.1', remote_ip='169.255.255.1')\nTraceback (most recent call last):\nFile \"/opt/conda/lib/python3.11/site-packages/tornado/web.py\", line 1788, in _execute\nFile \"/opt/conda/lib/python3.11/site-packages/tornado/web.py\", line 3301, in wrapper\nFile \"/opt/conda/lib/python3.11/site-packages/jupyter_ai/handlers.py\", line 534, in get\nFile \"/opt/conda/lib/python3.11/site-packages/jupyter_ai/config_manager.py\", line 458, in get_config\nFile \"/opt/conda/lib/python3.11/site-packages/jupyter_ai/config_manager.py\", line 276, in _read_config\nconfig = GlobalConfig(**raw_config)\nFile \"/opt/conda/lib/python3.11/site-packages/pydantic/main.py\", line 214, in __init__\npydantic_core._pydantic_core.ValidationError: 1 validation error for GlobalConfig\nField required [type=missing, input_value={'model_provider_id': 'am...completions_fields': {}}, input_type=dict]\nFor further information visit https://errors.pydantic.dev/2.10/v/missing\n[W 2025-03-24 22:06:57.967 ServerApp] wrote error: 'Unhandled error'\nTraceback (most recent call last):\nFile \"/opt/conda/lib/python3.11/site-packages/tornado/web.py\", line 1788, in _execute\n...",
-    "project_context": "You are using Jupyter AI to run an AI chat extension inside JupyterLab.",
-    "execution_code": "python -m jupyter lab",
-    "error_log": "Q chat feature supported by the extension amazon-sagemaker-jupyter-ai-q-developer which uses Jupyter AI is not loading correctly or if it loads, the user is not able to get a response back from Q. App container logs show the below exception:\nE 2025-03-24 22:06:57.966 ServerApp] Uncaught exception GET /jupyterlab/default/api/ai/config?1742854017897 (169.255.255.1)\nmethod='GET', uri='/jupyterlab/default/api/ai/config?1742854017897', version='HTTP/1.1', remote_ip='169.255.255.1')\nTraceback (most recent call last):\nFile \"/opt/conda/lib/python3.11/site-packages/tornado/web.py\", line 1788, in _execute\nresult = method(*self.path_args, **self.path_kwargs)\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFile \"/opt/conda/lib/python3.11/site-packages/tornado/web.py\", line 3301, in wrapper",
-    "shard": 1
-  },
-  {
-    "task_id": "T11",
-    "instance_id": "patroni__patroni-3373",
-    "repo": "patroni/patroni",
-    "repo_name": "Patroni",
-    "repo_description": "Patroni is a template for PostgreSQL high availability using distributed configuration stores.",
-    "context": "We operate multiple PostgreSQL clusters with Patroni, deployed across three availability zones (AZs), all using the same etcd cluster as the DCS. During regular failure tests involving the disconnection of one AZ (simulating a network partition), we encountered an issue where Patroni nodes in the previously disconnected AZ do not refresh their local DCS cache after reconnection. As a result, they retain outdated information about the cluster leader and do not synchronize the current state from the DCS.\n\n- As a result, they may attempt to operate with stale state, which could lead to split-brain or incorrect cluster behavior.\n\n- Patroni version: Patroni version: 4.0.5 (with and without patch)\n- PostgreSQL version: 15,16,17\n- DCS (and its version): etcd 3.4.35\n\nbootstrap:\ndcs:\nloop_wait: 10\nmaximum_lag_on_failover: 0\npostgresql:\nparameters:\narchive_command: pgbackrest --stanza=CLUSTER archive-push --log-level-console=warn\narchive_mode: on\nmax_connections: '100'\nmax_locks_per_transaction: '64'\nmax_prepared_transactions: 0\nmax_replication_slots: '5'\nmax_wal_senders: '20'\nmax_worker_processes: 8\nssl_cert_file: CERT\nssl_key_file: KEY\nsynchronous_commit: on\ntrack_commit_timestamp: off\nwal_keep_segments: '100'\nwal_keep_size: '1600'\nwal_level: hot_standby\nwal_log_hints: on\nwal_sender_timeout: 5min\nrecovery_conf:\nrecovery_target_timeline: latest\nrestore_command: pgbackrest --stanza=CLUSTER archive-get --log-level-console=warn\nuse_pg_rewind: true\nretry_timeout: 10\nttl: 30\nmethod: initdb\npgbackrest:\ncommand: pgbackrest --stanza=CLUSTER restore --log-level-console=warn\n...",
-    "project_context": "You are using Patroni to operate a PostgreSQL high-availability cluster.",
-    "execution_code": "patronictl list",
-    "error_log": "After reconnection, some Patroni nodes in the previously disconnected AZ retain outdated information about the cluster leader.\nThese nodes do not refresh their DCS cache with live data from etcd.\nAs a result, they may attempt to operate with stale state, which could lead to split-brain or incorrect cluster behavior.\nIn our observations, Patroni did not automatically drop or refresh the local DCS cache after reconnecting to etcd.\nPrevious problem in issue #3314",
-    "shard": 2
-  },
-  {
-    "task_id": "T12",
-    "instance_id": "reflex-dev__reflex-4958",
-    "repo": "reflex-dev/reflex",
-    "repo_name": "Reflex",
-    "repo_description": "Reflex is a Python framework for building full-stack web applications.",
-    "context": "You are running a Reflex app behind ngrok with Google OAuth. Ngrok sends identity headers such as ngrok-auth-user-email, but they do not appear in your Reflex State.\n\nExpected behavior:\nThe displayed headers include proxy-provided request headers such as ngrok-auth-user-email.\n\nObserved behavior:\nReflex exposes websocket headers through rx.State.router.headers, but the original HTTP request headers used to load the frontend app are not available in State. Custom headers set by proxies, ingress controllers, or browser extensions cannot be accessed.",
-    "project_context": "You are using Reflex to build a Python web application.",
-    "execution_code": "from reflex.state import State\nimport reflex as rx\n\nclass State(rx.State):\n    @rx.var\n    def headers(self):\n        return str(self.get_headers())\n\ndef index() -> rx.Component:\n    return rx.fragment(\n        rx.box(State.headers),\n    )\n\napp = rx.App()\napp.add_page(index)\napp.compile()\n\n# Run behind ngrok:\n# ngrok http 3000 --oauth=google --oauth-allow-domain=mydomain.com",
-    "error_log": "Expected behavior:\nThe displayed headers include proxy-provided request headers such as ngrok-auth-user-email.\n\nObserved behavior:\nReflex exposes websocket headers through rx.State.router.headers, but the original HTTP request headers used to load the frontend app are not available in State. Custom headers set by proxies, ingress controllers, or browser extensions cannot be accessed.",
-    "shard": 2
-  },
-  {
-    "task_id": "T13",
-    "instance_id": "sphinx-doc__sphinx-13127",
-    "repo": "sphinx-doc/sphinx",
-    "repo_name": "Sphinx",
-    "repo_description": "Sphinx is a documentation generator for Python projects and technical documentation.",
-    "context": "\"https://onlinelibrary.wiley.com\", # 403 Client Error: Forbidden for url",
-    "project_context": "You are using Sphinx to build Python project documentation.",
-    "execution_code": "sphinx-build docs docs/_build",
-    "error_log": "\"<url>\", # 403 Client Error: Forbidden for url",
-    "shard": 2
-  },
-  {
-    "task_id": "T14",
-    "instance_id": "jlowin__fastmcp-620",
-    "repo": "jlowin/fastmcp",
-    "repo_name": "FastMCP",
-    "repo_description": "FastMCP is a Python framework for building Model Context Protocol servers and clients.",
-    "context": "So I am creating a client with headers\n\nheaders = {}\nheaders[api_key_header] = f\"Bearer {server_config[\"auth\"][\"token\"]}\"\n\nprint(headers)\n\nhttp_client = httpx.AsyncClient(base_url=server_url, headers=headers)\n\nINFO:FastMCP.fastmcp.server.openapi:getting clien's header for tools Headers({'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'python-httpx/0.28.1', 'authorization': '[secure]'})\n\ntry:\nheaders=headers,\ntimeout=self._timeout,\nHowever when the client is making the request await self._client.request( the headers=headers, the parameter headers is replacing the http_client's header and this header\n\n- does not have authorization as the http_client's header is getting replaced by the mcp_server header",
-    "project_context": "You are using FastMCP to build and call tools through an MCP server.",
-    "execution_code": "headers = {api_key_header: f\"Bearer {token}\"}\nhttp_client = httpx.AsyncClient(base_url=server_url, headers=headers)\nawait openapi_tool.run(arguments)",
-    "error_log": "The outgoing request replaces the client's Authorization header with MCP request headers.\nThe forwarded headers include host: 0.0.0.0:9000 and no authorization header.",
-    "shard": 2
-  },
-  {
-    "task_id": "T15",
-    "instance_id": "MDAnalysis__mdanalysis-5086",
-    "repo": "MDAnalysis/mdanalysis",
-    "repo_name": "MDAnalysis",
-    "repo_description": "MDAnalysis is a Python library for analyzing molecular dynamics simulations.",
-    "context": "Reinstalled the MDanalysis today and run rdf calculation. Got this error message \"OSError: DCD seek failed with DCD error=Normal EOF\"\nShouldn't be memory issue, cause that gives a different error message.",
-    "project_context": "You are using MDAnalysis to analyze molecular dynamics trajectory data.",
-    "execution_code": "python rdf_calculation.py",
-    "error_log": "Reinstalled the MDanalysis today and run rdf calculation. Got this error message \"OSError: DCD seek failed with DCD error=Normal EOF\"",
-    "shard": 2
-  },
-  {
-    "task_id": "T16",
-    "instance_id": "aws-cloudformation__cfn-lint-3528",
-    "repo": "aws-cloudformation/cfn-lint",
-    "repo_name": "cfn-lint",
-    "repo_description": "cfn-lint is a linter for AWS CloudFormation templates.",
-    "context": "docker container based on python:3.12-alpine\n\n$ cfn-lint ./a.yaml\nE3601 'Iterator' is a required property\na.yaml:9:11\n\na.yaml:12:13\n\nMyStateMachine:\nType: AWS::StepFunctions::StateMachine\nProperties:\nRoleArn: MyStateMachineRole\nDefinition:\nStartAt: HelloWorld\nStates:\nStartAt: Validate_All\nStates:\nValidate_All:\nType: Map\nInputPath: $.detail\nItemProcessor:\nProcessorConfig:\nMode: INLINE\nStartAt: Validate\nStates:\nValidate:\nType: Pass\nEnd: true\nEnd: true\nResultPath: $.dtail.shipped\nItemsPath: $.shipped\n\nMyStateMachineRole:\nType: AWS::IAM::Role\nProperties:\nPath: /\nAssumeRolePolicyDocument:\nVersion: 2012-10-17\nStatement:\nPrincipal:\nService: [ states.amazonaws.com ]\nAction: [ sts:AssumeRole ]",
-    "project_context": "You are using cfn-lint to validate an AWS CloudFormation template.",
-    "execution_code": "$ cfn-lint ./a.yaml",
-    "error_log": "E3601 'Iterator' is a required property a.yaml:9:11 a.yaml:12:13",
-    "shard": 2
-  },
-  {
-    "task_id": "T17",
-    "instance_id": "yt-dlp__yt-dlp-11198",
-    "repo": "yt-dlp/yt-dlp",
-    "repo_name": "yt-dlp",
-    "repo_description": "yt-dlp is a command-line video downloader.",
-    "context": "[debug] Encodings: locale cp1252, fs utf-8, pref cp1252, out utf-8, error utf-8, screen utf-8\n[debug] yt-dlp version nightly@2023.09.17.024254 [94389b225] (win_exe)\n[debug] Python 3.8.10 (CPython AMD64 64bit) - Windows-10-10.0.22000-SP0 (OpenSSL 1.1.1k 25 Mar 2021)\n[debug] Optional libraries: Cryptodome-3.19.0, brotli-1.1.0, certifi-2023.07.22, mutagen-1.47.0, sqlite3-2.6.0, websockets-11.0.3\nAvailable version: nightly@2023.09.17.024254, Current version: nightly@2023.09.17.024254\nyt-dlp is up to date (nightly@2023.09.17.024254)\n[debug] ffmpeg version n6.0-34-g3d5edb89e7-20230819 Copyright (c) 2000-2023 the FFmpeg developers\nconfiguration: --prefix=/ffbuild/prefix --pkg-config-flags=--static --pkg-config=pkg-config --cross-prefix=x86_64-w64-mingw32- --arch=x86_64 --target-os=mingw32 --enable-gpl --enable-version3 --disable-debug --enable-shared --disable-static --disable-w32threads --enable-pthreads --enable-iconv --enable-libxml2 --enable-zlib --enable-libfreetype --enable-libfribidi --enable-gmp --enable-lzma --enable-fontconfig --enable-libvorbis --enable-opencl --disable-libpulse --enable-libvmaf --disable-libxcb --disable-xlib...\nMetadata:\nDuration: 00:00:09.83, start: 0.000000, bitrate: 804 kb/s\nMetadata:\nDuration: 00:00:09.84, start: -0.007000, bitrate: 115 kb/s\n[NULL @ 000001cc0c8e39c0] Unable to find a suitable output format for 'file:D:\\.webm.temp'\nfile:D:\\.webm.temp: Invalid argument\n\nERROR: Postprocessing: file:D:\\.webm.temp: Invalid argument\nTraceback (most recent call last):\nFile \"yt_dlp\\YoutubeDL.py\", line 3472, in process_info\n...",
-    "project_context": "You are using yt-dlp to download or inspect media streams from the command line.",
-    "execution_code": "yt-dlp -vUo 'D:%(title)s.%(ext)s' test:youtube\npython - <<'PY'\nfrom yt_dlp.utils import sanitize_path\nprint(sanitize_path('D:test'))\nprint(sanitize_path('D:'))\nPY",
-    "error_log": "sanitize_path('D:test') returns 'D:\\\\' instead of the drive-relative path 'D:test'.\nPostprocessing later fails with: file:D:\\\\.webm.temp: Invalid argument",
-    "shard": 2
-  },
-  {
-    "task_id": "T18",
-    "instance_id": "tox-dev__tox-3274",
-    "repo": "tox-dev/tox",
-    "repo_name": "tox",
-    "repo_description": "tox is a tool for automating Python testing across environments.",
-    "context": "/home/martin/micromamba/envs/py37/bin: Python 3.7.16\n/home/martin/micromamba/envs/py38/bin: Python 3.8.17\n/home/martin/micromamba/envs/py39/bin: Python 3.9.17\n/home/martin/micromamba/envs/py310/bin: Python 3.10.12\n/home/martin/micromamba/envs/py311/bin: Python 3.11.4\n/home/martin/micromamba/envs/py312/bin: Python 3.12.0\n\n- OS: Ubuntu 20.04\n\ncertifi 2024.2.2\nkeyring 25.1.0\npip 24.0\npytest 8.1.1\npytest-cov 5.0.0\npython-dateutil 2.9.0.post0\ntox 4.14.2\n\npy3.10: 295 W remove tox env folder /home/martin/workspace/ansible-lint-empty-lines-between-tasks/.tox/py3.10 [tox/tox_env/api.py:323]\n.pkg: 297 W remove tox env folder /home/martin/workspace/ansible-lint-empty-lines-between-tasks/.tox/.pkg [tox/tox_env/api.py:323]\npy3.10: 390 I find interpreter for spec PythonSpec(major=3, minor=10) [virtualenv/discovery/builtin.py:58]\npy3.10: 391 D get interpreter info via cmd: / /home/martin/micromamba/envs/ansible-lint-empty-lines-between-tasks/lib/python3.12/site-packages/virtualenv/discovery/py_info.py WRvXQNTlINZPalllgkZop8FdDeClVXMC Rxdhh6bKxVUdHvEI1R1C4qYyZmifFTd0 [virtualenv/discovery/cached_py_info.py:112]\npy3.10: 392 W skipped because could not find python interpreter with spec(s): py3.10 [tox/session/cmd/run/single.py:50]\npy3.11: 394 W remove tox env folder /home/martin/workspace/ansible-lint-empty-lines-between-tasks/.tox/py3.11 [tox/tox_env/api.py:323]\npy3.10: SKIP ⚠ in 0.1 seconds\npy3.11: 398 I find interpreter for spec PythonSpec(major=3, minor=11) [virtualenv/discovery/builtin.py:58]\n...",
-    "project_context": "You are using tox to run Python test environments.",
-    "execution_code": "export TOX_DISCOVER='/path/py37/bin /path/py38/bin /path/py39/bin /path/py310/bin'\ntox -e py3.10",
-    "error_log": "tox ignores most TOX_DISCOVER paths and only discovers the last path.\npy3.10 is skipped because tox could not find a Python interpreter with spec py3.10.",
-    "shard": 2
-  },
-  {
-    "task_id": "T19",
-    "instance_id": "google__adk-python-547",
-    "repo": "google/adk-python",
-    "repo_name": "ADK Python",
-    "repo_description": "ADK Python is Google's Python Agent Development Kit for building AI agents.",
-    "context": "\"info\": {\"title\": \"Combine Parameters API\", \"version\": \"1.0.0\"},\n\n- Python version(python -V): 3.13.3\n\n(adk-python) ➜ adk-python (fix/missing-path-level-parameters) pip show google-adk ✭ ✱\nName: google-adk\nVersion: 0.4.0\nSummary: Agent Development Kit\nHome-page: https://google.github.io/adk-docs/\nAuthor:\nAuthor-email: Google LLC <googleapis-packages@google.com>\nLicense:\nLocation: /Users/kmak/Documents/Github/adk-python/.venv/lib/python3.13/site-packages\nRequires: authlib, click, fastapi, google-api-python-client, google-cloud-aiplatform, google-cloud-secret-manager, google-cloud-speech, google-cloud-storage, google-genai, graphviz, mcp, opentelemetry-api, opentelemetry-exporter-gcp-trace, opentelemetry-sdk, pydantic, python-dotenv, PyYAML, sqlalchemy, tzlocal, uvicorn\nRequired-by:",
-    "project_context": "You are using ADK Python to parse an OpenAPI specification for an agent tool.",
-    "execution_code": "parsed_operations = openapi_spec_generator.parse(openapi_spec)\noperation = parsed_operations[0]\nassert len(operation.parameters) == 2",
-    "error_log": "The parser keeps the method-level parameter but drops the path-level parameter from the OpenAPI operation.",
-    "shard": 2
-  },
-  {
-    "task_id": "T20",
-    "instance_id": "matplotlib__matplotlib-27850",
-    "repo": "matplotlib/matplotlib",
-    "repo_name": "Matplotlib",
-    "repo_description": "Matplotlib is a Python plotting and visualization library.",
-    "context": "- It is a reopen bug report, same to #5575. The bug still exists for version 2.0.0.\n\n- The output gives no difference in xaxis, implying tz is not working.",
-    "project_context": "You are using Matplotlib to generate a Python plot.",
-    "execution_code": "import pytz\nimport matplotlib.pyplot as plt\nfrom datetime import datetime\ntime_index = [pytz.timezone('Europe/Berlin').localize(datetime(year=2015, month=11, day=27, hour=x)) for x in range(4)]\nplt.plot_date(time_index, [4]*4, tz='Europe/Berlin')\nplt.plot_date(time_index, [3]*4, tz='UTC')",
-    "error_log": "The output gives no difference in xaxis, implying tz is not working.",
-    "shard": 2
-  },
-  {
-    "task_id": "T21",
-    "instance_id": "pydata__xarray-9042",
-    "repo": "pydata/xarray",
-    "repo_name": "xarray",
-    "repo_description": "xarray is a library for labeled N-dimensional arrays and scientific data analysis.",
-    "context": "Converting pandas DataFrame that has a datetime column with timezone to an xarray dataset does not preserve the timezone, this only breaks in version 2024.5\n\ndtype: object\n\ndtype: object\n\ndtype: object\n\ndtype: object\n\ncommit: None\npython: 3.12.1 (tags/v3.12.1:2305ca5, Dec 7 2023, 22:03:25) [MSC v.1937 64 bit (AMD64)]\npython-bits: 64\nOS: Windows\nOS-release: 10\nmachine: AMD64\nprocessor: AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD\nbyteorder: little\nLC_ALL: None\nLANG: None\nLOCALE: ('English_United States', '1252')\nlibhdf5: 1.14.2\nlibnetcdf: None\n\nxarray: 2024.5.0\npandas: 2.2.2\nnumpy: 1.26.4\nscipy: 1.12.0\nnetCDF4: None\npydap: None\nh5netcdf: None\nh5py: 3.10.0\nzarr: None\ncftime: None\nnc_time_axis: None\niris: None\nbottleneck: None\ndask: None\ndistributed: None\nmatplotlib: 3.8.3\ncartopy: None\nseaborn: None\nnumbagg: None\nfsspec: 2024.3.1\ncupy: None\npint: None\nsparse: None\nflox: None\nnumpy_groupies: None\nsetuptools: 69.2.0\npip: 24.0\nconda: None\npytest: None\nmypy: None\nIPython: 8.22.2\nsphinx: 7.2.6",
-    "project_context": "You are using xarray to convert tabular data into an xarray dataset.",
-    "execution_code": "import pandas as pd\nimport xarray as xr\n\ndf1 = pd.DataFrame(\n    {\"A\": pd.date_range(\"20130101\", periods=4, tz=\"US/Eastern\"), \"B\": [1, 2, 3, 4]}\n)\ndataset = xr.Dataset.from_dataframe(df1)\ndf2 = dataset.to_dataframe()\n\nprint(df1.dtypes, dataset.dtypes, df2.dtypes, sep=\"\\n\\n\")",
-    "error_log": "Converting pandas DataFrame that has a datetime column with timezone to an xarray dataset does not preserve the timezone, this only breaks in version 2024.5",
-    "shard": 3
-  },
-  {
-    "task_id": "T22",
-    "instance_id": "eventlet__eventlet-1047",
-    "repo": "eventlet/eventlet",
-    "repo_name": "Eventlet",
-    "repo_description": "Eventlet is a concurrent networking library for Python.",
-    "context": "Here's the error output:\n$ python3 reproducer.py\nException in thread Thread-1 (background_task):\nTraceback (most recent call last):\nFile \"/usr/lib/python3.13/threading.py\", line 1566, in _after_fork\nKeyError: 128691506491200\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\nFile \"/usr/lib/python3.13/threading.py\", line 1041, in _bootstrap_inner\nFile \"/usr/lib/python3.13/threading.py\", line 992, in run\nFile \"/var/lib/nova/reproducer.py\", line 9, in background_task\nFile \"/usr/lib/python3.13/threading.py\", line 1571, in _after_fork\nFile \"/usr/lib/python3.13/threading.py\", line 1354, in __init__\nFile \"/usr/lib/python3/dist-packages/eventlet/green/thread.py\", line 80, in _make_thread_handle\nAssertionError\n\n$ python3 reproducer_threading.py\n\nError from nova that threw me into this race:\nException ignored in: <function _after_fork at 0x75fbe2136ac0>\nTraceback (most recent call last):\nFile \"/usr/lib/python3.13/threading.py\", line 1571, in _after_fork\nFile \"/usr/lib/python3.13/threading.py\", line 1354, in __init__\nFile \"/usr/lib/python3/dist-packages/eventlet/green/thread.py\", line 80, in _make_thread_handle\nAssertionError:",
-    "project_context": "You are using Eventlet to run concurrent Python code with monkey patching.",
-    "execution_code": "import eventlet\n\neventlet.monkey_patch()\n\nimport threading\n\ndef background_task():\n    threading._after_fork()\n\nt = threading.Thread(target=background_task)\nt.start()\nt.join()",
-    "error_log": "Traceback (most recent call last):\nFile \"/usr/lib/python3.13/threading.py\", line 1566, in _after_fork\nFile \"/usr/lib/python3.13/threading.py\", line 1041, in _bootstrap_inner\nFile \"/usr/lib/python3.13/threading.py\", line 992, in run\nFile \"/var/lib/nova/reproducer.py\", line 9, in background_task\nFile \"/usr/lib/python3.13/threading.py\", line 1571, in _after_fork\nFile \"/usr/lib/python3.13/threading.py\", line 1354, in __init__\nFile \"/usr/lib/python3/dist-packages/eventlet/green/thread.py\", line 80, in _make_thread_handle",
-    "shard": 3
-  },
-  {
-    "task_id": "T23",
-    "instance_id": "pwr-solaar__solaar-2463",
-    "repo": "pwr-Solaar/Solaar",
-    "repo_name": "Solaar",
-    "repo_description": "Solaar is a Linux device manager for Logitech receivers and devices.",
-    "context": "- Solaar version (solaar --version or git describe --tags if cloned from this repository): 1.1.10\n- Kernel version (ex. uname -srmo): Linux 6.5.0-17-generic x86_64 GNU/Linux\n\nsolaar version 1.1.10\n\nNotifications: wireless (0x000100)\n\n1: MX Keys S\nBootloader: BL1 88.01.B0015\nFirmware: RBK 81.01.B0015\nOther:\n0: ROOT {0000} V0\n1: FEATURE SET {0001} V0\n2: DEVICE FW VERSION {0003} V4\nFirmware: Bootloader BL1 88.01.B0015 B37802EEF676\nFirmware: Firmware RBK 81.01.B0015 B37802EEF676\nFirmware: Other\n3: DEVICE NAME {0005} V0\nName: MX Keys S\nKind: keyboard\n4: WIRELESS DEVICE STATUS {1D4B} V0\n5: CONFIG CHANGE {0020} V0\n6: DEVICE FRIENDLY NAME {0007} V0\n7: unknown:0011 {0011} V0\n8: UNIFIED BATTERY {1004} V3\nBattery: 65%, discharging.\n9: REPROG CONTROLS V4 {1B04} V5\n10: CHANGE HOST {1814} V1\n11: HOSTS INFO {1815} V2\n12: BACKLIGHT2 {1982} V3\n13: K375S FN INVERSION {40A3} V0\n14: LOCK KEY STATE {4220} V0\n15: KEYBOARD DISABLE KEYS {4521} V0\n16: MULTIPLATFORM {4531} V1\nSet OS (saved): 3\n17: KEYBOARD LAYOUT 2 {4540} V0\n18: DFUCONTROL {00C3} V0\n19: DEVICE RESET {1802} V0 internal, hidden, unknown:000010\n20: unknown:1803 {1803} V0 internal, hidden, unknown:000010\n21: unknown:1807 {1807} V0 internal, hidden, unknown:000010\n22: unknown:1816 {1816} V0 internal, hidden, unknown:000010\n23: OOBSTATE {1805} V0 internal, hidden\n24: unknown:1830 {1830} V0 internal, hidden, unknown:000010\n25: unknown:1891 {1891} V9 internal, hidden, unknown:000008\n26: unknown:18A1 {18A1} V0 internal, hidden, unknown:000010\n27: unknown:1E00 {1E00} V0 hidden\n28: unknown:1E02 {1E02} V0 internal, hidden\n...",
-    "project_context": "You are using Solaar to configure a Logitech keyboard on Linux.",
-    "execution_code": "solaar show\n# Then enable the Swap Fx function for MX Keys S in Solaar.",
-    "error_log": "Swap Fx function (saved): False\nSwap Fx function        : False\nThe keyboard F-keys keep the old behavior after toggling Swap Fx.",
-    "shard": 3
-  },
-  {
-    "task_id": "T24",
-    "instance_id": "pynamodb__PynamoDB-1271",
-    "repo": "pynamodb/PynamoDB",
-    "repo_name": "PynamoDB",
-    "repo_description": "PynamoDB is a Pythonic interface for Amazon DynamoDB.",
-    "context": "you are using PynamoDB instead of direct Boto3 calls to talk to DynamoDB.\n\nBoto3 supports retry modes, but you cannot find an equivalent retry mode configuration in the PynamoDB connection API. It is unclear whether PynamoDB exposes this botocore/Boto3 retry functionality.",
-    "project_context": "You are using PynamoDB to configure a DynamoDB client from Python.",
-    "execution_code": "from pynamodb.connection import Connection\nconnection = Connection(region='us-east-1')\n# Configure DynamoDB retry mode equivalent to boto3 retry modes.",
-    "error_log": "You cannot find an equivalent retry mode configuration in the PynamoDB connection API.",
-    "shard": 3
-  },
-  {
-    "task_id": "T25",
-    "instance_id": "beetbox__beets-5682",
-    "repo": "beetbox/beets",
-    "repo_name": "beets",
-    "repo_description": "beets is a music library manager and tagger.",
-    "context": "fetchart: google: Disabling art source due to missing key\nfetchart: lastfm: Disabling art source due to missing key\nUsage:\n\n* OS: Raspberry Pi OS, Debian 12.9\n* Python version: 3.11.2\n* beets version: 2.2.0",
-    "project_context": "You are using beets to classify and manage a music library.",
-    "execution_code": "beet lastgenre Kinderlieder",
-    "error_log": "lastgenre: genre for album Various Artists - Best of Kinderlieder, Volume 02 (artist): Grindcore\nlastgenre: genre for album Various Artists - Die 50 schoensten Kinderlieder (artist): Melodic Death Metal",
-    "shard": 3
-  },
-  {
-    "task_id": "T26",
-    "instance_id": "pypa__pipx-1625",
-    "repo": "pypa/pipx",
-    "repo_name": "pipx",
-    "repo_description": "pipx is a tool to install and run Python applications in isolated environments.",
-    "context": "pipx >(setup:1110): pipx version is 1.7.1\npipx >(setup:1111): Default python interpreter is '/Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12'\npipx >(run_pipx_command:241): Virtual Environment locations are:\nPackage is not installed. Expected to find /Users/richard/.local/pipx/venvs/-, but it does not exist.",
-    "project_context": "You are using pipx to upgrade an installed Python command-line application.",
-    "execution_code": "(.venv) richard@Richards-MBP % pipx upgrade -e -v .\npipx >(setup:1110): pipx version is 1.7.1\npipx >(setup:1111): Default python interpreter is '/Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12'\npipx >(run_pipx_command:241): Virtual Environment locations are:\n- . : /Users/richard/.local/pipx/venvs/-\nPackage is not installed. Expected to find /Users/richard/.local/pipx/venvs/-, but it does not exist.",
-    "error_log": "Package is not installed. Expected to find /Users/richard/.local/pipx/venvs/-, but it does not exist.",
-    "shard": 3
-  },
-  {
-    "task_id": "T27",
-    "instance_id": "traceloop__openllmetry-3205",
-    "repo": "traceloop/openllmetry",
-    "repo_name": "OpenLLMetry",
-    "repo_description": "OpenLLMetry provides OpenTelemetry-based instrumentation for LLM applications.",
-    "context": "OpenAI instrumentation does not record token usage metrics during auto-instrumentation.\n\nThe streaming OpenAI chat response already contains usage information:\n\ndata: {\n  \"model\": \"custom_model\",\n  \"object\": \"chat.completion.chunk\",\n  \"usage\": {\n    \"completion_tokens\": 42,\n    \"prompt_tokens\": 14,\n    \"total_tokens\": 56\n  }\n}\n\nActual behavior: token usage metrics are not recorded by default, and tiktoken is incompatible with some custom models.",
-    "project_context": "You are using OpenLLMetry to instrument an LLM application with OpenTelemetry.",
-    "execution_code": "opentelemetry-instrument python app.py\n# The OpenAI streaming response includes a usage object with prompt_tokens and completion_tokens.",
-    "error_log": "OpenAI auto-instrumentation does not record token usage metrics when enrich_token_usage is false or tiktoken is incompatible.",
-    "shard": 3
-  },
-  {
-    "task_id": "T28",
-    "instance_id": "pdm-project__pdm-3555",
-    "repo": "pdm-project/pdm",
-    "repo_name": "PDM",
-    "repo_description": "PDM is a modern Python package and dependency manager.",
-    "context": "/home/<redacted>/tmp/uv-test-credentials/.venv/bin/python (3.10)\n\nINFO: PDM 2.25.0 is installed, while 2.25.3 is available.\nINFO: PDM 2.25.0 is installed, while 2.25.3 is available.",
-    "project_context": "You are using PDM to manage Python project dependencies.",
-    "execution_code": "pdm config -l use_uv true\npdm add <package-only-on-private-index>",
-    "error_log": "No solution found when resolving dependencies: Because <package> was not found in the package registry and your project depends on <package>, your project's requirements are unsatisfiable.\nVerbose uv command includes --extra-index-url values without the configured credentials.",
-    "shard": 3
-  },
-  {
-    "task_id": "T29",
-    "instance_id": "streamlink__streamlink-6328",
-    "repo": "streamlink/streamlink",
-    "repo_name": "Streamlink",
-    "repo_description": "Streamlink is a CLI tool for extracting streams from websites to a video player of your choice.",
-    "context": "Streamlink generates segment URLs without removing manifest filename from BaseURL.\n\nPlease, ignore the DRM and key passing to ffmpeg because it does not interfere with DASH mechanics.\n\nE:\\>streamlink \"https://s25617.cdn.ngenix.net/mdrm/CH_TNTHD/manifest.mpd\" best --ffmpeg-dkey dkeydkeydkeydkeydkeydkeydkeydkey --loglevel=debug\ndebug: Loading plugin: dash\ndebug: OS: Windows 10\ndebug: Python: 3.12.8\ndebug: OpenSSL: OpenSSL 3.0.15 3 Sep 2024\ndebug: Streamlink: 7.0.0+27.gf3c3546\ndebug: certifi: 2024.8.30\ndebug: isodate: 0.7.2\ndebug: lxml: 5.3.0\ndebug: pycountry: 24.6.1\ndebug: pycryptodome: 3.21.0\ndebug: PySocks: 1.7.1\ndebug: requests: 2.32.3\ndebug: trio: 0.27.0\ndebug: trio-websocket: 0.11.1\ndebug: urllib3: 2.2.3\ndebug: websocket-client: 1.8.0\ndebug: Arguments:\ndebug: url=https://s25617.cdn.ngenix.net/mdrm/CH_TNTHD/manifest.mpd\ndebug: stream=['best']\ndebug: --loglevel=debug\ndebug: --ffmpeg-ffmpeg=C:\\Program Files\\Streamlink\\ffmpeg\\ffmpeg.exe\ndebug: --ffmpeg-dkey=dkeydkeydkeydkeydkeydkeydkeydkey\ninfo: Found matching plugin dash for URL https://s25617.cdn.ngenix.net/mdrm/CH_TNTHD/manifest.mpd\ndebug: Language code: en_US\ninfo: Available streams: 216p (worst), 360p, 450p, 720p, 1080p (best)\ninfo: Opening stream: 1080p (dash)\ninfo: Starting player: C:\\Program Files\\VideoLAN\\VLC\\vlc.exe\n[stream.ffmpegmux][debug] ffmpeg version n7.1-11-g5c59d97e8a-20241012 Copyright (c) 2000-2024 the FFmpeg developers\n...",
-    "project_context": "You are using Streamlink to open and inspect web video streams.",
-    "execution_code": "streamlink \"https://s25617.cdn.ngenix.net/mdrm/CH_TNTHD/manifest.mpd\" best --loglevel=debug",
-    "error_log": "Streamlink generates segment URLs without removing manifest.mpd from the BaseURL.\nGenerated segment URL contains: /manifest.mpd/video_384x216_avc1/...",
-    "shard": 3
-  },
-  {
-    "task_id": "T30",
-    "instance_id": "streamlink__streamlink-6338",
-    "repo": "streamlink/streamlink",
-    "repo_name": "Streamlink",
-    "repo_description": "Streamlink is a CLI tool for extracting streams from websites to a video player of your choice.",
-    "context": "Hi! Recently you are testing MPEG-DASH with streamlink. After encountering a bunch of HTTP 404 errors when downloading segments, I've started to read the code, and then fortunately I think I've found the solution.\n\nffprobe version n6.1.1-7-ga267d4ad4c-20240222 Copyright (c) 2007-2023 the FFmpeg developers\nconfiguration: ...\nMetadata:\nCOMPATIBLE_BRANDS: isomiso2avc1mp41\nDuration: 00:05:00.17, start: 0.000000, bitrate: 1620 kb/s\nMetadata:\nMetadata:\n\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\nxmlns:xlink=\"http://www.w3.org/1999/xlink\"\nxsi:schemaLocation=\"urn:mpeg:DASH:schema:MPD:2011 http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-DASH_schema_files/DASH-MPD.xsd\"\n\ndef test_baseurl_urljoin(self):\nwith xml(\"dash/test_baseurl_urljoin.mpd\") as mpd_xml:\n\n(\"empty-baseurl\", \"absolute-segments\", \"https://foo/absolute/init_video_5000kbps.m4s\"),\n(\"empty-baseurl\", \"absolute-segments\", \"https://foo/absolute/media_video_5000kbps-1.m4s\"),\n(\"empty-baseurl\", \"relative-segments\", \"https://foo/relative/init_video_5000kbps.m4s\"),\n(\"empty-baseurl\", \"relative-segments\", \"https://foo/relative/media_video_5000kbps-1.m4s\"),\n\n$ python -m streamlink --loglevel debug http://127.0.0.1:8080/mpeg-dash-test/vod/test.mpd best\ndebug: OS: Windows 10\ndebug: Python: 3.11.9\ndebug: OpenSSL: OpenSSL 3.0.13 30 Jan 2024\ndebug: Streamlink: 7.0.0+31.gfac5d8f7\ndebug: certifi: 2024.6.2\ndebug: isodate: 0.6.1\ndebug: lxml: 4.9.4\ndebug: pycountry: 24.6.1\ndebug: pycryptodome: 3.20.0\ndebug: PySocks: 1.7.1\ndebug: requests: 2.32.3\ndebug: trio: 0.25.1\ndebug: trio-websocket: 0.11.1\ndebug: typing-extensions: 4.12.2\n...",
-    "project_context": "You are using Streamlink to open and inspect web video streams.",
-    "execution_code": "def test_baseurl_urljoin(self):\n        with xml(\"dash/test_baseurl_urljoin.mpd\") as mpd_xml:\n            mpd = MPD(mpd_xml, base_url=\"https://foo/bar\", url=\"https://foo/bar/manifest.mpd\")\n        # ...                                           ^\n        #                             No trailing slash |\n\n        assert segment_urls == [\n            [\n                (\"empty-baseurl\", \"absolute-segments\", \"https://foo/absolute/init_video_5000kbps.m4s\"),\n                (\"empty-baseurl\", \"absolute-segments\", \"https://foo/absolute/media_video_5000kbps-1.m4s\"),\n            ],\n            [\n                (\"empty-baseurl\", \"relative-segments\", \"https://foo/relative/init_video_5000kbps.m4s\"),\n                (\"empty-baseurl\", \"relative-segments\", \"https://foo/relative/media_video_5000kbps-1.m4s\"),",
-    "error_log": "$ python -m streamlink --loglevel debug http://127.0.0.1:8080/mpeg-dash-test/vod/test.mpd best\n[cli][debug] OS:         Windows 10\n[cli][debug] Python:     3.11.9\n[cli][debug] OpenSSL:    OpenSSL 3.0.13 30 Jan 2024\n[cli][debug] Streamlink: 7.0.0+31.gfac5d8f7\n[cli][debug] Dependencies:\n[cli][debug]  certifi: 2024.6.2\n[cli][debug]  isodate: 0.6.1\n[cli][debug]  lxml: 4.9.4\n[cli][debug]  pycountry: 24.6.1\n[cli][debug]  pycryptodome: 3.20.0\n[cli][debug]  PySocks: 1.7.1\n[cli][debug]  requests: 2.32.3\n[cli][debug]  trio: 0.25.1\n[cli][debug]  trio-websocket: 0.11.1\n[cli][debug]  typing-extensions: 4.12.2\n[cli][debug]  urllib3: 2.2.1\n[cli][debug]  websocket-client: 1.8.0\n[cli][debug] Arguments:\n[cli][debug]  url=http://127.0.0.1:8080/mpeg-dash-test/vod/test.mpd\n[cli][debug]  stream=['best']\n[cli][debug]  --loglevel=debug\n[cli][info] Found matching plugin dash for URL http://127.0.0.1:8080/mpeg-dash-test/vod/test.mpd\n[plugins.dash][debug] URL=http://127.0.0.1:8080/mpeg-dash-test/vod/test.mpd; params={}\n[utils.l10n][debug] Language code: en_US\n[stream.dash][debug] Available languages for DASH audio streams: NONE (using: n/a)\n[cli][info] Available streams: 1080p (worst, best)\n[cli][info] Opening stream: 1080p (dash)\n[cli][info] Starting player: C:\\Program Files\\VideoLAN\\VLC\\vlc.exe\n[stream.dash][debug] Opening DASH reader for: ('0', '0', '0') - video/mp4\n[stream.dash][debug] Opening DASH reader for: ('0', '1', '1') - audio/mp4\n[stream.ffmpegmux][debug] ffmpeg version n6.1.1-7-ga267d4ad4c-20240222 Copyright (c) 2000-2023 the FFmpeg developers\nbuilt with gcc 13.2.0 (crosstool-NG 1.25.0.2",
-    "shard": 3
-  },
-  {
-    "task_id": "T31",
-    "instance_id": "patroni__patroni-3216",
-    "repo": "patroni/patroni",
-    "repo_name": "Patroni",
-    "repo_description": "Patroni is a template for PostgreSQL high availability using distributed configuration stores.",
-    "context": "We just installed Patroni 4.0.3 and edit-config does not work because a compatibility issue with the latest version of ydiff.\n\nTraceback (most recent call last):\nFile \"/bin/patronictl\", line 8, in <module>\nFile \"/applic/patroni_venv/lib64/python3.11/site-packages/click/core.py\", line 1157, in __call__\nFile \"/applic/patroni_venv/lib64/python3.11/site-packages/click/core.py\", line 1078, in main\nFile \"/applic/patroni_venv/lib64/python3.11/site-packages/click/core.py\", line 1688, in invoke\nFile \"/applic/patroni_venv/lib64/python3.11/site-packages/click/core.py\", line 1434, in invoke\nFile \"/applic/patroni_venv/lib64/python3.11/site-packages/click/core.py\", line 783, in invoke\nFile \"/applic/patroni_venv/lib64/python3.11/site-packages/patroni/ctl.py\", line 2122, in edit_config\nFile \"/applic/patroni_venv/lib64/python3.11/site-packages/patroni/ctl.py\", line 1917, in show_diff\nFile \"/applic/patroni_venv/lib64/python3.11/site-packages/ydiff.py\", line 640, in markup_to_pager\nAttributeError: type object 'opts' has no attribute 'theme'\n\npatroni 4.0.3\npip 24.3.1\npython-dateutil 2.9.0.post0\npython-etcd 0.4.5\n\npatronictl edit-config\n\n- Patroni version: 4.0.3\n- PostgreSQL version: 13.13\n- DCS (and its version): ETCD 3.5.9\n\nscope: patroni\nnamespace: /service/\nname: production-db-3\n\nlog:\nlevel: INFO\ndir: /var/log/patroni\nfile_size: 50000000 # Size of log file which triggers a log rotation\nfile_num: 10 # Number of logs to retain\ndateformat: '%Y-%m-%d %H:%M:%S'\n\nbootstrap:\ndcs:\nttl: 30\nloop_wait: 10\nretry_timeout: 10\nmaximum_lag_on_failover: 1048576\nmaster_start_timeout: 10\n...",
-    "project_context": "You are using Patroni to operate a PostgreSQL high-availability cluster.",
-    "execution_code": "patronictl -k edit-config",
-    "error_log": "AttributeError: type object 'opts' has no attribute 'theme'\nDowngrading ydiff to 1.2.0 avoids the crash.",
-    "shard": 4
-  },
-  {
-    "task_id": "T32",
-    "instance_id": "pdm-project__pdm-3440",
-    "repo": "pdm-project/pdm",
-    "repo_name": "PDM",
-    "repo_description": "PDM is a modern Python package and dependency manager.",
-    "context": "git clone git@github.com:pdm-project/pdm-autoexport.git\n\npdm init\n\npdm install -vv --plugins\n\ngives:\n\nSTATUS: Installing plugins...\nWARNING: Project requires a python version of ==3.11.*, The virtualenv is being created for you as it cannot be matched to the right version.\nINFO: python.use_venv is on, creating a virtualenv for this project...\nRun command: ['/opt/homebrew/Cellar/pdm/2.22.3/libexec/bin/python', '-m', 'virtualenv', '/Users/roberttaylor/Code/ChipFlow/Backend/test/.venv', '-p',\n'/Library/Frameworks/Python.framework/Versions/3.11/bin/python3', '--prompt=test-3.11', '--no-pip', '--no-setuptools', '--no-wheel']\npdm.termui: ======== Start resolving requirements ========\npdm.termui: Adding requirement python==3.13.2\npdm.termui: Adding requirement -e file:///${PROJECT_ROOT}/../pdm-autoexport#egg=pdm\nunearth.preparer: The file ../pdm-autoexport is a local directory, use it directly\npdm.termui: Running PEP 517 backend to get metadata for <Link file:///Users/roberttaylor/Code/ChipFlow/Backend/test/../pdm-autoexport (from None)>\npdm.termui: Preparing environment(Isolated mode) for PEP 517 build...\npdm.termui: ======== Start resolving requirements ========\npdm.termui: Adding requirement python==3.11.0\npdm.termui: Adding requirement pdm-backend\nunearth.collector: Collecting links from https://pypi.org/simple/pdm-backend/\nunearth.evaluator: Skipping link <Link https://pypi.org/simple/pdm-backend/ (from None)>: Not a file:\nunearth.auth: Found index url https://pypi.org/simple/\nunearth.collector: Fetching HTML page https://pypi.org/simple/pdm-backend/\n...",
-    "project_context": "You are using PDM to manage Python project dependencies.",
-    "execution_code": "git clone git@github.com:pdm-project/pdm-autoexport.git\npdm init\npdm install -vv --plugins",
-    "error_log": "WARNING: Project requires a python version of ==3.11.*, The virtualenv is being created for you as it cannot be matched to the right version.",
-    "shard": 4
-  },
-  {
-    "task_id": "T33",
-    "instance_id": "conan-io__conan-15453",
-    "repo": "conan-io/conan",
-    "repo_name": "Conan",
-    "repo_description": "Conan is a C and C++ package manager.",
-    "context": "Now, MyApplication suddenly is broken, because pkg_b binaries are now Missing, according to conan (of course, in the release day :) ). It's now required to rebuild the whole depndency tree.\n\nUPD:",
-    "project_context": "You are using Conan to install and build C/C++ package dependencies.",
-    "execution_code": "conan install . --build=missing\n# A dependency's python-require package gets a new minor version.",
-    "error_log": "pkg_b binaries become Missing even though MyApplication explicitly requests the older compatible some_package version.",
-    "shard": 4
-  },
-  {
-    "task_id": "T34",
-    "instance_id": "aws-cloudformation__cfn-lint-4016",
-    "repo": "aws-cloudformation/cfn-lint",
-    "repo_name": "cfn-lint",
-    "repo_description": "cfn-lint is a linter for AWS CloudFormation templates.",
-    "context": "ManagedPolicyCodeSuiteKmsKey:\nType: AWS::IAM::ManagedPolicy\nCondition: CreateCodePipelineRole\nProperties:\nPolicyDocument:\nVersion: '2012-10-17'\nStatement:\nEffect: Allow\nResource: !Sub 'arn:aws:kms::123123123123:key/*'\nAction:\n\n* Your CloudFormation template fails to Create or Update because the Sid uses invalid characters, and cfn-lint does not detect that.\n\nThe following resource(s) failed to update: [ManagedPolicyCodeSuiteKmsKey].\n| 11:20:11 UTC+1000 | UPDATE_FAILED | AWS::IAM::ManagedPolicy | ManagedPolicyCodeSuiteKmsKey | Statement IDs (SID) must be alpha-numeric. Check that your input satisfies the regular expression [0-9A-Za-z]* (Service: AmazonIdentityManagement; Status Code: 400; Error Code: MalformedPolicyDocument; Request ID: a632726a-42d2-11e9-8725-21992a944eb3)",
-    "project_context": "You are using cfn-lint to validate an AWS CloudFormation template.",
-    "execution_code": "cfn-lint template.yml\naws cloudformation update-stack --template-body file://template.yml",
-    "error_log": "cfn-lint reports no problem, but CloudFormation fails with MalformedPolicyDocument:\nStatement IDs (SID) must be alpha-numeric.",
-    "shard": 4
-  },
-  {
-    "task_id": "T35",
-    "instance_id": "patroni__patroni-3207",
-    "repo": "patroni/patroni",
-    "repo_name": "Patroni",
-    "repo_description": "Patroni is a template for PostgreSQL high availability using distributed configuration stores.",
-    "context": "We recently updated patroni from 3.3.0 to 4.0.3. After resuming the cluster management to patroni, patroni updates replicas' connection options with sslnegotiation=postgres and consequently, replicas fail to replicate and we see the following line in postgresql logs:\nFATAL: could not connect to the primary server: invalid connection option \"sslnegotiation\"\n\nThis only happens with 4.0.3, not with 4.0.2, which of course makes sense, because the support for sslnegotiation in patroni was announced in 4.0.3.",
-    "project_context": "You are using Patroni to operate a PostgreSQL high-availability cluster.",
-    "execution_code": "patronictl list",
-    "error_log": "FATAL: could not connect to the primary server: invalid connection option \"sslnegotiation\"",
-    "shard": 4
-  },
-  {
-    "task_id": "T36",
-    "instance_id": "tox-dev__tox-3388",
-    "repo": "tox-dev/tox",
-    "repo_name": "tox",
-    "repo_description": "tox is a tool for automating Python testing across environments.",
-    "context": "tox doesn't like the requires key when using (as documented) native TOML configuration.\n\n$ pipx runpip tox list\npip 24.2\ntox 4.21.0\ntox-uv 1.13.0\nuv 0.4.18\n\nTraceback (most recent call last):\nFile \"/Users/dhillard/.local/bin/tox\", line 8, in <module>\nFile \"/Users/dhillard/.local/pipx/venvs/tox/lib/python3.11/site-packages/tox/run.py\", line 20, in run\nFile \"/Users/dhillard/.local/pipx/venvs/tox/lib/python3.11/site-packages/tox/run.py\", line 42, in main\nFile \"/Users/dhillard/.local/pipx/venvs/tox/lib/python3.11/site-packages/tox/provision.py\", line 89, in provision\nrequires: list[Requirement] = state.conf.core[\"requires\"]\nFile \"/Users/dhillard/.local/pipx/venvs/tox/lib/python3.11/site-packages/tox/config/sets.py\", line 116, in __getitem__\nFile \"/Users/dhillard/.local/pipx/venvs/tox/lib/python3.11/site-packages/tox/config/sets.py\", line 127, in load\nFile \"/Users/dhillard/.local/pipx/venvs/tox/lib/python3.11/site-packages/tox/config/of_type.py\", line 109, in __call__\nFile \"/Users/dhillard/.local/pipx/venvs/tox/lib/python3.11/site-packages/tox/config/loader/api.py\", line 148, in load\nFile \"/Users/dhillard/.local/pipx/venvs/tox/lib/python3.11/site-packages/tox/config/loader/toml/__init__.py\", line 66, in build\nFile \"/Users/dhillard/.local/pipx/venvs/tox/lib/python3.11/site-packages/tox/config/loader/convert.py\", line 33, in to\nFile \"/Users/dhillard/.local/pipx/venvs/tox/lib/python3.11/site-packages/tox/config/loader/convert.py\", line 60, in _to_typing\n...",
-    "project_context": "You are using tox to run Python test environments.",
-    "execution_code": "tox -rvv",
-    "error_log": "tox crashes while reading native TOML configuration with a requires key.\nTraceback ends in tox/config/loader/convert.py while converting the requires value.",
-    "shard": 4
-  },
-  {
-    "task_id": "T37",
-    "instance_id": "streamlink__streamlink-6381",
-    "repo": "streamlink/streamlink",
-    "repo_name": "Streamlink",
-    "repo_description": "Streamlink is a CLI tool for extracting streams from websites to a video player of your choice.",
-    "context": "info: Your Streamlink version (7.1.1) is up to date!\n\nFrom your analysis using the browser dev tools it appears to me that tiktok changed the data provided on the website of a live. The script with id \"SIGI_STATE\" which should contain the roomInfo / roomId still contains the same data structure, but the roomId property stays empty (\"\") on multiple lives that i have checked. Resulting in the \"Could not find room ID\" error message and therefore rendering the plugin currently unusable for me.\n\nstreamlink https://www.tiktok.com/@{user}/live best --player-external-http --player-external-http-port 12345 --loglevel=debug\ndebug: Loading plugin: tiktok\ndebug: OS: Linux-6.8.0-76060800daily20240311-generic-x86_64-with-glibc2.35\ndebug: Python: 3.10.12\ndebug: OpenSSL: OpenSSL 3.0.2 15 Mar 2022\ndebug: Streamlink: 7.1.1\ndebug: certifi: 2024.2.2\ndebug: exceptiongroup: 1.2.1\ndebug: isodate: 0.6.1\ndebug: lxml: 5.2.1\ndebug: pycountry: 23.12.11\ndebug: pycryptodome: 3.20.0\ndebug: PySocks: 1.7.1\ndebug: requests: 2.31.0\ndebug: trio: 0.25.0\ndebug: trio-websocket: 0.11.1\ndebug: urllib3: 2.2.1\ndebug: websocket-client: 1.8.0\ndebug: Arguments:\ndebug: url=https://www.tiktok.com/@{user}/live\ndebug: stream=['best']\ndebug: --loglevel=debug\ndebug: --player-external-http=True\ndebug: --player-external-http-port=12345\ninfo: Found matching plugin tiktok for URL https://www.tiktok.com/{user}/live\n[plugins.tiktok][error] Could not find room ID\nerror: No playable streams found on this URL: https://www.tiktok.com/{user}/live",
-    "project_context": "You are using Streamlink to open and inspect web video streams.",
-    "execution_code": "streamlink <url> best --player-external-http --player-external-http-port 12345 --loglevel=debug",
-    "error_log": "[plugins.tiktok][error] Could not find room ID\nerror: No playable streams found on this URL: <url>",
-    "shard": 4
-  },
-  {
-    "task_id": "T38",
-    "instance_id": "pdm-project__pdm-3039",
-    "repo": "pdm-project/pdm",
-    "repo_name": "PDM",
-    "repo_description": "PDM is a modern Python package and dependency manager.",
-    "context": "pdm add pylint==2.5.3\n\npdm add full error:\npdm.termui: ======== Start resolving requirements ========\npdm.termui: pylint==2.5.3\npdm.termui: Adding requirement pylint==2.5.3\nunearth.collector: Collecting links from https://pypi.org/simple/pylint/\nunearth.evaluator: Skipping link <Link https://pypi.org/simple/pylint/ (from None)>: Not a file:\nunearth.auth: Found index url https://pypi.org/simple/\nunearth.collector: Fetching HTML page https://pypi.org/simple/pylint/\nunearth.evaluator: Skipping link <Link https://files.pythonhosted.org/packages/36/3b/fa4025a424adafd85c6195001b1c130ecb8d8b30784a1c4cb68e7b5e5ae7/pylint-1.9.5-py2.py3-none-any.whl (from https://pypi.org/simple/pylint/)>: The package requires-python >=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <3.7 is not compatible with the target ==3.9.*.\nunearth.evaluator: Skipping link <Link https://files.pythonhosted.org/packages/3f/0b/4e7eeab1abf594b447385a340593c1a4244cdf8e54a78edcae1e2756d6fb/pylint-1.9.5.tar.gz (from https://pypi.org/simple/pylint/)>: The package requires-python >=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <3.7 is not compatible with the target ==3.9.*.\nunearth.evaluator: Skipping link <Link https://files.pythonhosted.org/packages/a9/c8/773f3fb10f436a1ac5bf55b1705280edc0185fe0d5d419b4c6ad09e54f48/pylint-2.0.0.dev0-py2.py3-none-any.whl (from https://pypi.org/simple/pylint/)>: Invalid requires-python: >=3.4.*\n...",
-    "project_context": "You are using PDM to manage Python project dependencies.",
-    "execution_code": "pdm add pylint==2.5.3",
-    "error_log": "Lock failed.\nERROR: Unable to find a resolution for pylint\n[ResolutionImpossible]: Unable to find a resolution",
-    "shard": 4
-  },
-  {
-    "task_id": "T39",
-    "instance_id": "tox-dev__tox-3246",
-    "repo": "tox-dev/tox",
-    "repo_name": "tox",
-    "repo_description": "tox is a tool for automating Python testing across environments.",
-    "context": "you get a traceback, when I try to do a tox list for a project, whos tox.ini contains a requires:\n\n<summary>Traceback of <code>tox list</code></summary>\n\nROOT: will run in automatically provisioned tox, host /home/tha/.local/pipx/venvs/tox/bin/python is missing [requires (has)]: tox>=4.12 (4.11.4)\nROOT: install_deps> python -I -m pip install 'tox>=4.0' 'tox>=4.12'\nTraceback (most recent call last):\nFile \"/home/tha/.local/bin/tox\", line 8, in <module>\nFile \"/home/tha/.local/pipx/venvs/tox/lib/python3.11/site-packages/tox/run.py\", line 19, in run\nFile \"/home/tha/.local/pipx/venvs/tox/lib/python3.11/site-packages/tox/run.py\", line 41, in main\nFile \"/home/tha/.local/pipx/venvs/tox/lib/python3.11/site-packages/tox/provision.py\", line 122, in provision\nFile \"/home/tha/.local/pipx/venvs/tox/lib/python3.11/site-packages/tox/provision.py\", line 144, in run_provision\nFile \"/home/tha/.local/pipx/venvs/tox/lib/python3.11/site-packages/tox/tox_env/api.py\", line 256, in setup\nFile \"/home/tha/.local/pipx/venvs/tox/lib/python3.11/site-packages/tox/tox_env/python/api.py\", line 232, in _done_with_setup\nAttributeError: 'Parsed' object has no attribute 'list_dependencies'\n\nROOT: 138 W will run in automatically provisioned tox, host /home/tha/.local/pipx/venvs/tox/bin/python is missing [requires (has)]: tox>=4.12 (4.11.4) [tox/provision.py:121]\nROOT: 142 I find interpreter for spec PythonSpec(path=/home/tha/.local/pipx/venvs/tox/bin/python) [virtualenv/discovery/builtin.py:58]\n...",
-    "project_context": "You are using tox to run Python test environments.",
-    "execution_code": "tox list",
-    "error_log": "AttributeError: 'Parsed' object has no attribute 'list_dependencies'",
-    "shard": 4
-  },
-  {
-    "task_id": "T40",
-    "instance_id": "aws-cloudformation__cfn-lint-3686",
-    "repo": "aws-cloudformation/cfn-lint",
-    "repo_name": "cfn-lint",
-    "repo_description": "cfn-lint is a linter for AWS CloudFormation templates.",
-    "context": "The linter is raising a E3031 error saying\n\n'<redacted>' does not match '^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\\\d{1}:)?(\\\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\\\$LATEST|[a-zA-Z0-9-_]+))?$'",
-    "project_context": "You are using cfn-lint to validate an AWS CloudFormation template.",
-    "execution_code": "cfn-lint template.yml",
-    "error_log": "'<redacted>' does not match '^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\\\d{1}:)?(\\\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\\\$LATEST|[a-zA-Z0-9-_]+))?$'",
-    "shard": 4
-  },
-  {
-    "task_id": "T41",
-    "instance_id": "urllib3__urllib3-3311",
-    "repo": "urllib3/urllib3",
-    "repo_name": "urllib3",
-    "repo_description": "urllib3 is a widely used HTTP client library for Python.",
-    "context": "While working on HTTP/2 support in urllib3, there is no public way to tell which HTTP version a response used.\n\nBaseHTTPResponse does not expose an http_version property. The HTTP version value appears to be available internally through _http_vsn_str for normal HTTPResponse objects.",
-    "project_context": "You are using urllib3 to make HTTP requests from Python.",
-    "execution_code": "response = conn.urlopen(\"GET\", \"/\")\nprint(response.http_version)",
-    "error_log": "BaseHTTPResponse does not expose an http_version property.\nThe HTTP version appears to be available only through the internal _http_vsn_str value.",
-    "shard": 5
-  },
-  {
-    "task_id": "T42",
-    "instance_id": "aws-cloudformation__cfn-lint-3947",
-    "repo": "aws-cloudformation/cfn-lint",
-    "repo_name": "cfn-lint",
-    "repo_description": "cfn-lint is a linter for AWS CloudFormation templates.",
-    "context": "cfn-lint 1.23.1\n\nThe size of each managed policy can't exceed 6,144 characters ignoring whitespaces. you are running into E3033 error even though the size of the policy document is less than 6,144 characters.\n\ncfn-lint 1.23.1 gives\n\nAWSTemplateFormatVersion: \"2010-09-09\"\nLoadBalancerControllerPolicy:\nType: \"AWS::IAM::ManagedPolicy\"\nProperties:\nPolicyDocument: |\n\"Version\": \"2012-10-17\",\n\"elasticloadbalancing:DescribeListenerCertificates\",\n\"elasticloadbalancing:DescribeSSLPolicies\",\n\"acm:ListCertificates\",\n\"acm:DescribeCertificate\",\n\"iam:ListServerCertificates\",\n\"iam:GetServerCertificate\",\n\"elasticloadbalancing:AddListenerCertificates\",\n\"elasticloadbalancing:RemoveListenerCertificates\",",
-    "project_context": "You are using cfn-lint to validate an AWS CloudFormation template.",
-    "execution_code": "cfn-lint template.yml\naws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json",
-    "error_log": "[E3033: Check if a string has between min and max number of values specified]\nPolicyDocument is longer than 6144\nThe same policy document can be created successfully with aws iam create-policy.",
-    "shard": 5
-  },
-  {
-    "task_id": "T43",
-    "instance_id": "matplotlib__matplotlib-27613",
-    "repo": "matplotlib/matplotlib",
-    "repo_name": "Matplotlib",
-    "repo_description": "Matplotlib is a Python plotting and visualization library.",
-    "context": "raise ValueError(f\"Key {key}: {ve}\") from None\nValueError: Key axes.prop_cycle: Could not convert 5 to str\n\nPython 3.11.6",
-    "project_context": "You are using Matplotlib to generate a Python plot.",
-    "execution_code": "#!/usr/bin/env python3\n\nfrom cycler import cycler\nimport matplotlib.pyplot as plt\nimport matplotlib.markers as mk\n\ncycle = cycler(marker=[\"+\",mk.CARETRIGHT])\n\nt=[0,1]\ny=[5,6]\n\nplt.rc('axes', prop_cycle=cycle)\nplt.plot(t,y)\nplt.show()",
-    "error_log": "Traceback (most recent call last):\n  File \"/home/mcd/bugs/bug-cycler.py\", line 11, in <module>\n    plt.rc('axes', prop_cycle=cycle)\n  File \"/usr/lib/python3.11/site-packages/matplotlib/pyplot.py\", line 670, in rc\n    matplotlib.rc(group, **kwargs)\n  File \"/usr/lib/python3.11/site-packages/matplotlib/__init__.py\", line 1062, in rc\n    rcParams[key] = v\n    ~~~~~~~~^^^^^\n  File \"/usr/lib/python3.11/site-packages/matplotlib/__init__.py\", line 734, in __setitem__\n    raise ValueError(f\"Key {key}: {ve}\") from None\nValueError: Key axes.prop_cycle: Could not convert 5 to str",
-    "shard": 5
-  },
-  {
-    "task_id": "T44",
-    "instance_id": "aws-cloudformation__cfn-lint-3548",
-    "repo": "aws-cloudformation/cfn-lint",
-    "repo_name": "cfn-lint",
-    "repo_description": "cfn-lint is a linter for AWS CloudFormation templates.",
-    "context": "In an AWS::Lambda::Permission resource, when specifying SourceArn using !Sub (see attached repro template), cfn-lint complains about missing SourceAccount:\n\n$ cfn-lint -t linttest.yml\nE3003 'SourceAccount' is a required property\nlinttest.yml:27:5\n\nWhereas when using !GetAtt, (!GetAtt HelloLambdaSchedule.Arn), we get no error.\n\nHelloLambdaFunction:\nType: AWS::Lambda::Function\nProperties:\nFunctionName: HelloLambdaFunction\nRole: arn:aws:iam::123456789012:role/lambda-role\nRuntime: python3.12\nHandler: index.my_handler\nCode:\nZipFile: |\n\nHelloLambdaSchedule:\nType: \"AWS::Events::Rule\"\nProperties:\nScheduleExpression: 'cron(0 4 * * ? *)'\nState: ENABLED\nTargets:\nId: LambdaSchedule\n\nHelloLambdaPermission:\nType: \"AWS::Lambda::Permission\"\nProperties:\nAction: 'lambda:InvokeFunction'\nFunctionName: HelloLambdaFunction\nPrincipal: 'events.amazonaws.com'\nSourceArn: !Sub ${HelloLambdaSchedule.Arn}",
-    "project_context": "You are using cfn-lint to validate an AWS CloudFormation template.",
-    "execution_code": "$ cfn-lint -t linttest.yml",
-    "error_log": "E3003 'SourceAccount' is a required property",
-    "shard": 5
-  },
-  {
-    "task_id": "T45",
-    "instance_id": "pdm-project__pdm-2743",
-    "repo": "pdm-project/pdm",
-    "repo_name": "PDM",
-    "repo_description": "PDM is a modern Python package and dependency manager.",
-    "context": "version = \"1.0.0\"\n\npython = \"~3.11.6\"\n\npdm command-line execution always crashes.\n\n(cannot launch CLI)",
-    "project_context": "You are using PDM to manage Python project dependencies.",
-    "execution_code": "pdm",
-    "error_log": "pdm.formats.base.MetaConvertError:\nauthors: 'NoneType' object has no attribute 'groupdict'\nThe pyproject.toml author field contains a comma in the name.",
-    "shard": 5
-  },
-  {
-    "task_id": "T46",
-    "instance_id": "kubernetes-client__python-2187",
-    "repo": "kubernetes-client/python",
-    "repo_name": "Kubernetes Python client",
-    "repo_description": "The Kubernetes Python client is the official Python client library for Kubernetes.",
-    "context": "Calling config.load_kube_config() with a KUBECONFIG that uses colon delimited files throws an error:\n\n.venv/lib64/python3.11/site-packages/kubernetes/config/kube_config.py:815: in load_kube_config\n.venv/lib64/python3.11/site-packages/kubernetes/config/kube_config.py:775: in _get_kube_config_loader\n.venv/lib64/python3.11/site-packages/kubernetes/config/kube_config.py:206: in __init__\n.venv/lib64/python3.11/site-packages/kubernetes/config/kube_config.py:258: in set_active_context\n\n'Invalid kube-config file. Expected key %s in %s'\nE kubernetes.config.config_exception.ConfigException: Invalid kube-config file. Expected key current-context in /var/home/seb/.config/kube/clusters/kube.example.com.yaml\n\n.venv/lib64/python3.11/site-packages/kubernetes/config/kube_config.py:625: ConfigException\n\n/var/home/seb/.config/kube/clusters/kube.example.com.yaml:/var/home/seb/.config/kube/contexts/kube.example.com.yaml:/var/home/seb/.config/kube/users/kube.example.com.yaml\n\napiVersion: v1\nkind: Config\nclusters:\ncluster:\ncertificate-authority-data: doesnotmatter\nserver: https://kube.example.com:6443\n\napiVersion: v1\nkind: Config\ncontexts:\ncontext:\ncluster: kube.example.com\nuser: kube.example.com\nnamespace: kube-system\ncurrent-context: kube.example.com\n\napiVersion: v1\nkind: Config\nusers:\n\n- Kubernetes version (kubectl version): v1.29.0\n- OS (e.g., MacOS 10.13.6): Fedora 39\n- Python version (python --version): 3.11.7\n- Python client version (pip list | grep kubernetes): 29.0.0",
-    "project_context": "You are using Kubernetes Python client to load Kubernetes configuration from Python.",
-    "execution_code": "export KUBECONFIG=cluster.yaml:context.yaml:user.yaml\npython - <<'PY'\nfrom kubernetes import config\nconfig.load_kube_config()\nPY",
-    "error_log": "kubernetes.config.config_exception.ConfigException: Invalid kube-config file. Expected key current-context in cluster.yaml\nChanging the KUBECONFIG file order so that the context file comes first avoids the error.",
-    "shard": 5
-  },
-  {
-    "task_id": "T47",
-    "instance_id": "sphinx-doc__sphinx-13200",
-    "repo": "sphinx-doc/sphinx",
-    "repo_name": "Sphinx",
-    "repo_description": "Sphinx is a documentation generator for Python projects and technical documentation.",
-    "context": "Sphinx autodoc displays a class method from a builtin CPython C-API type incorrectly.\n\nPython help() shows the builtin method correctly:\n\n>>> inspect.signature(mpz.from_bytes)\n<Signature (bytes, byteorder='big', *, signed=False)>\n>>> help(mpz.from_bytes)\nfrom_bytes(bytes, byteorder='big', *, signed=False) class method of gmp.mpz\n\nHowever, Sphinx output misses the \"classmethod\" mark and removes the first argument \"bytes\".\n\nEnvironment:\nPython 3.13.1\nSphinx 8.1.3\nDocutils 0.21.2\nPygments 2.18.0",
-    "project_context": "You are using Sphinx to build Python project documentation.",
-    "execution_code": ">>> import inspect\n>>> from gmp import mpq, mpz\n>>> inspect.isbuiltin(mpq.from_decimal)\nFalse\n>>> inspect.isbuiltin(mpz.from_bytes)\nTrue\n>>> inspect.signature(mpq.from_decimal)\n<Signature (dec)>\n>>> inspect.signature(mpz.from_bytes)\n<Signature (bytes, byteorder='big', *, signed=False)>\n>>> help(mpq.from_decimal)\nHelp on method from_decimal in module gmp_fractions:\n\nfrom_decimal(dec) class method of gmp.mpq\n    Converts a finite Decimal instance to a rational number, exactly.\n\n>>> help(mpz.from_bytes)\nHelp on built-in function from_bytes:\n\nfrom_bytes(bytes, byteorder='big', *, signed=False) class method of gmp.mpz\n    Return the integer represented by the given array of bytes.\n\n    bytes\n      Holds the array of bytes to convert.  The argument must either\n[...]",
-    "error_log": "Sphinx autodoc displays a class method from a builtin CPython C-API type incorrectly.",
-    "shard": 5
-  },
-  {
-    "task_id": "T48",
-    "instance_id": "tox-dev__tox-3237",
-    "repo": "tox-dev/tox",
-    "repo_name": "tox",
-    "repo_description": "tox is a tool for automating Python testing across environments.",
-    "context": "tox 4.14.0 with no plugins then crashes with ValueError: write to closed file.\n\n$ pip list\ncertifi 2024.2.2\ncrashtest 0.4.1\nkeyring 24.3.0\npip 24.0\npip-tools 7.4.0\npoetry 1.8.2\npoetry-core 1.9.0\npoetry-plugin-export 1.6.0\npython-dateutil 2.8.2\npython-jsonrpc-server 0.4.0\npython-language-server 0.36.2\npython-magic 0.4.27\npython-slugify 8.0.4\ntox 4.14.0\nuv 0.1.15\nyt-dlp 2023.12.30\n\n$ tox -r -e py312",
-    "project_context": "You are using tox to run Python test environments.",
-    "execution_code": "$ pip list\npip 24.0\npoetry 1.8.2\ntox 4.14.0\nuv 0.1.15\nyt-dlp 2023.12.30\n$ tox -r -e py312",
-    "error_log": "tox 4.14.0 with no plugins then crashes with ValueError: write to closed file.",
-    "shard": 5
-  },
-  {
-    "task_id": "T49",
-    "instance_id": "aws-cloudformation__cfn-lint-3779",
-    "repo": "aws-cloudformation/cfn-lint",
-    "repo_name": "cfn-lint",
-    "repo_description": "cfn-lint is a linter for AWS CloudFormation templates.",
-    "context": "False errors:\nE3510 'StringEqualsIfExists' does not match any of the regexes: 'ForAllValues:^(Not)?IpAddress$', 'ForAllValues:^Arn(Not)?Equals$', 'ForAllValues:^Arn(Not)?Like$', 'ForAllValues:^Date(Not)?Equals$', 'ForAllValues:^Number(Less|Greater)Than(Equals)?$', 'ForAllValues:^Number(Not)?Equals$', 'ForAllValues:^String(Not)?Equals(IgnoreCase)?$', 'ForAllValues:^String(Not)?Like$', 'ForAnyValues:^(Not)?IpAddress$', 'ForAnyValues:^Arn(Not)?Equals$', 'ForAnyValues:^Arn(Not)?Like$', 'ForAnyValues:^Date(Not)?Equals$',...\npolicies/parallelcluster-policies.yaml:224:15\n\nE3510 'ForAnyValue:StringEquals' does not match any of the regexes: 'ForAllValues:^(Not)?IpAddress$', 'ForAllValues:^Arn(Not)?Equals$', 'ForAllValues:^Arn(Not)?Like$', 'ForAllValues:^Date(Not)?Equals$', 'ForAllValues:^Number(Less|Greater)Than(Equals)?$', 'ForAllValues:^Number(Not)?Equals$', 'ForAllValues:^String(Not)?Equals(IgnoreCase)?$', 'ForAllValues:^String(Not)?Like$', 'ForAnyValues:^(Not)?IpAddress$', 'ForAnyValues:^Arn(Not)?Equals$', 'ForAnyValues:^Arn(Not)?Like$', 'ForAnyValues:^Date(Not)?Equals$',...\npolicies/parallelcluster-policies.yaml:404:15\n...",
-    "project_context": "You are using cfn-lint to validate an AWS CloudFormation template.",
-    "execution_code": "cfn-lint template.yml",
-    "error_log": "E3510 'StringEqualsIfExists' does not match any of the regexes: 'ForAllValues:^(Not)?IpAddress$', 'ForAllValues:^Arn(Not)?Equals$', 'ForAllValues:^Arn(Not)?Like$', 'ForAllValues:^Date(Not)?Equals$', 'ForAllValues:^Number(Less|Greater)Than(Equals)?$', 'ForAllValues:^Number(Not)?Equals$', 'ForAllValues:^String(Not)?Equals(IgnoreCase)?$', 'ForAllValues:^String(Not)?Like$', 'ForAnyValues:^(Not)?IpAddress$', 'ForAnyValues:^Arn(Not)?Equals$', 'ForAnyValues:^Arn(Not)?Like$', 'ForAnyValues:^Date(Not)?Equals$',...\nE3510 'ForAnyValue:StringEquals' does not match any of the regexes: 'ForAllValues:^(Not)?IpAddress$', 'ForAllValues:^Arn(Not)?Equals$', 'ForAllValues:^Arn(Not)?Like$', 'ForAllValues:^Date(Not)?Equals$', 'ForAllValues:^Number(Less|Greater)Than(Equals)?$', 'ForAllValues:^Number(Not)?Equals$', 'ForAllValues:^String(Not)?Equals(IgnoreCase)?$', 'ForAllValues:^String(Not)?Like$', 'ForAnyValues:^(Not)?IpAddress$', 'ForAnyValues:^Arn(Not)?Equals$', 'ForAnyValues:^Arn(Not)?Like$', 'ForAnyValues:^Date(Not)?Equals$',...",
-    "shard": 5
-  },
-  {
-    "task_id": "T50",
-    "instance_id": "yt-dlp__yt-dlp-12714",
-    "repo": "yt-dlp/yt-dlp",
-    "repo_name": "yt-dlp",
-    "repo_description": "yt-dlp is a command-line video downloader.",
-    "context": "A direct Twitter/X m3u8 playlist is handled as a generic HLS link. Some audio formats have no codec/bitrate metadata, and yt-dlp sorts the 128k audio below the 32k and 64k audio streams.\n\nCommand:\nyt-dlp -vU https://video.twimg.com/ext_tw_video/1785387260893872128/pu/pl/bYr0BsdFEus_r7fy.m3u8\n\nVerbose output:\n[debug] Formats sorted by: hasvid, ie_pref, lang, quality, res, fps, hdr:12(7), vcodec:vp9.2(10), channels, acodec, size, br, asr, proto, vext, aext, hasaud, source, id\n[debug] Default format spec: bestvideo*+bestaudio/best\n[info] bYr0BsdFEus_r7fy: Downloading 1 format(s): 440+audio-64000-Audio\n\nExpected behavior: the 128k audio stream should rank above the 64k audio stream.",
-    "project_context": "You are using yt-dlp to download or inspect media streams from the command line.",
-    "execution_code": "yt-dlp -vU <url>",
-    "error_log": "A direct Twitter/X m3u8 playlist is handled as a generic HLS link. Some audio formats have no codec/bitrate metadata, and yt-dlp sorts the 128k audio below the 32k and 64k audio streams.\nExpected behavior: the 128k audio stream should rank above the 64k audio stream.",
-    "shard": 5
+  "db-wal-recovery": {
+    title: "db-wal-recovery",
+    shortName: "SQLite WAL recovery",
+    goal: "Recover rows from a SQLite database and WAL state after the database/WAL state is incomplete.",
+    command: "python3 /app/check_recovery.py",
+    notes: "The checker expects 11 recovered records in JSON output and a recovered database that passes integrity checks."
   }
+};
+
+const ORDERS = [
+  ["build-pov-ray", "compile-compcert", "mailman", "sam-cell-seg", "db-wal-recovery"],
+  ["compile-compcert", "mailman", "sam-cell-seg", "db-wal-recovery", "build-pov-ray"],
+  ["mailman", "sam-cell-seg", "db-wal-recovery", "build-pov-ray", "compile-compcert"],
+  ["sam-cell-seg", "db-wal-recovery", "build-pov-ray", "compile-compcert", "mailman"],
+  ["db-wal-recovery", "build-pov-ray", "compile-compcert", "mailman", "sam-cell-seg"],
+  ["build-pov-ray", "mailman", "db-wal-recovery", "compile-compcert", "sam-cell-seg"],
+  ["compile-compcert", "sam-cell-seg", "build-pov-ray", "db-wal-recovery", "mailman"],
+  ["mailman", "db-wal-recovery", "compile-compcert", "sam-cell-seg", "build-pov-ray"],
+  ["sam-cell-seg", "build-pov-ray", "mailman", "compile-compcert", "db-wal-recovery"],
+  ["db-wal-recovery", "compile-compcert", "sam-cell-seg", "mailman", "build-pov-ray"]
 ];
-const CORE_TASK_IDS = ['streamlink__streamlink-6205', 'pdm-project__pdm-3374', 'urllib3__urllib3-3428', 'kubernetes-client__python-2340', 'pvlib__pvlib-python-1947'];
-const BALANCED_BUCKET_COUNT = 10;
-const BALANCED_BUCKETS = Array.from({length: BALANCED_BUCKET_COUNT}, (_, bucketIndex) =>
-  ALL_TASKS.filter((_, taskIndex) => taskIndex % BALANCED_BUCKET_COUNT === bucketIndex).map(task => task.instance_id)
-);
-const params = new URLSearchParams(window.location.search);
-const ASSIGNMENT_KEY = 'human-query-study-balanced-bucket-v1';
-const shardRaw = params.get('shard');
-const bucketRaw = params.get('bucket');
-const mode = params.get('mode') || (shardRaw ? 'shard' : bucketRaw ? 'bucket' : 'random');
-function parseShard(value) { const parsed = parseInt(value || '', 10); return Number.isInteger(parsed) && parsed >= 1 && parsed <= 5 ? parsed : null; }
-function parseBucket(value) { const parsed = parseInt(value || '', 10); return Number.isInteger(parsed) && parsed >= 1 && parsed <= BALANCED_BUCKET_COUNT ? parsed : null; }
-function assignmentEndpoint() { const config = window.QUESTIONNAIRE_CONFIG || {}; return config.assignmentEndpoint || config.submitEndpoint || ''; }
-function readStoredBucket() {
-  try {
-    const stored = JSON.parse(localStorage.getItem(ASSIGNMENT_KEY) || '{}');
-    return parseBucket(stored.bucket);
-  } catch (error) {
-    return null;
-  }
+
+const STORAGE_KEY = "tb-human-from-scratch-study-v1";
+const CONFIG = window.QUESTIONNAIRE_CONFIG || {};
+let assignedBucket = null;
+
+function localState() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
+  catch (_) { return {}; }
 }
-function writeStoredBucket(bucket, source) {
-  localStorage.setItem(ASSIGNMENT_KEY, JSON.stringify({bucket, source, assigned_at: new Date().toISOString()}));
-}
-function localAssignedBucket() {
-  const stored = readStoredBucket();
-  if (stored) return stored;
-  const next = 1 + Math.floor(Math.random() * BALANCED_BUCKET_COUNT);
-  writeStoredBucket(next, 'local');
+
+function saveStatePatch(patch) {
+  const next = Object.assign(localState(), patch);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
   return next;
 }
-function requestServerBucket() {
-  const endpoint = assignmentEndpoint();
-  if (!endpoint || params.get('server') === '0') return Promise.resolve(null);
-  return new Promise(resolve => {
-    const callback = 'humanQueryAssign_' + Math.random().toString(36).slice(2);
-    const cleanup = () => {
-      delete window[callback];
-      if (script.parentNode) script.parentNode.removeChild(script);
-    };
-    const timer = setTimeout(() => { cleanup(); resolve(null); }, 1200);
-    window[callback] = payload => {
-      clearTimeout(timer);
-      const bucket = parseBucket(payload && payload.bucket);
-      cleanup();
-      resolve(bucket);
-    };
-    const script = document.createElement('script');
-    const sep = endpoint.includes('?') ? '&' : '?';
-    script.src = endpoint + sep + new URLSearchParams({
-      action: 'assign',
-      buckets: String(BALANCED_BUCKET_COUNT),
-      callback,
-      source_url: window.location.href
-    }).toString();
-    script.onerror = () => { clearTimeout(timer); cleanup(); resolve(null); };
-    document.head.appendChild(script);
+
+function hashString(value) {
+  let hash = 0;
+  for (let i = 0; i < value.length; i += 1) hash = ((hash << 5) - hash + value.charCodeAt(i)) | 0;
+  return Math.abs(hash);
+}
+
+function queryParam(name) {
+  return new URLSearchParams(window.location.search).get(name);
+}
+
+function chooseLocalBucket() {
+  const explicit = Number(queryParam("bucket"));
+  if (Number.isInteger(explicit) && explicit >= 1 && explicit <= ORDERS.length) return explicit;
+  const state = localState();
+  if (state.bucket) return Number(state.bucket);
+  const participant = document.getElementById("participant_id").value.trim();
+  const seed = participant || String(Date.now()) + Math.random();
+  const bucket = (hashString(seed) % ORDERS.length) + 1;
+  saveStatePatch({ bucket });
+  return bucket;
+}
+
+function assignBucketFromServer() {
+  const endpoint = CONFIG.submitEndpoint || "";
+  const explicit = Number(queryParam("bucket"));
+  if (Number.isInteger(explicit) && explicit >= 1 && explicit <= ORDERS.length) {
+    assignedBucket = explicit;
+    saveStatePatch({ bucket: explicit });
+    renderAll();
+    return;
+  }
+  const state = localState();
+  if (state.bucket) {
+    assignedBucket = Number(state.bucket);
+    renderAll();
+    return;
+  }
+  if (!endpoint) {
+    assignedBucket = chooseLocalBucket();
+    renderAll();
+    return;
+  }
+  const callbackName = "assignmentCallback_" + Math.random().toString(36).slice(2);
+  const script = document.createElement("script");
+  window[callbackName] = function(result) {
+    try {
+      if (result && result.ok && result.bucket) {
+        assignedBucket = Number(result.bucket);
+        saveStatePatch({ bucket: assignedBucket });
+      } else {
+        assignedBucket = chooseLocalBucket();
+      }
+      renderAll();
+    } finally {
+      delete window[callbackName];
+      script.remove();
+    }
+  };
+  script.onerror = function() {
+    assignedBucket = chooseLocalBucket();
+    renderAll();
+  };
+  const url = new URL(endpoint);
+  url.searchParams.set("action", "assign");
+  url.searchParams.set("orders", String(ORDERS.length));
+  url.searchParams.set("source_url", window.location.href);
+  url.searchParams.set("callback", callbackName);
+  script.src = url.toString();
+  document.body.appendChild(script);
+}
+
+function taskOrder() {
+  const bucket = assignedBucket || chooseLocalBucket();
+  return ORDERS[bucket - 1];
+}
+
+function renderOrderStrip() {
+  const strip = document.getElementById("orderStrip");
+  strip.innerHTML = "";
+  const bucket = assignedBucket || chooseLocalBucket();
+  const orderId = "O" + String(bucket).padStart(2, "0");
+  strip.appendChild(pill("Assignment " + orderId));
+  taskOrder().forEach((taskId, index) => {
+    strip.appendChild(pill((index + 1) + ". " + taskId));
   });
 }
-async function assignedBucket() {
-  if (params.get('reset') === '1') localStorage.removeItem(ASSIGNMENT_KEY);
-  const explicit = parseBucket(bucketRaw);
-  if (explicit) return explicit;
-  const stored = readStoredBucket();
-  if (stored) return stored;
-  const serverBucket = await requestServerBucket();
-  if (serverBucket) {
-    writeStoredBucket(serverBucket, 'server');
-    return serverBucket;
+
+function pill(text) {
+  const span = document.createElement("span");
+  span.className = "pill";
+  span.textContent = text;
+  return span;
+}
+
+function renderTasks() {
+  const container = document.getElementById("tasks");
+  container.innerHTML = "";
+  taskOrder().forEach((taskId, index) => {
+    const task = TASKS[taskId];
+    const card = document.createElement("section");
+    card.className = "task";
+    card.dataset.taskId = taskId;
+    card.innerHTML = `
+      <div class="task-header">
+        <div>
+          <h2>${escapeHtml(task.title)}</h2>
+          <div class="task-meta">Task ${index + 1} / 5 · ${escapeHtml(task.shortName)}</div>
+        </div>
+        <label class="inline"><input type="checkbox" data-field="attempted" checked> I attempted this task</label>
+      </div>
+      <div class="task-body">
+        <div class="goal">
+          <p><strong>Goal:</strong> ${escapeHtml(task.goal)}</p>
+          <p class="muted">${escapeHtml(task.notes)}</p>
+        </div>
+        <label>Relevant command / checker</label>
+        <pre>${escapeHtml(task.command)}</pre>
+        <div class="timer">
+          <button class="small-btn primary" type="button" data-action="start">Start task timer</button>
+          <button class="small-btn" type="button" data-action="finish">Mark task finished</button>
+          <span class="muted" data-field="time_display">Not started</span>
+        </div>
+        <div class="fields">
+          <div>
+            <label>Did you use web search?</label>
+            <select data-field="did_search">
+              <option value="">Select one</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div>
+            <label>Minutes to first search</label>
+            <input data-field="minutes_to_first_search" inputmode="decimal" placeholder="e.g. 7">
+          </div>
+          <div class="wide">
+            <label>Exact first web search query</label>
+            <textarea data-field="first_search_query" placeholder="Paste the exact first query, if you searched."></textarea>
+          </div>
+          <div class="wide">
+            <label>Command / action immediately before first search</label>
+            <textarea data-field="first_search_trigger_command" placeholder="What did you run or try just before searching?"></textarea>
+          </div>
+          <div class="wide">
+            <label>Error / context that made you search</label>
+            <textarea data-field="first_search_trigger_error_or_context" placeholder="Copy the error line, stack trace fragment, missing package name, or short context."></textarea>
+          </div>
+          <div class="wide">
+            <label>Later search queries</label>
+            <textarea data-field="later_search_queries" placeholder="Optional. Separate multiple queries with ||"></textarea>
+          </div>
+          <div>
+            <label>Solved within the time limit?</label>
+            <select data-field="solved">
+              <option value="">Select one</option>
+              <option value="yes">Yes</option>
+              <option value="partial">Partially</option>
+              <option value="no">No</option>
+              <option value="stopped">Stopped / skipped</option>
+            </select>
+          </div>
+          <div>
+            <label>Used LLM?</label>
+            <select data-field="used_llm">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+          <div class="wide">
+            <label>Notes</label>
+            <textarea data-field="notes" placeholder="Optional comments."></textarea>
+          </div>
+        </div>
+        <input type="hidden" data-field="started_at">
+        <input type="hidden" data-field="ended_at">
+      </div>`;
+    container.appendChild(card);
+  });
+  bindTaskButtons();
+}
+
+function bindTaskButtons() {
+  document.querySelectorAll(".task").forEach(card => {
+    const taskId = card.dataset.taskId;
+    const startButton = card.querySelector('[data-action="start"]');
+    const finishButton = card.querySelector('[data-action="finish"]');
+    const display = card.querySelector('[data-field="time_display"]');
+    const startField = card.querySelector('[data-field="started_at"]');
+    const endField = card.querySelector('[data-field="ended_at"]');
+    const saved = localState()["task_" + taskId] || {};
+    startField.value = saved.started_at || "";
+    endField.value = saved.ended_at || "";
+    updateTimerDisplay(display, startField.value, endField.value);
+    startButton.addEventListener("click", () => {
+      const now = new Date().toISOString();
+      startField.value = now;
+      const state = localState();
+      state["task_" + taskId] = Object.assign(state["task_" + taskId] || {}, { started_at: now });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      updateTimerDisplay(display, startField.value, endField.value);
+    });
+    finishButton.addEventListener("click", () => {
+      const now = new Date().toISOString();
+      endField.value = now;
+      const state = localState();
+      state["task_" + taskId] = Object.assign(state["task_" + taskId] || {}, { ended_at: now });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      updateTimerDisplay(display, startField.value, endField.value);
+    });
+  });
+}
+
+function updateTimerDisplay(display, start, end) {
+  if (!start) {
+    display.textContent = "Not started";
+    return;
   }
-  return localAssignedBucket();
+  const startTime = new Date(start);
+  if (!end) {
+    display.textContent = "Started at " + startTime.toLocaleTimeString();
+    return;
+  }
+  const minutes = Math.max(0, Math.round((new Date(end) - startTime) / 60000));
+  display.textContent = "Recorded duration: " + minutes + " min";
 }
-let shard = null;
-let bucket = null;
-const landing = document.getElementById('landing');
-const study = document.getElementById('study');
-const tasksRoot = document.getElementById('tasks');
-const statusEl = document.getElementById('status');
-const submitButton = document.getElementById('submit');
-const downloadButton = document.getElementById('download');
-const participantInput = document.getElementById('participant_id');
-const anonymousInput = document.getElementById('anonymous');
-function escapeHtml(value) { return String(value || '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])); }
-function normalizeCode(value) { const text = String(value || '').trim(); return text || 'Run the failing command or test for this task.'; }
-function normalizeError(value) { const text = String(value || '').trim(); return text || 'The command fails or behaves incorrectly for this task.'; }
-function taskIdsToTasks(ids) { return ids.map(id => ALL_TASKS.find(t => t.instance_id === id)).filter(Boolean); }
-function currentTasks() {
-  if (mode === 'core') return taskIdsToTasks(CORE_TASK_IDS);
-  if (mode === 'shard') return ALL_TASKS.filter(t => Number(t.shard) === shard);
-  const ids = BALANCED_BUCKETS[(bucket || 1) - 1] || [];
-  return taskIdsToTasks(ids);
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
-function currentGroupLabel() {
-  if (mode === 'core') return 'Core study · 5 tasks';
-  if (mode === 'shard') return `Legacy set ${shard} / 5`;
-  return `Balanced bucket ${bucket} / ${BALANCED_BUCKET_COUNT}`;
+
+function anonymousId() {
+  const state = localState();
+  if (state.anon_id) return state.anon_id;
+  const value = "anon-" + Math.random().toString(36).slice(2, 10);
+  saveStatePatch({ anon_id: value });
+  return value;
 }
-function currentGroupId() {
-  if (mode === 'core') return 'core';
-  if (mode === 'shard') return `legacy-shard-${shard}`;
-  return `balanced-bucket-${String(bucket).padStart(2, '0')}`;
-}
-function renderTask(task) {
-  const context = task.project_context || `You are debugging ${task.repo || task.instance_id}.`;
-  const code = normalizeCode(task.execution_code);
-  const error = normalizeError(task.error_log);
-  const full = task.context ? `<details><summary>Show additional context</summary><div class="full-context"><pre>${escapeHtml(task.context)}</pre></div></details>` : '';
-  return `<article class="task" data-instance-id="${escapeHtml(task.instance_id)}"><header class="task-header"><h2>${escapeHtml(task.instance_id)}</h2><div class="muted">Task ${escapeHtml(task.task_id)} · ${escapeHtml(currentGroupLabel())}</div></header><div class="task-body"><div class="context"><strong>Context:</strong> ${escapeHtml(context)}</div><section class="signal"><h3>When executing this code</h3><pre>${escapeHtml(code)}</pre></section><section class="signal"><h3>What you observe</h3><pre>${escapeHtml(error)}</pre></section>${full}<label for="q_${escapeHtml(task.task_id)}">First web search query</label><textarea id="q_${escapeHtml(task.task_id)}" data-task-id="${escapeHtml(task.task_id)}" placeholder="Write one query exactly as you would type it into a search engine."></textarea></div></article>`;
-}
-function setStatus(message, kind) { statusEl.textContent = message || ''; statusEl.className = 'status ' + (kind || ''); }
+
 function collectPayload() {
-  const participant = anonymousInput.checked ? 'anonymous' : participantInput.value.trim();
-  const responses = currentTasks().map(task => ({ task_id: task.task_id, instance_id: task.instance_id, repo: task.repo, original_shard: task.shard, query: document.getElementById('q_' + task.task_id).value.trim() }));
-  return { study:'human_debugging_search_query_baseline', study_version:'balanced-five-static-20260610', participant_id:participant, background:document.getElementById('background').value, experience:document.getElementById('experience').value, shard: currentGroupId(), submitted_at_client:new Date().toISOString(), source_url:window.location.href, user_agent:navigator.userAgent, responses };
+  const anonymous = document.getElementById("anonymous").checked;
+  const participantInput = document.getElementById("participant_id");
+  const participantId = anonymous ? anonymousId() : participantInput.value.trim();
+  if (!participantId) throw new Error("Please enter a participant ID or select anonymous.");
+  const bucket = assignedBucket || chooseLocalBucket();
+  const orderId = "O" + String(bucket).padStart(2, "0");
+  const responses = [];
+  document.querySelectorAll(".task").forEach((card, index) => {
+    const taskId = card.dataset.taskId;
+    const task = TASKS[taskId];
+    const row = {
+      task_order: String(index + 1),
+      task_id: taskId,
+      task_name: task.shortName,
+      attempted: valueFor(card, "attempted") ? "yes" : "no",
+      started_at: valueFor(card, "started_at"),
+      ended_at: valueFor(card, "ended_at"),
+      time_limit_minutes: String(TIME_LIMIT_MINUTES),
+      did_search: valueFor(card, "did_search"),
+      minutes_to_first_search: valueFor(card, "minutes_to_first_search"),
+      first_search_query: valueFor(card, "first_search_query"),
+      first_search_trigger_command: valueFor(card, "first_search_trigger_command"),
+      first_search_trigger_error_or_context: valueFor(card, "first_search_trigger_error_or_context"),
+      later_search_queries: valueFor(card, "later_search_queries"),
+      solved: valueFor(card, "solved"),
+      used_llm: valueFor(card, "used_llm"),
+      notes: valueFor(card, "notes")
+    };
+    responses.push(row);
+  });
+  return {
+    study_version: STUDY_VERSION,
+    submitted_at_client: new Date().toISOString(),
+    source_url: window.location.href,
+    participant_id: participantId,
+    anonymous: anonymous ? "yes" : "no",
+    background: document.getElementById("background").value,
+    experience: document.getElementById("experience").value,
+    assignment_order: orderId,
+    responses
+  };
 }
-function validate(payload) { if (!payload.participant_id) return 'Please enter a participant ID or select anonymous.'; const missing = payload.responses.filter(r => !r.query); if (missing.length) return `Please enter a query for all ${currentTasks().length} tasks. Missing: ${missing.map(r => r.task_id).join(', ')}.`; return ''; }
-function downloadPayload(payload) { const stamp = new Date().toISOString().replace(/[:.]/g, '-'); const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `human-query-study-${currentGroupId()}-${stamp}.json`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); }
-async function submitPayload(payload) {
-  const config = window.QUESTIONNAIRE_CONFIG || {};
-  if (!config.submitEndpoint) { downloadPayload(payload); setStatus('No collection endpoint is configured yet. A local JSON backup was downloaded.', 'warn'); return; }
-  submitButton.disabled = true; setStatus('Submitting responses...', '');
-  try { await fetch(config.submitEndpoint, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(payload) }); localStorage.setItem('human-query-study-last-submission', JSON.stringify(payload)); setStatus('Submitted. Thank you. Responses are written to the sheet tab named responses.', 'ok'); }
-  catch (error) { localStorage.setItem('human-query-study-last-submission', JSON.stringify(payload)); if (config.allowDownloadFallback !== false) downloadPayload(payload); setStatus('Submission failed locally, so a backup JSON was saved/downloaded.', 'bad'); }
-  finally { submitButton.disabled = false; }
+
+function valueFor(card, field) {
+  const element = card.querySelector(`[data-field="${field}"]`);
+  if (!element) return "";
+  if (element.type === "checkbox") return element.checked;
+  return element.value || "";
 }
-async function boot() {
-  if (params.get('choose') === '1') { landing.classList.remove('hidden'); return; }
-  if (mode === 'shard') {
-    shard = parseShard(shardRaw);
-    if (!shard) { landing.classList.remove('hidden'); return; }
-  } else if (mode !== 'core') {
-    bucket = await assignedBucket();
-    if (!bucket) { landing.classList.remove('hidden'); return; }
+
+function payloadToCsv(payload) {
+  const headers = [
+    "participant_id", "anonymous", "background", "experience", "assignment_order",
+    "task_order", "task_id", "task_name", "attempted", "started_at", "ended_at",
+    "time_limit_minutes", "did_search", "minutes_to_first_search", "first_search_query",
+    "first_search_trigger_command", "first_search_trigger_error_or_context",
+    "later_search_queries", "solved", "used_llm", "notes"
+  ];
+  const rows = payload.responses.map(row => {
+    const base = {
+      participant_id: payload.participant_id,
+      anonymous: payload.anonymous,
+      background: payload.background,
+      experience: payload.experience,
+      assignment_order: payload.assignment_order
+    };
+    return headers.map(header => csvCell(Object.prototype.hasOwnProperty.call(row, header) ? row[header] : base[header]));
+  });
+  return [headers.join(","), ...rows.map(row => row.join(","))].join("\n");
+}
+
+function csvCell(value) {
+  const text = String(value == null ? "" : value);
+  return '"' + text.replaceAll('"', '""') + '"';
+}
+
+function downloadText(filename, text, mime) {
+  const blob = new Blob([text], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function submitResponses() {
+  const status = document.getElementById("status");
+  const button = document.getElementById("submit");
+  let payload;
+  try {
+    payload = collectPayload();
+  } catch (error) {
+    status.className = "status bad";
+    status.textContent = error.message;
+    return;
   }
-  const tasks = currentTasks();
-  if (!tasks.length) { landing.classList.remove('hidden'); return; }
-  study.classList.remove('hidden');
-  tasksRoot.innerHTML = tasks.map(renderTask).join('');
+  const endpoint = CONFIG.submitEndpoint || "";
+  if (!endpoint) {
+    downloadText("terminalbench-human-search-response.csv", payloadToCsv(payload), "text/csv");
+    status.className = "status warn";
+    status.textContent = "No collector endpoint is configured. A CSV backup was downloaded instead.";
+    return;
+  }
+  button.disabled = true;
+  document.getElementById("payloadField").value = JSON.stringify(payload);
+  const form = document.getElementById("submitForm");
+  form.action = endpoint;
+  form.submit();
+  status.className = "status ok";
+  status.textContent = "Submitted. Please also keep a backup CSV if the network looked unstable.";
 }
-anonymousInput.addEventListener('change', () => { participantInput.disabled = anonymousInput.checked; if (anonymousInput.checked) participantInput.value = ''; });
-submitButton.addEventListener('click', () => { const payload = collectPayload(); const error = validate(payload); if (error) { setStatus(error, 'bad'); return; } submitPayload(payload); });
-downloadButton.addEventListener('click', () => { const payload = collectPayload(); downloadPayload(payload); setStatus('Backup JSON downloaded.', 'ok'); });
-boot();
+
+function renderAll() {
+  renderOrderStrip();
+  renderTasks();
+}
+
+document.getElementById("anonymous").addEventListener("change", event => {
+  const input = document.getElementById("participant_id");
+  input.disabled = event.target.checked;
+  input.value = event.target.checked ? anonymousId() : "";
+});
+document.getElementById("submit").addEventListener("click", submitResponses);
+document.getElementById("download").addEventListener("click", () => {
+  try {
+    const payload = collectPayload();
+    downloadText("terminalbench-human-search-response.csv", payloadToCsv(payload), "text/csv");
+  } catch (error) {
+    const status = document.getElementById("status");
+    status.className = "status bad";
+    status.textContent = error.message;
+  }
+});
+
+assignBucketFromServer();
 </script>
 </body>
 </html>
