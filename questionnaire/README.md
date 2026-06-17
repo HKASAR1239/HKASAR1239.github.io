@@ -8,6 +8,12 @@ Each participant receives all five selected TerminalBench tasks in one of ten ba
 
 This study addresses the first part of the project framing: whether humans and agents hit search-triggering errors in predictable ways when solving the same debugging tasks.
 
+The fixed SWE-style query baseline is separate and does not rotate tasks:
+
+- https://hkasar1239.github.io/questionnaire/query-baseline/
+
+Each participant sees the same five debugging errors and writes the first web search query they would type. This addresses the second part of the framing: once an error exists, how humans phrase debugging searches.
+
 ## Response collection
 
 The frontend is static and public. Do not put GitHub tokens or private secrets in it.

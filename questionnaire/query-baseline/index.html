@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://hkasar1239.github.io/questionnaire/query-baseline/">
+  <title>Human Debugging Search Query Baseline</title>
+  <meta name="description" content="Human baseline study for first web search queries on fixed debugging errors.">
+  <script src="../config.js"></script>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5f6b7c;
+      --line: #d9e0ec;
+      --line-strong: #bdc9da;
+      --accent: #2457d6;
+      --accent-soft: #eaf1ff;
+      --ok: #0f766e;
+      --warn: #a16207;
+      --bad: #b91c1c;
+      --code: #f1f4f8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg); color: var(--ink); }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.45; }
+    main { max-width: 1040px; margin: 0 auto; padding: 28px 18px 72px; }
+    h1, h2, h3 { letter-spacing: 0; }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    h2 { margin: 0 0 6px; font-size: 23px; }
+    h3 { margin: 0 0 10px; font-size: 16px; }
+    p { margin: 0 0 10px; }
+    .hero, .panel, .task {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, .06);
+    }
+    .hero { padding: 24px; margin-bottom: 18px; }
+    .panel { padding: 18px; margin-bottom: 18px; }
+    .muted { color: var(--muted); }
+    .callout {
+      border: 1px solid #bfd2ff;
+      background: var(--accent-soft);
+      border-radius: 8px;
+      padding: 13px 15px;
+      margin-top: 14px;
+    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    label { display: block; font-weight: 700; margin: 0 0 7px; }
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--line-strong);
+      border-radius: 7px;
+      padding: 10px 12px;
+      font: inherit;
+      color: var(--ink);
+      background: #fff;
+    }
+    textarea { min-height: 80px; resize: vertical; }
+    .inline { display: flex; gap: 8px; align-items: center; color: var(--muted); font-weight: 500; }
+    .inline input { width: auto; }
+    .task { margin: 18px 0; overflow: hidden; }
+    .task-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfe;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .task-body { padding: 18px 20px 22px; }
+    .task-meta { color: var(--muted); font-weight: 700; }
+    .context {
+      border: 1px solid var(--line);
+      background: #fbfdff;
+      border-radius: 8px;
+      padding: 13px 14px;
+      margin-bottom: 14px;
+    }
+    .snippet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .snippet { min-width: 0; }
+    .snippet-title {
+      margin: 0 0 7px;
+      color: var(--muted);
+      font-size: 13px;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font: 14px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: var(--code);
+      border: 1px solid var(--line-strong);
+      border-radius: 7px;
+      padding: 12px 14px;
+    }
+    .query-field { border-top: 1px solid var(--line); padding-top: 14px; margin-top: 4px; }
+    .actions {
+      position: sticky;
+      bottom: 0;
+      background: rgba(245, 247, 251, .95);
+      border-top: 1px solid var(--line);
+      padding: 14px 0;
+      backdrop-filter: blur(8px);
+    }
+    button {
+      appearance: none;
+      border: 1px solid #1d4ed8;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      padding: 11px 18px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    button.secondary { background: #fff; color: var(--accent); margin-left: 10px; }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+    .status { margin-top: 10px; font-weight: 800; }
+    .status.ok { color: var(--ok); }
+    .status.warn { color: var(--warn); }
+    .status.bad { color: var(--bad); }
+    .hidden { display: none !important; }
+    @media (max-width: 760px) {
+      main { padding: 18px 12px 58px; }
+      h1 { font-size: 24px; }
+      .hero, .panel, .task-header, .task-body { padding: 14px; }
+      .task-header { display: block; }
+      .snippet-grid { grid-template-columns: 1fr; }
+      button.secondary { margin: 8px 0 0; display: block; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <h1>Human Debugging Search Query Baseline</h1>
+    <p class="muted">You will see five debugging errors. For each one, write the first web search query you would type if this appeared on your screen.</p>
+    <div class="callout">
+      <strong>Important:</strong> do not use LLMs or coding assistants while answering. Do not try to solve the issue. We only need the exact first search query you would type.
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="grid">
+      <div>
+        <label for="participant_id">Participant ID</label>
+        <input id="participant_id" autocomplete="off" placeholder="Initials, lab alias, or anonymous">
+        <label class="inline"><input id="anonymous" type="checkbox"> Use anonymous participant ID</label>
+      </div>
+      <div>
+        <label for="background">Background</label>
+        <select id="background">
+          <option value="">Select one</option>
+          <option>CS Bachelor student</option>
+          <option>CS Master student</option>
+          <option>PhD student / researcher</option>
+          <option>Software engineer</option>
+          <option>Other technical background</option>
+        </select>
+      </div>
+      <div>
+        <label for="experience">Programming experience</label>
+        <select id="experience">
+          <option value="">Select one</option>
+          <option>Less than 1 year</option>
+          <option>1-3 years</option>
+          <option>3-5 years</option>
+          <option>5+ years</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <div id="tasks"></div>
+
+  <div class="actions">
+    <button id="submit" type="button">Submit responses</button>
+    <button id="download" class="secondary" type="button">Download backup CSV</button>
+    <div id="status" class="status"></div>
+  </div>
+</main>
+
+<form id="submitForm" method="POST" target="submitFrame" class="hidden">
+  <input type="hidden" name="payload" id="payloadField">
+</form>
+<iframe name="submitFrame" id="submitFrame" class="hidden"></iframe>
+
+<script>
+const STUDY_KIND = "swe_query_baseline_fixed5";
+const STUDY_VERSION = "swe-query-baseline-fixed5-20260617";
+const CONFIG = window.QUESTIONNAIRE_CONFIG || {};
+
+const TASKS = [
+  {
+    task_id: "T01",
+    instance_id: "streamlink__streamlink-6205",
+    repo: "streamlink/streamlink",
+    context: "You are using Streamlink to open web video streams from the command line.",
+    code: `streamlink --http-no-ssl-verify "<stream URL>"`,
+    error: `error: Unable to open URL: HTTPSConnectionPool(...): Max retries exceeded
+SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate
+
+error: Unable to open URL: Cannot set verify_mode to CERT_NONE when check_hostname is enabled.`
+  },
+  {
+    task_id: "T02",
+    instance_id: "pdm-project__pdm-3374",
+    repo: "pdm-project/pdm",
+    context: "You are using PDM to install Python project dependencies.",
+    code: `pdm install`,
+    error: `Error: keyring/pdm-pypi-pypi is not in the password store.
+Error: keyring/pdm-pypi-pypi/__token__ is not in the password store.
+Error: keyring/pdm-pypi-pypi is not in the password store.
+Error: keyring/pdm-pypi-pypi/__token__ is not in the password store.`
+  },
+  {
+    task_id: "T03",
+    instance_id: "urllib3__urllib3-3428",
+    repo: "urllib3/urllib3",
+    context: "You are using urllib3 to send an HTTP POST request from Python.",
+    code: `import urllib3
+
+poolmanager = urllib3.PoolManager(num_pools=10, maxsize=3, block=False)
+conn = poolmanager.connection_from_url("https://httpbin.org")
+resp = conn.urlopen(
+    method="POST",
+    url="/post",
+    body='test\\x80\\x80\\x01\\x01\\x81',
+    headers={
+        "User-Agent": "python-api/2",
+        "Accept-Encoding": "gzip, deflate",
+        "Accept": "*/*",
+        "Connection": "keep-alive",
+    },
+)`,
+    error: `The same request produces different Content-Length values across urllib3 versions.
+
+urllib3 1.26.6 sends Content-Length: 9
+urllib3 2.0.2 sends Content-Length: 12`
+  },
+  {
+    task_id: "T04",
+    instance_id: "conan-io__conan-16964",
+    repo: "conan-io/conan",
+    context: "You are using Conan and CMake to install and build C/C++ package dependencies.",
+    code: `mkdir build1 && cd build1
+conan install zstd/1.5.2@ -g CMakeToolchain -g cmake_find_package -c tools.cmake.cmaketoolchain:find_package_prefer_config="OFF"
+cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release`,
+    error: `"CONAN_LIB::openssl_OpenSSL_SSL_libssl_RELEASE" but the target was not found.
+
+Perhaps a find_package() call is missing for an IMPORTED target, or an ALIAS target is missing?`
+  },
+  {
+    task_id: "T05",
+    instance_id: "beeware__briefcase-2085",
+    repo: "beeware/briefcase",
+    context: "You are using Briefcase to create and package a Python desktop application.",
+    code: `briefcase new`,
+    error: `DEBUG git.util: Failed checking if running in CYGWIN due to: FileNotFoundError(2, 'No such file or directory')
+Unable to check out template branch.
+GitCommandError: Cmd('git') failed due to: exit code(128)
+Python version: 3.12.7`
+  }
+];
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function renderTasks() {
+  const container = document.getElementById("tasks");
+  container.innerHTML = TASKS.map((task, index) => `
+    <section class="task" data-task="${escapeHtml(task.task_id)}">
+      <div class="task-header">
+        <div>
+          <h2>${escapeHtml(task.instance_id)}</h2>
+          <div class="task-meta">Task ${index + 1} / ${TASKS.length} · ${escapeHtml(task.repo)}</div>
+        </div>
+      </div>
+      <div class="task-body">
+        <div class="context"><strong>Context:</strong> ${escapeHtml(task.context)}</div>
+        <div class="snippet-grid">
+          <div class="snippet">
+            <div class="snippet-title">When executing this code</div>
+            <pre>${escapeHtml(task.code)}</pre>
+          </div>
+          <div class="snippet">
+            <div class="snippet-title">You get this error / behavior</div>
+            <pre>${escapeHtml(task.error)}</pre>
+          </div>
+        </div>
+        <div class="query-field">
+          <label for="query_${escapeHtml(task.task_id)}">First web search query</label>
+          <textarea id="query_${escapeHtml(task.task_id)}" placeholder="Write one query exactly as you would type it into a search engine."></textarea>
+        </div>
+      </div>
+    </section>
+  `).join("");
+}
+
+function participantId() {
+  if (document.getElementById("anonymous").checked) return "anonymous";
+  return document.getElementById("participant_id").value.trim();
+}
+
+function collectPayload() {
+  return {
+    study_kind: STUDY_KIND,
+    study_version: STUDY_VERSION,
+    submitted_at_client: new Date().toISOString(),
+    source_url: window.location.href,
+    participant_id: participantId(),
+    anonymous: document.getElementById("anonymous").checked,
+    background: document.getElementById("background").value,
+    experience: document.getElementById("experience").value,
+    shard: "fixed5",
+    responses: TASKS.map((task, index) => ({
+      task_order: String(index + 1),
+      task_id: task.task_id,
+      instance_id: task.instance_id,
+      repo: task.repo,
+      query: document.getElementById(`query_${task.task_id}`).value.trim()
+    }))
+  };
+}
+
+function csvEscape(value) {
+  const s = String(value ?? "");
+  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+}
+
+function downloadCsv(payload) {
+  const headers = [
+    "submitted_at_client", "source_url", "participant_id", "background", "experience",
+    "study_kind", "study_version", "shard", "task_order", "task_id", "instance_id", "repo", "query"
+  ];
+  const rows = payload.responses.map(response => [
+    payload.submitted_at_client,
+    payload.source_url,
+    payload.participant_id,
+    payload.background,
+    payload.experience,
+    payload.study_kind,
+    payload.study_version,
+    payload.shard,
+    response.task_order,
+    response.task_id,
+    response.instance_id,
+    response.repo,
+    response.query
+  ]);
+  const csv = [headers, ...rows].map(row => row.map(csvEscape).join(",")).join("\n");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `query-baseline-${Date.now()}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function setStatus(text, kind) {
+  const status = document.getElementById("status");
+  status.textContent = text;
+  status.className = `status ${kind || ""}`;
+}
+
+function validate(payload) {
+  if (!payload.participant_id) return "Please enter a participant ID or tick anonymous.";
+  const answered = payload.responses.filter(response => response.query).length;
+  if (answered === 0) return "Please enter at least one search query.";
+  return "";
+}
+
+function submitPayload() {
+  const payload = collectPayload();
+  const error = validate(payload);
+  if (error) {
+    setStatus(error, "bad");
+    return;
+  }
+  if (!CONFIG.submitEndpoint) {
+    downloadCsv(payload);
+    setStatus("No collector endpoint configured. A CSV backup was downloaded instead.", "warn");
+    return;
+  }
+
+  const button = document.getElementById("submit");
+  button.disabled = true;
+  setStatus("Submitting...", "warn");
+  document.getElementById("payloadField").value = JSON.stringify(payload);
+  document.getElementById("submitForm").action = CONFIG.submitEndpoint;
+  document.getElementById("submitForm").submit();
+  setTimeout(() => {
+    setStatus("Submitted. If the network blocked the collector, use Download backup CSV.", "ok");
+    button.disabled = false;
+  }, 1200);
+}
+
+renderTasks();
+document.getElementById("submit").addEventListener("click", submitPayload);
+document.getElementById("download").addEventListener("click", () => downloadCsv(collectPayload()));
+document.getElementById("anonymous").addEventListener("change", event => {
+  const input = document.getElementById("participant_id");
+  input.disabled = event.target.checked;
+  if (event.target.checked) input.value = "";
+});
+</script>
+</body>
+</html>
