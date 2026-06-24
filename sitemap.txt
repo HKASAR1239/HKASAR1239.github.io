@@ -19,8 +19,14 @@ https://hkasar1239.github.io/conan-cmakedeps-libraries-variable-check-symbol-exi
 https://hkasar1239.github.io/conan-cmakedeps-libraries-variable-check-symbol-exists-imported-targets-issue-outdated-solutions/
 https://hkasar1239.github.io/conan-io-conan-python-require-package-id-mode-configuration-attribute-conanfile-conan-current-patch/
 https://hkasar1239.github.io/conan-io-conan-python-require-package-id-mode-configuration-attribute-conanfile-conan-outdated-solutions/
+https://hkasar1239.github.io/duckdb-map-try-cast-debug-assertion-vector-valid-check-current-patch/
+https://hkasar1239.github.io/duckdb-map-try-cast-debug-assertion-vector-valid-check-outdated-solutions/
+https://hkasar1239.github.io/esphome-2026-4-0-substitutions-include-file-yaml-regression-current-patch/
+https://hkasar1239.github.io/esphome-2026-4-0-substitutions-include-file-yaml-regression-outdated-solutions/
 https://hkasar1239.github.io/eventlet-green-thread-py-make-thread-handle-python-3-13-current-patch/
 https://hkasar1239.github.io/eventlet-green-thread-py-make-thread-handle-python-3-13-outdated-solutions/
+https://hkasar1239.github.io/floci-lambda-updatefunctioncode-lastupdatestatus-terraform-current-patch/
+https://hkasar1239.github.io/floci-lambda-updatefunctioncode-lastupdatestatus-terraform-outdated-solutions/
 https://hkasar1239.github.io/google-adk-python-open-api-spec-parser-collect-operations-path-level-parameters-current-patch/
 https://hkasar1239.github.io/google-adk-python-open-api-spec-parser-collect-operations-path-level-parameters-outdated-solutions/
 https://hkasar1239.github.io/jlowin-fastmcp-openapi-py-openapitool-request-headers-current-patch/
@@ -39,6 +45,8 @@ https://hkasar1239.github.io/matplotlib-plot-date-timezone-tz-parameter-ignored-
 https://hkasar1239.github.io/matplotlib-plot-date-timezone-tz-parameter-ignored-site-github-com-matplotlib-matplotlib-outdated-solutions/
 https://hkasar1239.github.io/mdanalysis-dcd-seek-failed-normal-eof-oserror-issue-2-8-0-current-patch/
 https://hkasar1239.github.io/mdanalysis-dcd-seek-failed-normal-eof-oserror-issue-2-8-0-outdated-solutions/
+https://hkasar1239.github.io/orchardcore-markdowntohtmlasync-markdown-not-converted-preview-current-patch/
+https://hkasar1239.github.io/orchardcore-markdowntohtmlasync-markdown-not-converted-preview-outdated-solutions/
 https://hkasar1239.github.io/patroni-ctl-py-show-diff-ydiff-markup-to-pager-opts-theme-current-patch/
 https://hkasar1239.github.io/patroni-ctl-py-show-diff-ydiff-markup-to-pager-opts-theme-outdated-solutions/
 https://hkasar1239.github.io/patroni-issue-3314-dcs-cache-reconnection-etcd-current-patch/
@@ -63,6 +71,8 @@ https://hkasar1239.github.io/pvlib-modelchain-py-temperature-model-racking-model
 https://hkasar1239.github.io/pynamodb-connection-boto3-botocore-retry-modes-configuration-current-patch/
 https://hkasar1239.github.io/pynamodb-connection-boto3-botocore-retry-modes-configuration-outdated-solutions/
 https://hkasar1239.github.io/questionnaire/
+https://hkasar1239.github.io/qwen-code-statusline-spawn-ebadf-ansiregex3-macos-current-patch/
+https://hkasar1239.github.io/qwen-code-statusline-spawn-ebadf-ansiregex3-macos-outdated-solutions/
 https://hkasar1239.github.io/reflex-dev-reflex-router-headers-websocket-state-get-headers-implementation-reflex-dev-current-patch/
 https://hkasar1239.github.io/reflex-dev-reflex-router-headers-websocket-state-get-headers-implementation-reflex-dev-outdated-solutions/
 https://hkasar1239.github.io/solaar-pwr-solaar-swap-fx-f-keys-feature-implementation-current-patch/
