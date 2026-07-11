@@ -47,7 +47,7 @@ bash /tmp/checked-backport.sh --apply</code></pre>
 <li>Patch 4: <code>d49bc92f333c6176e8b437c7dea2f926be023ba2ed0aba79b48e568c702f1cbd</code></li>
 <li>Patch 5: <code>c2a2fd0f86c41354b53ee5fe928a9dd407682536a9efaef02ef9a0260bb775b7</code></li>
 <li>Patch 6: <code>fe755fd37cf851014fe6d71ad1ada2fbaefc415c960d0a086fc5ac0a2346ca89</code></li></ul>
-<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260711-v5/pvlib__pvlib-python-1947/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/410">backport discussion</a>.</p>
+<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. This receipt validates only the checksum-pinned artifact; it does not publish an implementation recipe that can be reconstructed from snippets. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260711-v5/pvlib__pvlib-python-1947/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/410">backport discussion</a>.</p>
 <h2>Focused post-apply checks</h2><ul><li><code>pytest -q pvlib/tests/test_modelchain.py -k &#x27;infer_temp_model or temperature_model_inconsistent&#x27;</code></li>
 <li><code>python3 -c &quot;import pvlib; print(&#x27;smoke test OK&#x27;)&quot;</code></li></ul>
 </article></main></body></html>

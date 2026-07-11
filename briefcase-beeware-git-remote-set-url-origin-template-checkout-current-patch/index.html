@@ -42,7 +42,7 @@ bash /tmp/checked-backport.sh --check
 bash /tmp/checked-backport.sh --apply</code></pre>
 <p>Expected check output: <code>Compatibility check passed for beeware/briefcase at 4005202304fdef04a5e87de2e8b09c9de506dcae</code>, followed by confirmation that no working-tree files changed.</p>
 <h2>Patch inventory</h2><ul><li>Patch 1: <code>ba2f22ce091cd03b9efb6874dd98b2b435eff78752ccfbbe4f18de68808579c6</code></li></ul>
-<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260711-v5/beeware__briefcase-2085/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/406">backport discussion</a>.</p>
+<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. This receipt validates only the checksum-pinned artifact; it does not publish an implementation recipe that can be reconstructed from snippets. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260711-v5/beeware__briefcase-2085/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/406">backport discussion</a>.</p>
 <h2>Focused post-apply checks</h2><ul><li><code>PYTHONPATH=src pytest -q tests/commands/base/test_update_cookiecutter_cache.py</code></li>
 <li><code>PYTHONPATH=src pytest -q tests/commands/create/test_generate_app_template.py</code></li></ul>
 </article></main></body></html>

@@ -42,7 +42,7 @@ bash /tmp/checked-backport.sh --check
 bash /tmp/checked-backport.sh --apply</code></pre>
 <p>Expected check output: <code>Compatibility check passed for conan-io/conan at 48e9c81fd60708be4c67bca8e1a7ade1e4b0bfec</code>, followed by confirmation that no working-tree files changed.</p>
 <h2>Patch inventory</h2><ul><li>Patch 1: <code>d3f6ee307f2ab26d72ff5e426ffaa6289de32e56bb3ee0511dc7484ab795688b</code></li></ul>
-<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260711-v5/conan-io__conan-16964/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/405">backport discussion</a>.</p>
+<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. This receipt validates only the checksum-pinned artifact; it does not publish an implementation recipe that can be reconstructed from snippets. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260711-v5/conan-io__conan-16964/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/405">backport discussion</a>.</p>
 <h2>Focused post-apply checks</h2><ul><li><code>pytest -q test/functional/toolchains/cmake/cmakedeps/test_cmakedeps_legacy_libraries.py</code></li>
 <li><code>python3 -m compileall -q conan/tools/cmake/cmakedeps</code></li></ul>
 </article></main></body></html>

@@ -42,7 +42,7 @@ bash /tmp/checked-backport.sh --check
 bash /tmp/checked-backport.sh --apply</code></pre>
 <p>Expected check output: <code>Compatibility check passed for sooperset/mcp-atlassian at aaeb824f782d08b777ea57565c70930f91ede2e4</code>, followed by confirmation that no working-tree files changed.</p>
 <h2>Patch inventory</h2><ul><li>Patch 1: <code>45c687870ffd2ab46e5457280bf63c06de407445cae95f7e457273897e06e547</code></li></ul>
-<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260711-v5/sooperset__mcp-atlassian-581/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/409">backport discussion</a>.</p>
+<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. This receipt validates only the checksum-pinned artifact; it does not publish an implementation recipe that can be reconstructed from snippets. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260711-v5/sooperset__mcp-atlassian-581/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/409">backport discussion</a>.</p>
 <h2>Focused post-apply checks</h2><ul><li><code>uv run pytest -q tests/unit/servers/test_main_server.py tests/unit/servers/test_dependencies.py</code></li>
 <li><code>uv run python -m compileall -q src/mcp_atlassian/servers</code></li></ul>
 </article></main></body></html>

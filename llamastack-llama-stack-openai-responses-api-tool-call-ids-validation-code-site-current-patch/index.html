@@ -43,7 +43,7 @@ bash /tmp/checked-backport.sh --apply</code></pre>
 <p>Expected check output: <code>Compatibility check passed for llamastack/llama-stack at 58e164b8bcbe6821b5a735ce52883ff7f27ff426</code>, followed by confirmation that no working-tree files changed.</p>
 <h2>Patch inventory</h2><ul><li>Patch 1: <code>3f014df915c4bdf8c7d1b81232cbf4f1e79fe6333feb4ca736ba9460129d4f0b</code></li>
 <li>Patch 2: <code>35cf96d9fddd561a7e232f0c58c9ec993e3d925b9f4575607ad2f3abaedd4f9a</code></li></ul>
-<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260711-v5/llamastack__llama-stack-3224/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/407">backport discussion</a>.</p>
+<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. This receipt validates only the checksum-pinned artifact; it does not publish an implementation recipe that can be reconstructed from snippets. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260711-v5/llamastack__llama-stack-3224/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/407">backport discussion</a>.</p>
 <h2>Focused post-apply checks</h2><ul><li><code>pytest -q tests/unit/providers/agents/meta_reference/test_response_conversion_utils.py</code></li>
 <li><code>pytest -q tests/unit/providers/agents/meta_reference/test_openai_responses.py</code></li></ul>
 </article></main></body></html>

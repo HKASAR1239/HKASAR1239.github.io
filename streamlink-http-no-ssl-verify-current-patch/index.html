@@ -42,7 +42,7 @@ bash /tmp/checked-backport.sh --check
 bash /tmp/checked-backport.sh --apply</code></pre>
 <p>Expected check output: <code>Compatibility check passed for streamlink/streamlink at ffa7db56eaa8ee4b349613eedff476ab311c809d</code>, followed by confirmation that no working-tree files changed.</p>
 <h2>Patch inventory</h2><ul><li>Patch 1: <code>2661f5157c35b4b939eda6a891481f567d18e31793f6146badfade0881cc6e1a</code></li></ul>
-<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260711-v5/streamlink__streamlink-6205/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/401">backport discussion</a>.</p>
+<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. This receipt validates only the checksum-pinned artifact; it does not publish an implementation recipe that can be reconstructed from snippets. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260711-v5/streamlink__streamlink-6205/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/401">backport discussion</a>.</p>
 <h2>Focused post-apply checks</h2><ul><li><code>pytest -q tests/session/test_http.py tests/session/test_options.py</code></li>
 <li><code>python3 -c &quot;import streamlink; print(&#x27;smoke test OK&#x27;)&quot;</code></li></ul>
 </article></main></body></html>

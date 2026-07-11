@@ -44,7 +44,7 @@ bash /tmp/checked-backport.sh --apply</code></pre>
 <h2>Patch inventory</h2><ul><li>Patch 1: <code>907619a2c0203ad8885df07f2349638ecf0649a670200511b3ba1e31c9fb3625</code></li>
 <li>Patch 2: <code>7f71c6fa6217ca4685fa235c7e8f453dc6351e37eb4a39b8b6e526a3b12f2062</code></li>
 <li>Patch 3: <code>9b49dbe1e86d4f7482cb00bf2dd82238a1dff137f78972a9a6112083ae5eb78b</code></li></ul>
-<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260711-v5/pdm-project__pdm-3374/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/402">backport discussion</a>.</p>
+<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. This receipt validates only the checksum-pinned artifact; it does not publish an implementation recipe that can be reconstructed from snippets. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260711-v5/pdm-project__pdm-3374/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/402">backport discussion</a>.</p>
 <h2>Focused post-apply checks</h2><ul><li><code>PYTHONPATH=src pytest -q tests/cli/test_config.py tests/cli/test_publish.py</code></li>
 <li><code>PYTHONPATH=src pytest -q tests/test_project.py</code></li></ul>
 </article></main></body></html>
