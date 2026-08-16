@@ -73,6 +73,18 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://hkasar1239.github.io/cargo-argfile-rebuild-workarounds/</loc>
+    <lastmod>2026-08-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://hkasar1239.github.io/cargo-rustflags-argfile-17369-validation-receipt/</loc>
+    <lastmod>2026-08-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://hkasar1239.github.io/casey-just-the-no-exit-message-attribute-does-not-silence-signal-2-error-messages-3200-validation-receipt/</loc>
     <lastmod>2026-08-16</lastmod>
     <changefreq>weekly</changefreq>

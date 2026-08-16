@@ -10,6 +10,8 @@ https://hkasar1239.github.io/briefcase-beeware-git-remote-set-url-origin-templat
 https://hkasar1239.github.io/briefcase-beeware-git-remote-set-url-origin-template-checkout-outdated-solutions/
 https://hkasar1239.github.io/caddyserver-caddy-regression-for-wildcard-tls-get-certificate-http-in-v2-11-7567-validation-receipt/
 https://hkasar1239.github.io/can1357-oh-my-pi-bug-coding-agent-resumed-github-copilot-sessions-can-fail-with-401-input-item-does-not-belong-to-this-connectio-validation-receipt/
+https://hkasar1239.github.io/cargo-argfile-rebuild-workarounds/
+https://hkasar1239.github.io/cargo-rustflags-argfile-17369-validation-receipt/
 https://hkasar1239.github.io/casey-just-the-no-exit-message-attribute-does-not-silence-signal-2-error-messages-3200-validation-receipt/
 https://hkasar1239.github.io/cc65-cc65-optimizer-confluence-produces-assertion-failure-in-optstackops-opt-a-tossub-2941-validation-receipt/
 https://hkasar1239.github.io/cc65-optstackops-partial-fixes-and-upstream-drift/
