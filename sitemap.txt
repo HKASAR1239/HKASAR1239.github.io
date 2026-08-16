@@ -32,6 +32,8 @@ https://hkasar1239.github.io/conan-cpp-info-exes-cmakedeps-imported-executable-t
 https://hkasar1239.github.io/conan-io-conan-python-require-package-id-mode-configuration-attribute-conanfile-conan-current-patch/
 https://hkasar1239.github.io/conan-io-conan-python-require-package-id-mode-configuration-attribute-conanfile-conan-outdated-solutions/
 https://hkasar1239.github.io/delta-io-delta-rs-bug-merge-on-partitioned-table-produces-duplicate-rows-when-partition-value-contains-a-space-4357-validation-receipt/
+https://hkasar1239.github.io/deno-minimum-dependency-age-foreign-optional-native-36597-validation-receipt/
+https://hkasar1239.github.io/deno-optional-native-minimum-dependency-age-workarounds/
 https://hkasar1239.github.io/dioxuslabs-dioxus-dx-fmt-adds-extra-whitespaces-in-a-forloop-5384-validation-receipt/
 https://hkasar1239.github.io/duckdb-22152-verified-setup/
 https://hkasar1239.github.io/duckdb-map-try-cast-debug-assertion-vector-valid-check-current-patch/
