@@ -673,6 +673,18 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://hkasar1239.github.io/opensearch-small-terminate-after-workarounds/</loc>
+    <lastmod>2026-08-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://hkasar1239.github.io/opensearch-terminate-after-zero-hits-22733-validation-receipt/</loc>
+    <lastmod>2026-08-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://hkasar1239.github.io/orchardcore-19169-verified-setup/</loc>
     <lastmod>2026-08-16</lastmod>
     <changefreq>weekly</changefreq>

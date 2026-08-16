@@ -110,6 +110,8 @@ https://hkasar1239.github.io/nvidia-openshell-bug-cli-sandbox-create-with-duplic
 https://hkasar1239.github.io/openrct2-openrct2-new-script-engine-breaks-when-one-event-has-multiple-event-listeners-26315-validation-receipt/
 https://hkasar1239.github.io/openrewrite-rewrite-kotlin-parser-emits-javatype-unknown-as-declaringtype-for-methods-on-built-in-primitive-receivers-e-g-char-toi-current-patch/
 https://hkasar1239.github.io/openrewrite-rewrite-kotlin-parser-emits-javatype-unknown-as-declaringtype-for-methods-on-built-in-primitive-receivers-e-g-char-toi-outdated-solutions/
+https://hkasar1239.github.io/opensearch-small-terminate-after-workarounds/
+https://hkasar1239.github.io/opensearch-terminate-after-zero-hits-22733-validation-receipt/
 https://hkasar1239.github.io/orchardcore-19169-verified-setup/
 https://hkasar1239.github.io/orchardcore-markdowntohtmlasync-markdown-not-converted-preview-current-patch/
 https://hkasar1239.github.io/orchardcore-markdowntohtmlasync-markdown-not-converted-preview-outdated-solutions/
