@@ -355,6 +355,18 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://hkasar1239.github.io/go-shiori-shiori-legacy-api-401-backport-workarounds/</loc>
+    <lastmod>2026-08-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://hkasar1239.github.io/go-shiori-shiori-legacy-api-unauthenticated-panic-1204-validation-receipt/</loc>
+    <lastmod>2026-08-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://hkasar1239.github.io/gohugoio-hugo-bug-report-runtime-panic-index-out-of-range-in-toc-generation-with-nested-extension-nodes-14742-validation-receipt/</loc>
     <lastmod>2026-08-16</lastmod>
     <changefreq>weekly</changefreq>

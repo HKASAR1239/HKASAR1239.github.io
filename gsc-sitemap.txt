@@ -57,6 +57,8 @@ https://hkasar1239.github.io/floci-lambda-updatefunctioncode-lastupdatestatus-te
 https://hkasar1239.github.io/floci-lambda-updatefunctioncode-lastupdatestatus-terraform-outdated-solutions/
 https://hkasar1239.github.io/gentleman-programming-gentle-ai-issue-engram-installation-fails-when-go-is-missing-or-running-in-gopath-mode-50-validation-receipt/
 https://hkasar1239.github.io/gleam-lang-gleam-js-codegen-regression-1-15-0-internal-index-based-reuse-error-5493-validation-receipt/
+https://hkasar1239.github.io/go-shiori-shiori-legacy-api-401-backport-workarounds/
+https://hkasar1239.github.io/go-shiori-shiori-legacy-api-unauthenticated-panic-1204-validation-receipt/
 https://hkasar1239.github.io/gohugoio-hugo-bug-report-runtime-panic-index-out-of-range-in-toc-generation-with-nested-extension-nodes-14742-validation-receipt/
 https://hkasar1239.github.io/google-adk-python-open-api-spec-parser-collect-operations-path-level-parameters-current-patch/
 https://hkasar1239.github.io/google-adk-python-open-api-spec-parser-collect-operations-path-level-parameters-outdated-solutions/
