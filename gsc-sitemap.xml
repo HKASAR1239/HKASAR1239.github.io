@@ -85,6 +85,12 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://hkasar1239.github.io/cc65-optstackops-partial-fixes-and-upstream-drift/</loc>
+    <lastmod>2026-08-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://hkasar1239.github.io/cfn-lint-aws-cloudformation-iam-policy-sid-validation-alphanumeric-current-patch/</loc>
     <lastmod>2026-08-16</lastmod>
     <changefreq>weekly</changefreq>

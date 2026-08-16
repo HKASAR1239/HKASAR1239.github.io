@@ -12,6 +12,7 @@ https://hkasar1239.github.io/caddyserver-caddy-regression-for-wildcard-tls-get-c
 https://hkasar1239.github.io/can1357-oh-my-pi-bug-coding-agent-resumed-github-copilot-sessions-can-fail-with-401-input-item-does-not-belong-to-this-connectio-validation-receipt/
 https://hkasar1239.github.io/casey-just-the-no-exit-message-attribute-does-not-silence-signal-2-error-messages-3200-validation-receipt/
 https://hkasar1239.github.io/cc65-cc65-optimizer-confluence-produces-assertion-failure-in-optstackops-opt-a-tossub-2941-validation-receipt/
+https://hkasar1239.github.io/cc65-optstackops-partial-fixes-and-upstream-drift/
 https://hkasar1239.github.io/cfn-lint-aws-cloudformation-iam-policy-sid-validation-alphanumeric-current-patch/
 https://hkasar1239.github.io/cfn-lint-aws-cloudformation-iam-policy-sid-validation-alphanumeric-outdated-solutions/
 https://hkasar1239.github.io/cfn-lint-aws-cloudformation-step-functions-state-machine-schema-json-file-location-current-patch/
