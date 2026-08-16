@@ -673,6 +673,18 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://hkasar1239.github.io/openbao-control-group-nested-identity-workarounds/</loc>
+    <lastmod>2026-08-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://hkasar1239.github.io/openbao-indirect-group-control-group-3814-validation-receipt/</loc>
+    <lastmod>2026-08-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://hkasar1239.github.io/openrct2-openrct2-new-script-engine-breaks-when-one-event-has-multiple-event-listeners-26315-validation-receipt/</loc>
     <lastmod>2026-08-16</lastmod>
     <changefreq>weekly</changefreq>

@@ -110,6 +110,8 @@ https://hkasar1239.github.io/ninja-build-ninja-depfile-dependency-on-dyndep-outp
 https://hkasar1239.github.io/nodejs-undici-h2cclient-ignores-the-connect-option-current-patch/
 https://hkasar1239.github.io/nodejs-undici-h2cclient-ignores-the-connect-option-outdated-solutions/
 https://hkasar1239.github.io/nvidia-openshell-bug-cli-sandbox-create-with-duplicate-name-returns-raw-database-error-instead-of-user-friendly-message-695-validation-receipt/
+https://hkasar1239.github.io/openbao-control-group-nested-identity-workarounds/
+https://hkasar1239.github.io/openbao-indirect-group-control-group-3814-validation-receipt/
 https://hkasar1239.github.io/openrct2-openrct2-new-script-engine-breaks-when-one-event-has-multiple-event-listeners-26315-validation-receipt/
 https://hkasar1239.github.io/openrewrite-rewrite-kotlin-parser-emits-javatype-unknown-as-declaringtype-for-methods-on-built-in-primitive-receivers-e-g-char-toi-current-patch/
 https://hkasar1239.github.io/openrewrite-rewrite-kotlin-parser-emits-javatype-unknown-as-declaringtype-for-methods-on-built-in-primitive-receivers-e-g-char-toi-outdated-solutions/
