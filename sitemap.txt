@@ -187,6 +187,7 @@ https://hkasar1239.github.io/smithy-lang-smithy-smithyidlserializer-always-rende
 https://hkasar1239.github.io/smithy-lang-smithy-smithyidlserializer-always-renders-idrefs-unquoted-outdated-solutions/
 https://hkasar1239.github.io/solaar-pwr-solaar-swap-fx-f-keys-feature-implementation-current-patch/
 https://hkasar1239.github.io/solaar-pwr-solaar-swap-fx-f-keys-feature-implementation-outdated-solutions/
+https://hkasar1239.github.io/sonarqube-azure-devops-iteration-status-403-outdated-solutions/
 https://hkasar1239.github.io/sooperset-mcp-atlassian-cloud-id-x-atlassian-cloud-id-header-oauth-multi-current-patch/
 https://hkasar1239.github.io/sooperset-mcp-atlassian-cloud-id-x-atlassian-cloud-id-header-oauth-multi-outdated-solutions/
 https://hkasar1239.github.io/sphinx-autodoc-builtin-classmethod-detection-isbuiltin-inspect-current-patch/
