@@ -183,6 +183,7 @@ https://hkasar1239.github.io/shader-slang-slang-dynamic-dispatch-explicit-generi
 https://hkasar1239.github.io/shader-slang-slang-ice-when-using-rwbyteaddressbuffer-load-t-store-t-with-interface-type-10768-validation-receipt/
 https://hkasar1239.github.io/shader-slang-slang-internal-compiler-error-when-using-groupshared-with-interface-typed-variables-current-patch/
 https://hkasar1239.github.io/shader-slang-slang-internal-compiler-error-when-using-groupshared-with-interface-typed-variables-outdated-solutions/
+https://hkasar1239.github.io/slang-error-99999-partial-upstream-fixes-outdated/
 https://hkasar1239.github.io/smithy-lang-smithy-smithyidlserializer-always-renders-idrefs-unquoted-3038-validation-receipt/
 https://hkasar1239.github.io/smithy-lang-smithy-smithyidlserializer-always-renders-idrefs-unquoted-current-patch/
 https://hkasar1239.github.io/smithy-lang-smithy-smithyidlserializer-always-renders-idrefs-unquoted-outdated-solutions/
