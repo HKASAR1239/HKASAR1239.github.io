@@ -174,6 +174,7 @@ https://hkasar1239.github.io/roocodeinc-roo-code-enhancement-add-vertex-ai-suppo
 https://hkasar1239.github.io/rust-lang-rust-analyzer-crash-can-t-merge-cycle-heads-variances-of-query-id-a0b7-with-different-iteration-counts-on-cyclic-types-validation-receipt/
 https://hkasar1239.github.io/rust-lang-rust-analyzer-syntax-error-when-using-type-const-current-patch/
 https://hkasar1239.github.io/rust-lang-rust-analyzer-syntax-error-when-using-type-const-outdated-solutions/
+https://hkasar1239.github.io/shader-slang-explicit-generic-interface-error-99999-outdated-solutions/
 https://hkasar1239.github.io/shader-slang-slang-crash-ice-when-emitting-code-for-interface-types-without-conformance-flags-current-patch/
 https://hkasar1239.github.io/shader-slang-slang-crash-ice-when-emitting-code-for-interface-types-without-conformance-flags-outdated-solutions/
 https://hkasar1239.github.io/shader-slang-slang-dynamic-dispatch-explicit-generic-specialization-with-interface-type-crashes-with-error-99999-10682-validation-receipt/
