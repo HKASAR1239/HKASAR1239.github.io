@@ -169,6 +169,7 @@ https://hkasar1239.github.io/qwen-code-statusline-spawn-ebadf-ansiregex3-macos-o
 https://hkasar1239.github.io/reflex-dev-reflex-router-headers-websocket-state-get-headers-implementation-reflex-dev-current-patch/
 https://hkasar1239.github.io/reflex-dev-reflex-router-headers-websocket-state-get-headers-implementation-reflex-dev-outdated-solutions/
 https://hkasar1239.github.io/riok-mapperly-wrong-code-generated-when-mapping-method-has-additional-parameter-2232-validation-receipt/
+https://hkasar1239.github.io/rizin-armv7-stack-chk-guard-partial-fixes-outdated/
 https://hkasar1239.github.io/rizinorg-rizin-wrong-stack-chk-guard-naming-in-armv7-binaries-6079-validation-receipt/
 https://hkasar1239.github.io/roocodeinc-roo-code-enhancement-add-vertex-ai-support-for-claude-opus-4-7-claude-opus-4-7-current-patch/
 https://hkasar1239.github.io/roocodeinc-roo-code-enhancement-add-vertex-ai-support-for-claude-opus-4-7-claude-opus-4-7-outdated-solutions/

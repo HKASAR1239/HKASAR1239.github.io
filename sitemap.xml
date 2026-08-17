@@ -1027,6 +1027,12 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://hkasar1239.github.io/rizin-armv7-stack-chk-guard-partial-fixes-outdated/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://hkasar1239.github.io/rizinorg-rizin-wrong-stack-chk-guard-naming-in-armv7-binaries-6079-validation-receipt/</loc>
     <lastmod>2026-08-17</lastmod>
     <changefreq>weekly</changefreq>
