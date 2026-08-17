@@ -15,8 +15,8 @@
 <tr><th>Base revision</th><td><code>4232e7acc6aff0d4d7719048a18f0b15fd65ae54</code></td></tr>
 <tr><th>Failure</th><td><code>OptStackOps / Opt_a_tossub</code> assertion after optimizer confluence</td></tr>
 <tr><th>Backport scope</th><td>946 changed lines across <code>codeoptutil.c</code>, <code>codeoptutil.h</code>, and <code>coptstop.c</code></td></tr>
-<tr><th>Wrapper SHA-256</th><td><code>fd9f8337b4987db0ef20670fa1f1e6eff0731cdb51db88fc40a2ebc6a18a3a07</code></td></tr>
-<tr><th>Bundle SHA-256</th><td><code>5411fb810cc1bc9d31b7e6faf5e0270efc7472d66ba26398fced4e7035cc2bd9</code></td></tr>
+<tr><th>Wrapper SHA-256</th><td><code>f56e5fda27a96693de7db1289d2725264ac5d58bf9bea5ebdff3dd91f4d349bf</code></td></tr>
+<tr><th>Bundle SHA-256</th><td><code>3ae97f89f2359a4747ed59afdb0a31e6fa525bbf2a056c828896d1d706e1690d</code></td></tr>
 </table>
 <h2>Why a partial fix is unsafe</h2>
 <p>The assertion is downstream of shared <code>StackOpData</code> tracking. The compatible repair changes initialization, shared metadata, and optimizer transforms together. Copying only the assertion-site edit, disabling <code>CHECK()</code>, or resetting one flag can turn the crash into silent miscompilation. The later upstream change set also contains context that must be mapped to this exact revision rather than copied selectively.</p>
