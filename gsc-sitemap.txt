@@ -61,6 +61,7 @@ https://hkasar1239.github.io/floci-io-floci-bug-kinesis-increasestreamretentionp
 https://hkasar1239.github.io/floci-lambda-updatefunctioncode-lastupdatestatus-terraform-current-patch/
 https://hkasar1239.github.io/floci-lambda-updatefunctioncode-lastupdatestatus-terraform-outdated-solutions/
 https://hkasar1239.github.io/gentleman-programming-gentle-ai-issue-engram-installation-fails-when-go-is-missing-or-running-in-gopath-mode-50-validation-receipt/
+https://hkasar1239.github.io/gleam-js-codegen-identifier-reuse-upstream-fixes-outdated/
 https://hkasar1239.github.io/gleam-lang-gleam-js-codegen-regression-1-15-0-internal-index-based-reuse-error-5493-validation-receipt/
 https://hkasar1239.github.io/go-shiori-shiori-legacy-api-401-backport-workarounds/
 https://hkasar1239.github.io/go-shiori-shiori-legacy-api-unauthenticated-panic-1204-validation-receipt/

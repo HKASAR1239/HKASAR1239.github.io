@@ -379,6 +379,12 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://hkasar1239.github.io/gleam-js-codegen-identifier-reuse-upstream-fixes-outdated/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://hkasar1239.github.io/gleam-lang-gleam-js-codegen-regression-1-15-0-internal-index-based-reuse-error-5493-validation-receipt/</loc>
     <lastmod>2026-08-17</lastmod>
     <changefreq>weekly</changefreq>
